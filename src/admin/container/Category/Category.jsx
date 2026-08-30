@@ -44,7 +44,7 @@ function Category(props) {
     //Destructuring
     const { handleSubmit, touched, handleChange, handleBlur, errors } = formik
 
-    return (
+    return (    
 
         <Box>
             <h2>Category Admin</h2>
