@@ -25,6 +25,18 @@ import ShareIcon from '@mui/icons-material/Share';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import CardMembershipOutlinedIcon from '@mui/icons-material/CardMembershipOutlined';
+import StarOutlinedIcon from '@mui/icons-material/StarOutlined';
+import Avatar from '@mui/material/Avatar';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import { Gauge } from '@mui/x-charts/Gauge';
+import PersonIcon from '@mui/icons-material/Person';
+import EmailIcon from '@mui/icons-material/Email';
+import AndroidIcon from '@mui/icons-material/Android';
+import GridViewIcon from '@mui/icons-material/GridView';
+import AppleIcon from '@mui/icons-material/Apple';
 
 
 const stats = [
@@ -185,6 +197,34 @@ const product = [
         rankColor: "primary",
     },
     {
+        _id: 3,
+        products_img: "../../../../public/assets/img/best-product-1.jpg",
+        name: "ABCD",
+        price: "$150",
+        total_orders: "280",
+        rank: "Top1",
+        rankColor: "primary",
+    },
+    {
+        _id: 3,
+        products_img: "../../../../public/assets/img/best-product-1.jpg",
+        name: "ABCD",
+        price: "$150",
+        total_orders: "280",
+        rank: "Top1",
+        rankColor: "primary",
+    },
+    {
+        _id: 3,
+        products_img: "../../../../public/assets/img/best-product-1.jpg",
+        name: "ABCD",
+        price: "$150",
+        total_orders: "280",
+        rank: "Top1",
+        rankColor: "primary",
+    },
+
+    {
         _id: 4,
         products_img: "../../../../public/assets/img/best-product-2.jpg",
         name: "abcd",
@@ -260,7 +300,7 @@ function Dashboard(props) {
                 <Grid size={4}>
 
                     <Paper elevation={1} sx={{ px: 3, pt: 4, pb: 9 }}>
-                        <Typography variant='h5'>
+                        <Typography variant='h6' sx={{ fontWeight: 'bold' }}>
                             Current download
                         </Typography>
                         <Typography variant='body2' sx={{ pt: 1, pb: 3, color: 'gray' }}>
@@ -340,7 +380,7 @@ function Dashboard(props) {
 
                 <Grid size={8}>
                     <Paper elevation={1} sx={{ pt: 4, }}>
-                        <Typography variant='h5' sx={{ px: 4, py: 2 }}>
+                        <Typography variant='h6' sx={{ px: 4, py: 2, fontWeight: 'bold' }}>
                             All Products
                         </Typography>
 
@@ -422,8 +462,8 @@ function Dashboard(props) {
                 </Grid>
 
                 <Grid size={4}>
-                    <Paper elevation={1} sx={{ px: 3, pt: 4, pb: 9 }}>
-                        <Typography variant='h5' sx={{ px: 4, py: 2 }}>
+                    <Paper elevation={1} sx={{ px: 3, pt: 4, pb: 5 }}>
+                        <Typography variant='h6' sx={{ px: 4, py: 2, fontWeight: 'bold' }}>
                             Related applications
                         </Typography>
 
@@ -437,22 +477,420 @@ function Dashboard(props) {
                         </Box>
 
 
-                        <Grid sx={{display:'flex'}}>
-                            <Grid size={2} sx={{py:2}}>
-                               <img src="src\assets\Images\ic-app-1.webp" alt="" />
+                        <Grid sx={{ display: 'flex' }}>
+                            <Grid size={2} sx={{ py: 2, width: 2 }}>
+                                <Box>
+                                    <img src="src\assets\Images\ic-app-1.webp" alt="" style={{ width: '35px' }} />
+                                </Box>
                             </Grid>
                             <Grid size={10}>
                                 <Box>
-                                    <Typography sx={{fontSize:13}}>Microsoft office 365 <Button sx={{borderRadius:'10px',background:'#F4F6F8'}}>free</Button></Typography>
+                                    <Typography
+                                        sx={{ fontSize: 13, fontWeight: 'bold', ml: 7, mt: 1 }}>
+                                        Microsoft office 365
+                                        <Button
+                                            sx={{ borderRadius: '10px', background: '#F4F6F8', fontSize: 11, fontWeight: 'bold' }}
+                                        >
+                                            free
+                                        </Button>
+                                    </Typography>
+                                    <Box sx={{ ml: 7, display: 'flex' }}>
+                                        <Box className="box1" sx={{ display: 'flex', color: 'gray', fontSize: 13 }}>
+                                            <CloudDownloadIcon sx={{ width: 15 }} />
+                                            <h5 style={{ margin: '5px', color: 'black' }}>9.9k</h5>
+                                            <FiberManualRecordIcon sx={{ width: 10 }} />
+                                        </Box>
+                                        <Box className="box2" sx={{ display: 'flex', color: 'gray', fontSize: 13, ml: 1 }}>
+                                            <CardMembershipOutlinedIcon sx={{ width: 15 }} />
+                                            <h5 style={{ margin: '5px', color: 'black' }}>9.69Mb</h5>
+                                            <FiberManualRecordIcon sx={{ width: 10 }} />
+                                        </Box>
+                                        <Box className="box3" sx={{ display: 'flex', color: 'gray', fontSize: 13, ml: 1 }}>
+                                            <StarOutlinedIcon sx={{ width: 15, color: 'yellow' }} />
+                                            <h5 style={{ margin: '5px', color: 'black' }}>9.91K</h5>
+
+                                        </Box>
+                                    </Box>
                                 </Box>
                             </Grid>
                         </Grid>
 
+                        <Grid sx={{ display: 'flex' }}>
+                            <Grid size={2} sx={{ py: 2, width: 2 }}>
+                                <Box>
+                                    <img src="src\assets\Images\ic-app-2.webp" alt="" style={{ width: '35px' }} />
+                                </Box>
+                            </Grid>
+                            <Grid size={10}>
+                                <Box>
+                                    <Typography
+                                        sx={{ fontSize: 13, fontWeight: 'bold', ml: 7, mt: 1 }}>
+                                        Opera
+                                        <Button
+                                            sx={{ borderRadius: '10px', background: '#F4F6F8', fontSize: 11, fontWeight: 'bold' }}
+                                        >
+                                            free
+                                        </Button>
+                                    </Typography>
+                                    <Box sx={{ ml: 7, display: 'flex' }}>
+                                        <Box className="box1" sx={{ display: 'flex', color: 'gray', fontSize: 13 }}>
+                                            <CloudDownloadIcon sx={{ width: 15 }} />
+                                            <h5 style={{ margin: '5px', color: 'black' }}>9.9k</h5>
+                                            <FiberManualRecordIcon sx={{ width: 10 }} />
+                                        </Box>
+                                        <Box className="box2" sx={{ display: 'flex', color: 'gray', fontSize: 13, ml: 1 }}>
+                                            <CardMembershipOutlinedIcon sx={{ width: 15 }} />
+                                            <h5 style={{ margin: '5px', color: 'black' }}>9.69Mb</h5>
+                                            <FiberManualRecordIcon sx={{ width: 10 }} />
+                                        </Box>
+                                        <Box className="box3" sx={{ display: 'flex', color: 'gray', fontSize: 13, ml: 1 }}>
+                                            <StarOutlinedIcon sx={{ width: 15, color: 'yellow' }} />
+                                            <h5 style={{ margin: '5px', color: 'black' }}>9.91K</h5>
+
+                                        </Box>
+                                    </Box>
+                                </Box>
+                            </Grid>
+                        </Grid>
+
+                        <Grid sx={{ display: 'flex' }}>
+                            <Grid size={2} sx={{ py: 2, width: 2 }}>
+                                <Box>
+                                    <img src="src\assets\Images\ic-app-3.webp" alt="" style={{ width: '35px' }} />
+                                </Box>
+                            </Grid>
+                            <Grid size={10}>
+                                <Box>
+                                    <Typography
+                                        sx={{ fontSize: 13, fontWeight: 'bold', ml: 7, mt: 1 }}>
+                                        Adobe acrobat reader DC
+                                        <Button
+                                            sx={{ borderRadius: '10px', background: '#F4F6F8', fontSize: 11, fontWeight: 'bold' }}
+                                        >
+                                            free
+                                        </Button>
+                                    </Typography>
+                                    <Box sx={{ ml: 7, display: 'flex' }}>
+                                        <Box className="box1" sx={{ display: 'flex', color: 'gray', fontSize: 13 }}>
+                                            <CloudDownloadIcon sx={{ width: 15 }} />
+                                            <h5 style={{ margin: '5px', color: 'black' }}>9.9k</h5>
+                                            <FiberManualRecordIcon sx={{ width: 10 }} />
+                                        </Box>
+                                        <Box className="box2" sx={{ display: 'flex', color: 'gray', fontSize: 13, ml: 1 }}>
+                                            <CardMembershipOutlinedIcon sx={{ width: 15 }} />
+                                            <h5 style={{ margin: '5px', color: 'black' }}>9.69Mb</h5>
+                                            <FiberManualRecordIcon sx={{ width: 10 }} />
+                                        </Box>
+                                        <Box className="box3" sx={{ display: 'flex', color: 'gray', fontSize: 13, ml: 1 }}>
+                                            <StarOutlinedIcon sx={{ width: 15, color: 'yellow' }} />
+                                            <h5 style={{ margin: '5px', color: 'black' }}>9.91K</h5>
+
+                                        </Box>
+                                    </Box>
+                                </Box>
+                            </Grid>
+                        </Grid>
+
+                        <Grid sx={{ display: 'flex' }}>
+                            <Grid size={2} sx={{ py: 2, width: 2 }}>
+                                <Box>
+                                    <img src="src\assets\Images\ic-app-4.webp" alt="" style={{ width: '35px' }} />
+                                </Box>
+                            </Grid>
+                            <Grid size={10}>
+                                <Box>
+                                    <Typography
+                                        sx={{ fontSize: 13, fontWeight: 'bold', ml: 7, mt: 1 }}>
+                                        Joplin
+                                        <Button
+                                            sx={{ borderRadius: '10px', background: '#F4F6F8', fontSize: 11, fontWeight: 'bold' }}
+                                        >
+                                            free
+                                        </Button>
+                                    </Typography>
+                                    <Box sx={{ ml: 7, display: 'flex' }}>
+                                        <Box className="box1" sx={{ display: 'flex', color: 'gray', fontSize: 13 }}>
+                                            <CloudDownloadIcon sx={{ width: 15 }} />
+                                            <h5 style={{ margin: '5px', color: 'black' }}>9.9k</h5>
+                                            <FiberManualRecordIcon sx={{ width: 10 }} />
+                                        </Box>
+                                        <Box className="box2" sx={{ display: 'flex', color: 'gray', fontSize: 13, ml: 1 }}>
+                                            <CardMembershipOutlinedIcon sx={{ width: 15 }} />
+                                            <h5 style={{ margin: '5px', color: 'black' }}>9.69Mb</h5>
+                                            <FiberManualRecordIcon sx={{ width: 10 }} />
+                                        </Box>
+                                        <Box className="box3" sx={{ display: 'flex', color: 'gray', fontSize: 13, ml: 1 }}>
+                                            <StarOutlinedIcon sx={{ width: 15, color: 'yellow' }} />
+                                            <h5 style={{ margin: '5px', color: 'black' }}>9.91K</h5>
+
+                                        </Box>
+                                    </Box>
+                                </Box>
+                            </Grid>
+                        </Grid>
+
+                        <Grid sx={{ display: 'flex' }}>
+                            <Grid size={2} sx={{ py: 2, width: 2 }}>
+                                <Box>
+                                    <img src="src\assets\Images\ic-app-5.webp" alt="" style={{ width: '35px' }} />
+                                </Box>
+                            </Grid>
+                            <Grid size={10}>
+                                <Box>
+                                    <Typography
+                                        sx={{ fontSize: 13, fontWeight: 'bold', ml: 7, mt: 1 }}>
+                                        Topaz photo AI
+                                        <Button
+                                            sx={{ borderRadius: '10px', background: '#F4F6F8', fontSize: 11, fontWeight: 'bold' }}
+                                        >
+                                            free
+                                        </Button>
+                                    </Typography>
+                                    <Box sx={{ ml: 7, display: 'flex' }}>
+                                        <Box className="box1" sx={{ display: 'flex', color: 'gray', fontSize: 13 }}>
+                                            <CloudDownloadIcon sx={{ width: 15 }} />
+                                            <h5 style={{ margin: '5px', color: 'black' }}>9.9k</h5>
+                                            <FiberManualRecordIcon sx={{ width: 10 }} />
+                                        </Box>
+                                        <Box className="box2" sx={{ display: 'flex', color: 'gray', fontSize: 13, ml: 1 }}>
+                                            <CardMembershipOutlinedIcon sx={{ width: 15 }} />
+                                            <h5 style={{ margin: '5px', color: 'black' }}>9.69Mb</h5>
+                                            <FiberManualRecordIcon sx={{ width: 10 }} />
+                                        </Box>
+                                        <Box className="box3" sx={{ display: 'flex', color: 'gray', fontSize: 13, ml: 1 }}>
+                                            <StarOutlinedIcon sx={{ width: 15, color: 'yellow' }} />
+                                            <h5 style={{ margin: '5px', color: 'black' }}>9.91K</h5>
+
+                                        </Box>
+                                    </Box>
+                                </Box>
+                            </Grid>
+                        </Grid>
                     </Paper>
                 </Grid>
 
+                <Grid size={4}>
+                    <Paper elevation={1} sx={{ px: 3, pt: 4,  }}>
+                        <Typography variant='h6' sx={{ fontWeight: 'bold' }}>
+                            Top installed countries
+                        </Typography>
+                        <TableContainer >
+                            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell></TableCell>
+                                        <TableCell align="left"></TableCell>
+                                        <TableCell align="left"></TableCell>
+                                        <TableCell align="left"></TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    <TableRow
+                                    >
+                                        <TableCell sx={{ display: 'flex' }}>
+                                            <img src="src\assets\Images\Minimal - Client and Admin Dashboard - MUI Store_files\DE.svg" alt="" width={'30px'} style={{ borderRadius: '4px' }} />
+
+                                            <Typography sx={{ml:1}}>
+                                                Germany
+                                            </Typography>
+                                        </TableCell>
+
+                                        <TableCell align="left"><AndroidIcon sx={{fontSize:15,color:'gray'}}/>9.91k</TableCell>
+                                        <TableCell align="left"><GridViewIcon sx={{fontSize:15,color:'gray'}}/>1.95k</TableCell>
+                                        <TableCell align="left"><AppleIcon sx={{fontSize:15,color:'gray'}}/>9.12k</TableCell>
+                                    </TableRow>
+
+                                    <TableRow
+                                    >
+                                        <TableCell sx={{ display: 'flex' }}>
+                                            <img src="src\assets\Images\Minimal - Client and Admin Dashboard - MUI Store_files\GB.svg" alt="" width={'30px'} style={{ borderRadius: '4px' }} />
+                                            <Typography sx={{ml:1}}>
+                                                England
+                                            </Typography>
+
+                                        </TableCell>
+
+                                        <TableCell align="left"><AndroidIcon sx={{fontSize:15,color:'gray'}}/>9.91k</TableCell>
+                                        <TableCell align="left"><GridViewIcon sx={{fontSize:15,color:'gray'}}/>1.95k</TableCell>
+                                        <TableCell align="left"><AppleIcon sx={{fontSize:15,color:'gray'}}/>9.12k</TableCell>
+                                    </TableRow>
+
+                                    <TableRow
+                                    >
+                                        <TableCell sx={{ display: 'flex' }}>
+                                            <img src="src\assets\Images\Minimal - Client and Admin Dashboard - MUI Store_files\FR.svg" alt="" width={'30px'} style={{ borderRadius: '4px' }} />
+                                            <Typography sx={{ml:1}}>
+                                                France
+                                            </Typography>
+                                        </TableCell>
+
+                                        <TableCell align="left"><AndroidIcon sx={{fontSize:15,color:'gray'}}/>9.91k</TableCell>
+                                        <TableCell align="left"><GridViewIcon sx={{fontSize:15,color:'gray'}}/>1.95k</TableCell>
+                                        <TableCell align="left"><AppleIcon sx={{fontSize:15,color:'gray'}}/>9.12k</TableCell>
+                                    </TableRow>
+
+                                    <TableRow
+                                    >
+                                        <TableCell sx={{ display: 'flex' }}>
+                                            <img src="src\assets\Images\Minimal - Client and Admin Dashboard - MUI Store_files\KR.svg" alt="" width={'30px'} style={{ borderRadius: '4px' }} />
+                                            <Typography sx={{ml:1}}>
+                                                Korean
+                                            </Typography>
+
+                                        </TableCell>
+
+                                        <TableCell align="left"><AndroidIcon sx={{fontSize:15,color:'gray'}}/>9.91k</TableCell>
+                                        <TableCell align="left"><GridViewIcon sx={{fontSize:15,color:'gray'}}/>1.95k</TableCell>
+                                        <TableCell align="left"><AppleIcon sx={{fontSize:15,color:'gray'}}/>9.12k</TableCell>
+                                    </TableRow>
+
+                                    <TableRow
+                                    >
+                                        <TableCell sx={{ display: 'flex' }}>
+                                            <img src="src\assets\Images\Minimal - Client and Admin Dashboard - MUI Store_files\US.svg" alt="" width={'30px'} style={{ borderRadius: '4px' }} />
+                                            <Typography sx={{ml:1}}>
+                                                USA
+                                            </Typography>
+
+                                        </TableCell>
+
+                                        <TableCell align="left"><AndroidIcon sx={{fontSize:15,color:'gray'}}/>9.91k</TableCell>
+                                        <TableCell align="left"><GridViewIcon sx={{fontSize:15,color:'gray'}}/>1.95k</TableCell>
+                                        <TableCell align="left"><AppleIcon sx={{fontSize:15,color:'gray'}}/>9.12k</TableCell>
+                                    </TableRow>
+
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </Paper>
+                </Grid>
+
+
+                <Grid size={4}>
+                    <Paper elevation={1} sx={{ px: 3, pt: 4, pb: 6 }}>
+                        <Typography variant='h6' sx={{ fontWeight: 'bold' }}>
+                            Top authors
+                        </Typography>
+
+                        <Box className="box1" sx={{ justifyContent: 'space-between', display: 'flex', mt: 3 }}>
+                            <Box sx={{ display: 'flex' }}>
+                                <Stack direction="row" spacing={2}>
+                                    <Avatar alt="Remy Sharp" src="src\assets\Images\Minimal - Client and Admin Dashboard - MUI Store_files\avatar-1.webp" />
+                                </Stack>
+                                <Box sx={{ ml: 2, }}>
+                                    <Typography variant='body2' sx={{ fontWeight: 'bold', mb: 1, color: 'black' }}>
+                                        Jayvion Simon
+                                    </Typography>
+                                    <Box sx={{ display: 'flex', fontSize: 13, color: 'gray' }}>
+                                        <FavoriteIcon sx={{ width: 19, mr: 1 }} />
+                                        <Typography variant='body2'>
+                                            99.1k
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                            </Box>
+                            <Box sx={{ width: 40, pl: 1, height: 40, backgroundColor: '#EBF8F4', borderRadius: 25, alignItems: 'center', display: 'flex', color: 'green' }}>
+                                <EmojiEventsIcon />
+                            </Box>
+                        </Box>
+
+
+                        <Box className="box2" sx={{ justifyContent: 'space-between', display: 'flex', mt: 3 }}>
+                            <Box sx={{ display: 'flex' }}>
+                                <Stack direction="row" spacing={2}>
+                                    <Avatar alt="Remy Sharp" src="src\assets\Images\Minimal - Client and Admin Dashboard - MUI Store_files\avatar-2.webp" />
+                                </Stack>
+                                <Box sx={{ ml: 2, }}>
+                                    <Typography variant='body2' sx={{ fontWeight: 'bold', mb: 1, color: 'black' }}>
+                                        Jayvion Simon
+                                    </Typography>
+                                    <Box sx={{ display: 'flex', fontSize: 13, color: 'gray' }}>
+                                        <FavoriteIcon sx={{ width: 19, mr: 1 }} />
+                                        <Typography variant='body2'>
+                                            99.1k
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                            </Box>
+                            <Box sx={{ width: 40, pl: 1, height: 40, backgroundColor: '#EBF8F4', borderRadius: 25, alignItems: 'center', display: 'flex', color: 'skyblue' }}>
+                                <EmojiEventsIcon />
+                            </Box>
+                        </Box>
+
+
+                        <Box className="box3" sx={{ justifyContent: 'space-between', display: 'flex', mt: 3 }}>
+                            <Box sx={{ display: 'flex' }}>
+                                <Stack direction="row" spacing={2}>
+                                    <Avatar alt="Remy Sharp" src="src\assets\Images\Minimal - Client and Admin Dashboard - MUI Store_files\avatar-3.webp" />
+                                </Stack>
+                                <Box sx={{ ml: 2, }}>
+                                    <Typography variant='body2' sx={{ fontWeight: 'bold', mb: 1, color: 'black' }}>
+                                        Jayvion Simon
+                                    </Typography>
+                                    <Box sx={{ display: 'flex', fontSize: 13, color: 'gray' }}>
+                                        <FavoriteIcon sx={{ width: 19, mr: 1 }} />
+                                        <Typography variant='body2'>
+                                            99.1k
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                            </Box>
+                            <Box sx={{ width: 40, pl: 1, height: 40, backgroundColor: '#EBF8F4', borderRadius: 25, alignItems: 'center', display: 'flex', color: 'red' }}>
+                                <EmojiEventsIcon />
+                            </Box>
+                        </Box>
+                    </Paper>
+                </Grid>
+
+
+                <Grid size={4}>
+
+                    <Grid size={12} sx={{ justifyContent: 'space-between', display: 'flex', backgroundColor: '#007867', borderRadius: 5, overflow: 'hidden' }}>
+                        <Grid sx={{ py: 2, px: 3, alignItems: 'center', color: 'white', display: 'flex' }}>
+                            <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 1, md: 3 }}>
+                                <Gauge width={100} height={100} value={48} />
+                            </Stack>
+                            <Grid sx={{ ml: 3 }}>
+                                <Typography variant='h5' sx={{ fontWeight: 'bold' }}>
+                                    38,900
+                                </Typography>
+                                <Typography variant='body1' sx={{ fontWeight: 'bold' }}>
+                                    Conversion
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                        <Grid>
+                            <PersonIcon sx={{ fontSize: 160, color: '#148373', ml: 15 }} />
+                        </Grid>
+                    </Grid>
+
+
+
+
+                    <Grid size={12} sx={{ justifyContent: 'space-between', display: 'flex', backgroundColor: '#006C9C', borderRadius: 5, overflow: 'hidden', mt: 2 }}>
+                        <Grid sx={{ py: 3, px: 3, alignItems: 'center', color: 'white', display: 'flex' }}>
+                            <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 1, md: 3 }}>
+                                <Gauge width={100} height={100} value={75} />
+                            </Stack>
+                            <Grid sx={{ ml: 3 }}>
+                                <Typography variant='h5' sx={{ fontWeight: 'bold' }}>
+                                    55,566
+                                </Typography>
+                                <Typography variant='body1' sx={{ fontWeight: 'bold' }}>
+                                    Applications
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                        <Grid>
+                            <EmailIcon sx={{ fontSize: 160, color: '#1478A4', ml: 15 }} />
+                        </Grid>
+                    </Grid>
+
+                </Grid>
+
+
             </Grid>
-        </Box>
+        </Box >
     );
 }
 
