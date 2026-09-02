@@ -101,7 +101,7 @@ const StatsCard = ({ data }) => {
     return (
         <>
             <Grid size={3} >
-                <Paper elevation={1} sx={{ px: 3, py: 4 }}>
+                <Paper elevation={3} sx={{ px: 3, py: 4 }}>
                     <Typography variant="subtitle2">
                         {
                             data.title
@@ -224,6 +224,15 @@ const product = [
         rank: "Top1",
         rankColor: "primary",
     },
+    {
+        _id: 3,
+        products_img: "../../../../public/assets/img/best-product-1.jpg",
+        name: "ABCD",
+        price: "$150",
+        total_orders: "280",
+        rank: "Top1",
+        rankColor: "primary",
+    },
 
     {
         _id: 4,
@@ -251,6 +260,15 @@ const product = [
         total_orders: "300",
         rank: "Top4",
         rankColor: "info",
+    },
+    {
+        _id: 3,
+        products_img: "../../../../public/assets/img/best-product-1.jpg",
+        name: "ABCD",
+        price: "$150",
+        total_orders: "280",
+        rank: "Top1",
+        rankColor: "primary",
     },
     {
         _id: 7,
@@ -324,6 +342,16 @@ const installedCountries = [
     { img: 'src/assets/Images/Minimal - Client and Admin Dashboard - MUI Store_files/US.svg', android: '9.7k', window: '8.98k', apple: '8.98k' }
 ]
 
+const topAuthors = [
+    { img: 'src/assets/Images/Minimal - Client and Admin Dashboard - MUI Store_files/avatar-1.webp', name: 'Jayvion Simon', like: '9.91k',color:'red' },
+
+    { img: 'src/assets/Images/Minimal - Client and Admin Dashboard - MUI Store_files/avatar-2.webp', name: 'Deja Brady', like: '9.91k',color:'green' },
+
+    { img: 'src/assets/Images/Minimal - Client and Admin Dashboard - MUI Store_files/avatar-3.webp', name: 'Lucian Obrien', like: '9.91k',color:'blue' },
+
+    { img: 'src/assets/Images/Minimal - Client and Admin Dashboard - MUI Store_files/avatar-1.webp', name: 'Jayvion Simon', like: '9.91k',color:'brown' },
+]
+
 function Dashboard(props) {
     const ITEM_HEIGHT = 48;
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -353,7 +381,7 @@ function Dashboard(props) {
 
                 <Grid size={4}>
 
-                    <Paper elevation={1} sx={{ px: 3, pt: 4, pb: 9 }}>
+                    <Paper elevation={3} sx={{ px: 3, pt: 4, pb: 9 }}>
                         <Typography variant='h6' sx={{ fontWeight: 'bold' }}>
                             Current download
                         </Typography>
@@ -390,7 +418,7 @@ function Dashboard(props) {
                 </Grid>
 
                 <Grid size={8}>
-                    <Paper elevation={1} sx={{ px: 3, py: 4 }}>
+                    <Paper elevation={3} sx={{ px: 3, py: 4 }}>
                         <Typography variant='h6' sx={{ fontWeight: 'bold' }}>
                             Area installed
                         </Typography>
@@ -433,7 +461,7 @@ function Dashboard(props) {
                 </Grid>
 
                 <Grid size={8}>
-                    <Paper elevation={1} sx={{ pt: 4, }}>
+                    <Paper elevation={3} sx={{ pt: 4, }}>
                         <Typography variant='h6' sx={{ px: 4, py: 2, fontWeight: 'bold' }}>
                             All Products
                         </Typography>
@@ -516,7 +544,7 @@ function Dashboard(props) {
                 </Grid>
 
                 <Grid size={4}>
-                    <Paper elevation={1} sx={{ px: 3, pt: 4, pb: 5 }}>
+                    <Paper elevation={3} sx={{ px: 3, pt: 4, pb: 5 }}>
                         <Typography variant='h6' sx={{ px: 4, py: 2, fontWeight: 'bold' }}>
                             Related applications
                         </Typography>
@@ -719,7 +747,7 @@ function Dashboard(props) {
                 </Grid>
 
                 <Grid size={4}>
-                    <Paper elevation={1} sx={{ px: 3, pt: 4, }}>
+                    <Paper elevation={3} sx={{ px: 3, pt: 4, }}>
                         <Typography variant='h6' sx={{ fontWeight: 'bold' }}>
                             Top installed countries
                         </Typography>
@@ -745,23 +773,23 @@ function Dashboard(props) {
                                                 </TableCell>
 
                                                 <TableCell align="left" >
-                                                    <Box sx={{display:'flex', alignItems: 'center' }}>
+                                                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
                                                         <AndroidIcon sx={{ fontSize: 15, color: 'gray', mr: 1 }} />
-                                                    <Typography variant='subtitle2'>{v.android}</Typography>
+                                                        <Typography variant='subtitle2'>{v.android}</Typography>
                                                     </Box>
 
                                                 </TableCell>
                                                 <TableCell align="left" >
-                                                    <Box sx={{display:'flex', alignItems: 'center' }}>
+                                                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
                                                         <AndroidIcon sx={{ fontSize: 15, color: 'gray', mr: 1 }} />
-                                                    <Typography variant='subtitle2'>{v.window}</Typography>
+                                                        <Typography variant='subtitle2'>{v.window}</Typography>
                                                     </Box>
 
                                                 </TableCell>
                                                 <TableCell align="left" >
-                                                    <Box sx={{display:'flex', alignItems: 'center' }}>
+                                                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
                                                         <AndroidIcon sx={{ fontSize: 15, color: 'gray', mr: 1 }} />
-                                                    <Typography variant='subtitle2'>{v.apple}</Typography>
+                                                        <Typography variant='subtitle2'>{v.apple}</Typography>
                                                     </Box>
 
                                                 </TableCell>
@@ -771,64 +799,7 @@ function Dashboard(props) {
                                     }
 
 
-                                    {/* <TableRow
-                                    >
-                                        <TableCell sx={{ display: 'flex' }}>
-                                            <img src="src\assets\Images\Minimal - Client and Admin Dashboard - MUI Store_files\GB.svg" alt="" width={'30px'} style={{ borderRadius: '4px' }} />
-                                            <Typography sx={{ ml: 1 }}>
-                                                England
-                                            </Typography>
 
-                                        </TableCell>
-
-                                        <TableCell align="left"><AndroidIcon sx={{ fontSize: 15, color: 'gray' }} />9.91k</TableCell>
-                                        <TableCell align="left"><GridViewIcon sx={{ fontSize: 15, color: 'gray' }} />1.95k</TableCell>
-                                        <TableCell align="left"><AppleIcon sx={{ fontSize: 15, color: 'gray' }} />9.12k</TableCell>
-                                    </TableRow>
-
-                                    <TableRow
-                                    >
-                                        <TableCell sx={{ display: 'flex' }}>
-                                            <img src="src\assets\Images\Minimal - Client and Admin Dashboard - MUI Store_files\FR.svg" alt="" width={'30px'} style={{ borderRadius: '4px' }} />
-                                            <Typography sx={{ ml: 1 }}>
-                                                France
-                                            </Typography>
-                                        </TableCell>
-
-                                        <TableCell align="left"><AndroidIcon sx={{ fontSize: 15, color: 'gray' }} />9.91k</TableCell>
-                                        <TableCell align="left"><GridViewIcon sx={{ fontSize: 15, color: 'gray' }} />1.95k</TableCell>
-                                        <TableCell align="left"><AppleIcon sx={{ fontSize: 15, color: 'gray' }} />9.12k</TableCell>
-                                    </TableRow>
-
-                                    <TableRow
-                                    >
-                                        <TableCell sx={{ display: 'flex' }}>
-                                            <img src="src\assets\Images\Minimal - Client and Admin Dashboard - MUI Store_files\KR.svg" alt="" width={'30px'} style={{ borderRadius: '4px' }} />
-                                            <Typography sx={{ ml: 1 }}>
-                                                Korean
-                                            </Typography>
-
-                                        </TableCell>
-
-                                        <TableCell align="left"><AndroidIcon sx={{ fontSize: 15, color: 'gray' }} />9.91k</TableCell>
-                                        <TableCell align="left"><GridViewIcon sx={{ fontSize: 15, color: 'gray' }} />1.95k</TableCell>
-                                        <TableCell align="left"><AppleIcon sx={{ fontSize: 15, color: 'gray' }} />9.12k</TableCell>
-                                    </TableRow>
-
-                                    <TableRow
-                                    >
-                                        <TableCell sx={{ display: 'flex' }}>
-                                            <img src="src\assets\Images\Minimal - Client and Admin Dashboard - MUI Store_files\US.svg" alt="" width={'30px'} style={{ borderRadius: '4px' }} />
-                                            <Typography sx={{ ml: 1 }}>
-                                                USA
-                                            </Typography>
-
-                                        </TableCell>
-
-                                        <TableCell align="left"><AndroidIcon sx={{ fontSize: 15, color: 'gray', }} />9.91k</TableCell>
-                                        <TableCell align="left"><GridViewIcon sx={{ fontSize: 15, color: 'gray' }} />1.95k</TableCell>
-                                        <TableCell align="left"><AppleIcon sx={{ fontSize: 15, color: 'gray' }} />9.12k</TableCell>
-                                    </TableRow> */}
 
                                 </TableBody>
                             </Table>
@@ -838,12 +809,37 @@ function Dashboard(props) {
 
 
                 <Grid size={4}>
-                    <Paper elevation={1} sx={{ px: 3, pt: 4, pb: 6 }}>
+                    <Paper elevation={3} sx={{ px: 3, pt: 4, pb: 2 }}>
                         <Typography variant='h6' sx={{ fontWeight: 'bold' }}>
                             Top authors
                         </Typography>
+                        {
+                            topAuthors.map((v) => (
+                                <Box className="box1" sx={{ justifyContent: 'space-between', display: 'flex', mt: 2 }}>
+                                    <Box sx={{ display: 'flex' }}>
+                                        <Stack direction="row" spacing={2}>
+                                            <Avatar alt="Remy Sharp" src={v.img} />
+                                        </Stack>
+                                        <Box sx={{ ml: 2, }}>
+                                            <Typography variant='body2' sx={{ fontWeight: 'bold', mb: 1, color: 'black' }}>
+                                                {v.name}
+                                            </Typography>
+                                            <Box sx={{ display: 'flex', fontSize: 13, color: 'gray' }}>
+                                                <FavoriteIcon sx={{ width: 19, mr: 0.5 }} />
+                                                <Typography variant='body2'>
+                                                    {v.like}
+                                                </Typography>
+                                            </Box>
+                                        </Box>
+                                    </Box>
+                                    <Box sx={{ width: 40, pl: 1, height: 40, backgroundColor: '#d9e2df', borderRadius: 25, alignItems: 'center', display: 'flex',  }}>
+                                        <EmojiEventsIcon style={{ color: v.color }} />
+                                    </Box>
+                                </Box>
+                            ))
+                        }
 
-                        <Box className="box1" sx={{ justifyContent: 'space-between', display: 'flex', mt: 3 }}>
+                        {/* <Box className="box1" sx={{ justifyContent: 'space-between', display: 'flex', mt: 2 }}>
                             <Box sx={{ display: 'flex' }}>
                                 <Stack direction="row" spacing={2}>
                                     <Avatar alt="Remy Sharp" src="src\assets\Images\Minimal - Client and Admin Dashboard - MUI Store_files\avatar-1.webp" />
@@ -863,10 +859,9 @@ function Dashboard(props) {
                             <Box sx={{ width: 40, pl: 1, height: 40, backgroundColor: '#EBF8F4', borderRadius: 25, alignItems: 'center', display: 'flex', color: 'green' }}>
                                 <EmojiEventsIcon />
                             </Box>
-                        </Box>
+                        </Box> */}
 
-
-                        <Box className="box2" sx={{ justifyContent: 'space-between', display: 'flex', mt: 3 }}>
+                        {/* <Box className="box2" sx={{ justifyContent: 'space-between', display: 'flex', mt: 2 }}>
                             <Box sx={{ display: 'flex' }}>
                                 <Stack direction="row" spacing={2}>
                                     <Avatar alt="Remy Sharp" src="src\assets\Images\Minimal - Client and Admin Dashboard - MUI Store_files\avatar-2.webp" />
@@ -888,8 +883,7 @@ function Dashboard(props) {
                             </Box>
                         </Box>
 
-
-                        <Box className="box3" sx={{ justifyContent: 'space-between', display: 'flex', mt: 3 }}>
+                        <Box className="box3" sx={{ justifyContent: 'space-between', display: 'flex', mt: 2 }}>
                             <Box sx={{ display: 'flex' }}>
                                 <Stack direction="row" spacing={2}>
                                     <Avatar alt="Remy Sharp" src="src\assets\Images\Minimal - Client and Admin Dashboard - MUI Store_files\avatar-3.webp" />
@@ -910,50 +904,92 @@ function Dashboard(props) {
                                 <EmojiEventsIcon />
                             </Box>
                         </Box>
+                        <Box className="box1" sx={{ justifyContent: 'space-between', display: 'flex', mt: 2}}>
+                            <Box sx={{ display: 'flex' }}>
+                                <Stack direction="row" spacing={2}>
+                                    <Avatar alt="Remy Sharp" src="src\assets\Images\Minimal - Client and Admin Dashboard - MUI Store_files\avatar-1.webp" />
+                                </Stack>
+                                <Box sx={{ ml: 2, }}>
+                                    <Typography variant='body2' sx={{ fontWeight: 'bold', mb: 1, color: 'black' }}>
+                                        Jayvion Simon
+                                    </Typography>
+                                    <Box sx={{ display: 'flex', fontSize: 13, color: 'gray' }}>
+                                        <FavoriteIcon sx={{ width: 19, mr: 0.5 }} />
+                                        <Typography variant='body2'>
+                                            99.1k
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                            </Box>
+                            <Box sx={{ width: 40, pl: 1, height: 40, backgroundColor: '#EBF8F4', borderRadius: 25, alignItems: 'center', display: 'flex', color: 'green' }}>
+                                <EmojiEventsIcon />
+                            </Box>
+                        </Box> */}
                     </Paper>
                 </Grid>
 
-
                 <Grid size={4}>
 
-                    <Grid size={12} sx={{ justifyContent: 'space-between', display: 'flex', backgroundColor: '#007867', borderRadius: 5, overflow: 'hidden' }}>
-                        <Grid sx={{ py: 2, px: 3, alignItems: 'center', color: 'white', display: 'flex' }}>
+                    <Grid size={12} sx={{ justifyContent: 'space-between', display: 'flex', backgroundColor: '#007867', borderRadius: 5, overflow: 'hidden', position: 'relative' }}>
+                        <Grid sx={{ py: 4, px: 3, alignItems: 'center', color: 'white', display: 'flex' }}>
                             <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 1, md: 3 }}>
-                                <Gauge width={100} height={100} value={48} />
+                                <Gauge
+                                    sx={{
+                                        ['.MuiGauge-valueArc']: {
+                                            fill: '#73c9a2'
+                                        },
+                                        ['.MuiGauge-valueText Text']: {
+                                            fill: 'white'
+                                        }
+                                    }}
+                                    width={100}
+                                    height={100}
+                                    value={48} />
                             </Stack>
                             <Grid sx={{ ml: 3 }}>
                                 <Typography variant='h5' sx={{ fontWeight: 'bold' }}>
                                     38,900
                                 </Typography>
-                                <Typography variant='body1' sx={{ fontWeight: 'bold' }}>
+                                <Typography variant='body1' sx={{ fontWeight: 'bold', fontSize: 13, color: '#cfcfcf' }}>
                                     Conversion
                                 </Typography>
                             </Grid>
                         </Grid>
                         <Grid>
-                            <PersonIcon sx={{ fontSize: 160, color: '#148373', ml: 15 }} />
+                            <PersonIcon sx={{ fontSize: 160, color: '#148373', position: 'absolute', right: -40 }} />
                         </Grid>
                     </Grid>
 
 
 
 
-                    <Grid size={12} sx={{ justifyContent: 'space-between', display: 'flex', backgroundColor: '#006C9C', borderRadius: 5, overflow: 'hidden', mt: 2 }}>
-                        <Grid sx={{ py: 3, px: 3, alignItems: 'center', color: 'white', display: 'flex' }}>
+                    <Grid size={12} sx={{ justifyContent: 'space-between', display: 'flex', backgroundColor: '#006C9C', borderRadius: 5, overflow: 'hidden', mt: 2, position: 'relative' }}>
+                        <Grid sx={{ py: 4, px: 3, alignItems: 'center', color: 'white', display: 'flex' }}>
                             <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 1, md: 3 }}>
-                                <Gauge width={100} height={100} value={75} />
+                                <Gauge
+                                    sx={{
+                                        ['.MuiGauge-valueArc']: {
+                                            fill: '#28afc4'
+                                        },
+                                        ['.MuiGauge-valueText Text']: {
+                                            fill: 'white'
+                                        }
+                                    }}
+                                    width={100}
+                                    height={100}
+                                    value={75} />
                             </Stack>
                             <Grid sx={{ ml: 3 }}>
                                 <Typography variant='h5' sx={{ fontWeight: 'bold' }}>
                                     55,566
                                 </Typography>
-                                <Typography variant='body1' sx={{ fontWeight: 'bold' }}>
+                                <Typography variant='body1' sx={{ fontWeight: 'bold', fontSize: 13, color: '#cfcfcf' }}>
                                     Applications
                                 </Typography>
                             </Grid>
                         </Grid>
                         <Grid>
-                            <EmailIcon sx={{ fontSize: 160, color: '#1478A4', ml: 15 }} />
+                            <EmailIcon sx={{ fontSize: 160, color: '#1478A4', position: 'absolute', right: -40 }} />
                         </Grid>
                     </Grid>
 
