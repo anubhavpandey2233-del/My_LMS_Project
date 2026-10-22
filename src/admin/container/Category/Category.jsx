@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -10,15 +10,27 @@ import { Box } from '@mui/material';
 import { object, string } from 'yup';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCategory, deleteCategory, fetchCategory, updateCategory } from '../../../redux/slice/category.slice';
+import { addCategory, deleteCategory, fetchCategory, searchCategory, updateCategory } from '../../../redux/slice/category.slice';
 import { DataGrid } from '@mui/x-data-grid';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
+
 function Category(props) {
 
     const [open, setOpen] = React.useState(false);
+    const [update, setUpdate] = useState(null);
+    const [search, setSearch] = useState()
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -42,25 +54,27 @@ function Category(props) {
         description: string().required("Please enter descrtiption...")
     })
 
-    const columns = [
-        { field: 'name', headerName: 'Name', width: 130 },
-        { field: 'description', headerName: 'Description', width: 130 },
-        {
-            headerName: 'Action',
-            renderCell: (params) => (
-                <>
-                    <IconButton aria-label="delete" onClick={()=>dispatch(deleteCategory(params.row._id))}>
-                        <DeleteIcon />
-                    </IconButton>
 
-                    <IconButton aria-label="delete" onClick={()=>dispatch(updateCategory(params.row._id))}>
-                        <EditIcon />
-                    </IconButton>
-                </>
-            )
-        }
+    // const columns = [
+    //     { field: 'name', headerName: 'Name', width: 130 },
+    //     { field: 'description', headerName: 'Description', width: 130 },
+    //     {
+    //         headerName: 'Action',
+    //         renderCell: (params) => (
+    //             <>
+    //                 <IconButton aria-label="delete" onClick={() => dispatch(deleteCategory(params.row._id))}>
+    //                     <DeleteIcon />
+    //                 </IconButton>
 
-    ]
+    //                 <IconButton aria-label="delete" onClick={() => dispatch(updateCategory(params.row._id))}>
+    //                     <EditIcon />
+    //                 </IconButton>
+    //             </>
+    //         )
+    //     }
+
+    // ]
+
 
     const formik = useFormik({
         initialValues: {
@@ -68,30 +82,81 @@ function Category(props) {
             description: '',
         },
         validationSchema: categorySchema,
-        onSubmit: values => {
+        onSubmit: (values, { resetForm }) => {
             console.log(values);
 
-            dispatch(addCategory(values));
-
+            if (update === null) {
+                dispatch(addCategory(values));
+            } else {
+                dispatch(updateCategory(values))
+                setUpdate(null)
+            }
             handleClose()
+
+            resetForm()
+
 
         },
     });
     console.log(formik.errors);
 
     //Destructuring
-    const { handleSubmit, touched, handleChange, handleBlur, errors } = formik
+    const { handleSubmit, touched, handleChange, handleBlur, errors, setValues, values } = formik
 
-    const paginationModel = { page: 0, pageSize: 5 };
+    const handleEdit = (row) => {
+        handleClickOpen()
+        setValues(row)
+
+        setUpdate(row._id)
+    }
+
+    console.log(update);
+
+    const searchByName = () => {
+
+        if(search){
+
+        
+        dispatch(searchCategory(search))
+
+        }else{
+            dispatch(fetchCategory())
+        }
+
+
+    }
+
+    // const paginationModel = { page: 0, pageSize: 5 };
 
     return (
 
         <Box>
             <h2>Category Admin</h2>
             <React.Fragment>
-                <Button variant="outlined" onClick={handleClickOpen}>
+                <Button variant="outlined" onClick={handleClickOpen} sx={{ mr: 2 }}>
                     Add Category
                 </Button>
+
+                {/* <input type="text"
+                    placeholder='Search Name'
+                    
+
+                /> */}
+
+                                    
+
+                <TextField
+                    id="outlined-multiline-flexible"
+                    label="Search"
+                    multiline
+                    maxRows={4}
+                    onChange={(e) => setSearch(e.target.value)}
+                />
+
+                <Button variant="outlined" sx={{ ml: 2 }} onClick={searchByName}>
+                    Search
+                </Button>
+
                 <Dialog open={open} onClose={handleClose}>
                     <DialogTitle>Category</DialogTitle>
                     <DialogContent>
@@ -104,6 +169,7 @@ function Category(props) {
                                 name="name"
                                 label="Name"
                                 type="text"
+                                value={values.name}
                                 fullWidth
                                 onChange={handleChange}
                                 onBlur={handleBlur}
@@ -117,6 +183,7 @@ function Category(props) {
                                 name="description"
                                 label="Description"
                                 type="text"
+                                value={values.description}
                                 fullWidth
                                 variant="standard"
                                 onChange={handleChange}
@@ -137,15 +204,52 @@ function Category(props) {
             </React.Fragment>
 
 
-            <DataGrid
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650,mt:5 }} size="small" aria-label="a dense table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Name</TableCell>
+                            <TableCell align="center">Description</TableCell>
+                            <TableCell align="right">Action</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {categoryData.category.map((row, i) => (
+                            <TableRow
+                                key={i}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    {row.name}
+                                </TableCell>
+                                <TableCell align="center">{row.description}</TableCell>
+                                <TableCell align="right">
+                                    <>
+                                        <IconButton aria-label="delete" onClick={() => dispatch(deleteCategory(row))}>
+                                            <DeleteIcon />
+                                        </IconButton>
+
+                                        <IconButton aria-label="delete" onClick={() => handleEdit(row)}>
+                                            <EditIcon />
+                                        </IconButton>
+                                    </>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+
+
+            {/* <DataGrid
                 rows={categoryData.category}
                 columns={columns}
                 initialState={{ pagination: { paginationModel } }}
                 pageSizeOptions={[5, 10]}
                 checkboxSelection
-                  getRowId={(row) => row._id} 
+                getRowId={(row) => row._id}
                 sx={{ border: 0 }}
-            />
+            /> */}
         </Box>
     );
 }

@@ -30,10 +30,13 @@ export const fetchCategory = createAsyncThunk(
 
 export const deleteCategory = createAsyncThunk(
     'category/deleteCategory',
-    async (_id) => {
+    async (data) => {
+
+        console.log(data);
+
 
         try {
-            const response = await fetch(`${BASE_URL}category/deleteCategory/${_id}`, {
+            const response = await fetch(`${BASE_URL}category/deleteCategory/${data._id}`, {
                 method: "DELETE"
             })
             const delData = await response.json()
@@ -73,10 +76,10 @@ export const addCategory = createAsyncThunk(
 
 export const updateCategory = createAsyncThunk(
     'category/updateCategory',
-    async (_id) => {
+    async (data) => {
 
         try {
-            const response = await fetch(`${BASE_URL}category/updateCategory/${_id}`, {
+            const response = await fetch(`${BASE_URL}category/updateCategory/${data._id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -86,12 +89,27 @@ export const updateCategory = createAsyncThunk(
             const updateData = await response.json();
 
             return updateData.data
+
         } catch (error) {
             console.log(error);
 
         }
     }
 )
+
+export const searchCategory = createAsyncThunk(
+    'category/searchCategory',
+    async (data) => {
+        const response = await fetch(`${BASE_URL}category/searchbyname/${data}`)
+
+        const searchData = await response.json()
+
+        console.log(searchData);
+
+        return searchData.data
+    }
+)
+
 
 const categorySlice = createSlice({
     name: 'category',
@@ -100,24 +118,31 @@ const categorySlice = createSlice({
 
         builder.addCase(fetchCategory.fulfilled, (state, action) => {
             state.category = action.payload
-        }),
+        })
 
-            builder.addCase(deleteCategory.fulfilled, (state, action) => {
-                state.category = state.category.filter((v) => v._id !== action.payload)
-            }),
-
-
-            builder.addCase(addCategory.fulfilled, (state, action) => {
-                state.category.push(action.payload)
-            }),
+        builder.addCase(deleteCategory.fulfilled, (state, action) => {
+            state.category = state.category.filter((v) => v._id !== action.payload)
+        })
 
 
-            builder.addCase(updateCategory.fulfilled, (state, action) => {
-                const index = state.category.findIndex(
-                    (v) => v._id === action.payload._id
-                );
-            })
+        builder.addCase(addCategory.fulfilled, (state, action) => {
+            state.category.push(action.payload)
+        })
 
+
+        builder.addCase(updateCategory.fulfilled, (state, action) => {
+            const index = state.category.findIndex(
+                (v) => v._id === action.payload._id
+            );
+            console.log(index);
+
+            state.category[index] = action.payload
+
+        })
+
+        builder.addCase(searchCategory.fulfilled, (state, action) => {
+            state.category=action.payload
+        })
 
 
     }
