@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -9,6 +9,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { Box } from '@mui/material';
 import { object, string } from 'yup';
 import { useFormik } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
+import { addCategory, deleteCategory, fetchCategory, updateCategory } from '../../../redux/slice/category.slice';
+import { DataGrid } from '@mui/x-data-grid';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 function Category(props) {
 
@@ -22,11 +28,39 @@ function Category(props) {
         setOpen(false);
     };
 
+    const categoryData = useSelector((state) => state.category)
+
+    console.log(categoryData);
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchCategory())
+    }, [])
 
     let categorySchema = object({
         name: string().required("Please enter name..."),
         description: string().required("Please enter descrtiption...")
     })
+
+    const columns = [
+        { field: 'name', headerName: 'Name', width: 130 },
+        { field: 'description', headerName: 'Description', width: 130 },
+        {
+            headerName: 'Action',
+            renderCell: (params) => (
+                <>
+                    <IconButton aria-label="delete" onClick={()=>dispatch(deleteCategory(params.row._id))}>
+                        <DeleteIcon />
+                    </IconButton>
+
+                    <IconButton aria-label="delete" onClick={()=>dispatch(updateCategory(params.row._id))}>
+                        <EditIcon />
+                    </IconButton>
+                </>
+            )
+        }
+
+    ]
 
     const formik = useFormik({
         initialValues: {
@@ -36,13 +70,19 @@ function Category(props) {
         validationSchema: categorySchema,
         onSubmit: values => {
             console.log(values);
-            
+
+            dispatch(addCategory(values));
+
+            handleClose()
+
         },
     });
     console.log(formik.errors);
 
     //Destructuring
     const { handleSubmit, touched, handleChange, handleBlur, errors } = formik
+
+    const paginationModel = { page: 0, pageSize: 5 };
 
     return (
 
@@ -79,7 +119,7 @@ function Category(props) {
                                 type="text"
                                 fullWidth
                                 variant="standard"
-                                 onChange={handleChange}
+                                onChange={handleChange}
                                 onBlur={handleBlur}
                                 multiline
                                 rows={5}
@@ -95,6 +135,17 @@ function Category(props) {
                     </DialogActions>
                 </Dialog>
             </React.Fragment>
+
+
+            <DataGrid
+                rows={categoryData.category}
+                columns={columns}
+                initialState={{ pagination: { paginationModel } }}
+                pageSizeOptions={[5, 10]}
+                checkboxSelection
+                  getRowId={(row) => row._id} 
+                sx={{ border: 0 }}
+            />
         </Box>
     );
 }

@@ -1,0 +1,126 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { BASE_URL } from "../../utills/url"
+
+const initialState = {
+    isLoading: false,
+    category: [],
+    error: null
+}
+
+export const fetchCategory = createAsyncThunk(
+    'category/fetchCategory',
+    async () => {
+
+        try {
+            const response = await fetch(BASE_URL + 'category/getAllCategory')
+            const cData = await response.json()
+
+            console.log(cData);
+
+
+            return cData.data
+        } catch (error) {
+            console.log(error);
+
+        }
+
+
+    }
+)
+
+export const deleteCategory = createAsyncThunk(
+    'category/deleteCategory',
+    async (_id) => {
+
+        try {
+            const response = await fetch(`${BASE_URL}category/deleteCategory/${_id}`, {
+                method: "DELETE"
+            })
+            const delData = await response.json()
+
+            return delData.data._id
+        } catch (error) {
+            console.log(error);
+
+        }
+
+
+    }
+)
+
+export const addCategory = createAsyncThunk(
+    'category/addCategory',
+    async (data) => {
+
+        try {
+            const response = await fetch(BASE_URL + 'category/postCategory', {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            const addData = await response.json()
+            return addData.data
+        } catch (error) {
+            console.log(error);
+
+        }
+
+
+    }
+)
+
+export const updateCategory = createAsyncThunk(
+    'category/updateCategory',
+    async (_id) => {
+
+        try {
+            const response = await fetch(`${BASE_URL}category/updateCategory/${_id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+            const updateData = await response.json();
+
+            return updateData.data
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
+)
+
+const categorySlice = createSlice({
+    name: 'category',
+    initialState,
+    extraReducers: (builder) => {
+
+        builder.addCase(fetchCategory.fulfilled, (state, action) => {
+            state.category = action.payload
+        }),
+
+            builder.addCase(deleteCategory.fulfilled, (state, action) => {
+                state.category = state.category.filter((v) => v._id !== action.payload)
+            }),
+
+
+            builder.addCase(addCategory.fulfilled, (state, action) => {
+                state.category.push(action.payload)
+            }),
+
+
+            builder.addCase(updateCategory.fulfilled, (state, action) => {
+                const index = state.category.findIndex(
+                    (v) => v._id === action.payload._id
+                );
+            })
+
+
+
+    }
+})
+
+export default categorySlice.reducer;
