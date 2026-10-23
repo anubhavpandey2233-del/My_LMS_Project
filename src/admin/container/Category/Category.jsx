@@ -7,7 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Box } from '@mui/material';
-import { object, string } from 'yup';
+import { array, mixed, object, string } from 'yup';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCategory, deleteCategory, fetchCategory, searchCategory, updateCategory } from '../../../redux/slice/category.slice';
@@ -23,6 +23,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { styled } from '@mui/material/styles';
 
 
 function Category(props) {
@@ -51,7 +53,23 @@ function Category(props) {
 
     let categorySchema = object({
         name: string().required("Please enter name..."),
-        description: string().required("Please enter descrtiption...")
+        description: string().required("Please enter descrtiption..."),
+        category_img: mixed()
+            .test("profileImg", "Plese select only .png,.jpg,jpeg files", function (val) {
+                const fileType = ["image/jpg", "image/jpeg", "image/png"]
+
+                // console.log(val.type);
+
+
+                // return val?.every((v) => fileType.includes(v.type))
+
+                return fileType?.includes(val?.type)
+                console.log(val);
+
+            })
+        // .test("profileImg", "Plese select files under 2MB", function (val) {
+        //     return val?.every((v) => v.size < 2 * 1024 * 1024)
+        // }),
     })
 
 
@@ -80,6 +98,7 @@ function Category(props) {
         initialValues: {
             name: '',
             description: '',
+            category_img: ''
         },
         validationSchema: categorySchema,
         onSubmit: (values, { resetForm }) => {
@@ -100,8 +119,22 @@ function Category(props) {
     });
     console.log(formik.errors);
 
+
+    const VisuallyHiddenInput = styled('input')({
+        clip: 'rect(0 0 0 0)',
+        clipPath: 'inset(50%)',
+        height: 1,
+        overflow: 'hidden',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        whiteSpace: 'nowrap',
+        width: 1,
+    });
+
+
     //Destructuring
-    const { handleSubmit, touched, handleChange, handleBlur, errors, setValues, values } = formik
+    const { handleSubmit, touched, handleChange, handleBlur, errors, setValues, setFieldValue, values, setFieldTouched } = formik
 
     const handleEdit = (row) => {
         handleClickOpen()
@@ -114,17 +147,18 @@ function Category(props) {
 
     const searchByName = () => {
 
-        if(search){
+        if (search) {
 
-        
-        dispatch(searchCategory(search))
 
-        }else{
+            dispatch(searchCategory(search))
+
+        } else {
             dispatch(fetchCategory())
         }
 
 
     }
+
 
     // const paginationModel = { page: 0, pageSize: 5 };
 
@@ -143,7 +177,7 @@ function Category(props) {
 
                 /> */}
 
-                                    
+
 
                 <TextField
                     id="outlined-multiline-flexible"
@@ -161,7 +195,7 @@ function Category(props) {
                     <DialogTitle>Category</DialogTitle>
                     <DialogContent>
 
-                        <form onSubmit={handleSubmit} id="subscription-form">
+                        <form onSubmit={handleSubmit} id="subscription-form" enctype="multipart/form-data">
                             <TextField
                                 error={errors.name && touched.name}
                                 margin="normal"
@@ -192,6 +226,48 @@ function Category(props) {
                                 rows={5}
                                 helperText={errors.description && touched.description ? errors.description : ''}
                             />
+
+                            <Button
+                                component="label"
+                                role={undefined}
+                                variant="contained"
+                                tabIndex={-1}
+                                startIcon={<CloudUploadIcon />}
+                            >
+                                Upload files
+                                <VisuallyHiddenInput
+                                    name='category_img'
+                                    type="file"
+                                    onChange={(event) => {
+                                        // const files = Array.from(event.target.files)
+                                        setFieldValue("category_img", event.target.files[0])
+                                        console.log(event.target.files);
+
+                                        setFieldTouched("category_img", true, false)
+
+                                    }
+                                    }
+                                // multiple    
+                                />
+                            </Button>
+                            <p className='error'>
+                                {
+                                    errors.category_img && touched.category_img ? errors.category_img : ''
+                                }
+                            </p>
+
+                            {
+                                <img src={values?.category_img ? URL.createObjectURL(values?.category_img) : ''} alt="" width={"100px"} height={"100px"} />
+
+                            }
+
+
+                            {/* {
+                                values?.map((v) => (
+                                    <img src={URL.createObjectURL(v)} alt="" width={"100px"} height={"100px"} />
+                                ))
+                            } */}
+
                         </form>
                     </DialogContent>
                     <DialogActions>
@@ -205,7 +281,7 @@ function Category(props) {
 
 
             <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650,mt:5 }} size="small" aria-label="a dense table">
+                <Table sx={{ minWidth: 650, mt: 5 }} size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
                             <TableCell>Name</TableCell>

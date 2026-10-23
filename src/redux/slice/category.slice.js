@@ -54,14 +54,18 @@ export const deleteCategory = createAsyncThunk(
 export const addCategory = createAsyncThunk(
     'category/addCategory',
     async (data) => {
+        console.log(data);
+
+        const formData = new FormData()
+        formData.append("name", data.name)
+        formData.append("description", data.description)
+        formData.append("category_img", data.category_img)
 
         try {
             const response = await fetch(BASE_URL + 'category/postCategory', {
                 method: "POST",
-                body: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                body: formData,
+
             })
             const addData = await response.json()
             return addData.data
@@ -141,7 +145,7 @@ const categorySlice = createSlice({
         })
 
         builder.addCase(searchCategory.fulfilled, (state, action) => {
-            state.category=action.payload
+            state.category = action.payload
         })
 
 
