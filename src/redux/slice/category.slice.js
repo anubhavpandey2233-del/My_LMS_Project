@@ -61,6 +61,9 @@ export const addCategory = createAsyncThunk(
         formData.append("description", data.description)
         formData.append("category_img", data.category_img)
 
+        console.log( data.category_img);
+        
+
         try {
             const response = await fetch(BASE_URL + 'category/postCategory', {
                 method: "POST",

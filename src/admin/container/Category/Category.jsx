@@ -58,18 +58,18 @@ function Category(props) {
             .test("profileImg", "Plese select only .png,.jpg,jpeg files", function (val) {
                 const fileType = ["image/jpg", "image/jpeg", "image/png"]
 
-                // console.log(val.type);
+                console.log(val.type);
 
 
-                // return val?.every((v) => fileType.includes(v.type))
+                return val?.every((v) => fileType.includes(v.type))
 
-                return fileType?.includes(val?.type)
-                console.log(val);
+                // return fileType?.includes(val?.type)
+                // console.log(val);
 
             })
-        // .test("profileImg", "Plese select files under 2MB", function (val) {
-        //     return val?.every((v) => v.size < 2 * 1024 * 1024)
-        // }),
+            .test("profileImg", "Plese select files under 2MB", function (val) {
+                return val?.every((v) => v.size < 2 * 1024 * 1024)
+            }),
     })
 
 
@@ -98,7 +98,7 @@ function Category(props) {
         initialValues: {
             name: '',
             description: '',
-            category_img: ''
+            category_img: []
         },
         validationSchema: categorySchema,
         onSubmit: (values, { resetForm }) => {
@@ -239,15 +239,15 @@ function Category(props) {
                                     name='category_img'
                                     type="file"
                                     onChange={(event) => {
-                                        // const files = Array.from(event.target.files)
-                                        setFieldValue("category_img", event.target.files[0])
+                                        const files = Array.from(event.target.files)
+                                        setFieldValue("category_img", files)
                                         console.log(event.target.files);
 
                                         setFieldTouched("category_img", true, false)
 
                                     }
                                     }
-                                // multiple    
+                                    multiple
                                 />
                             </Button>
                             <p className='error'>
@@ -256,17 +256,24 @@ function Category(props) {
                                 }
                             </p>
 
-                            {
+                            {/* {
                                 <img src={values?.category_img ? URL.createObjectURL(values?.category_img) : ''} alt="" width={"100px"} height={"100px"} />
 
-                            }
-
-
-                            {/* {
-                                values?.map((v) => (
-                                    <img src={URL.createObjectURL(v)} alt="" width={"100px"} height={"100px"} />
-                                ))
                             } */}
+
+
+                            {
+                                values?.category_img?.map((v, i) => (
+                                    <img
+                                        key={i}
+                                        src={URL.createObjectURL(v)}
+                                        alt=""
+                                        width="100px"
+                                        height="100px"
+                                        style={{ objectFit: "cover", margin: "5px" }}
+                                    />
+                                ))
+                            }
 
                         </form>
                     </DialogContent>
