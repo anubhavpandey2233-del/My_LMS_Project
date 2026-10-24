@@ -25,6 +25,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
+import { IMAGE_URL } from '../../../utills/url';
 
 
 function Category(props) {
@@ -257,23 +258,23 @@ function Category(props) {
                             </p>
 
                             {/* {
-                                <img src={values?.category_img ? URL.createObjectURL(values?.category_img) : ''} alt="" width={"100px"} height={"100px"} />
+                                <img src={values?.category_img ? URL.createObjectURL(values?.category_img[0]) : ''} alt="" width={"100px"} height={"100px"} />
 
                             } */}
 
-
                             {
-                                values?.category_img?.map((v, i) => (
-                                    <img
-                                        key={i}
-                                        src={URL.createObjectURL(v)}
-                                        alt=""
-                                        width="100px"
-                                        height="100px"
-                                        style={{ objectFit: "cover", margin: "5px" }}
-                                    />
-                                ))
+                                values?.category_img ?
+
+                                   values?.category_img.map((v) => (
+                                        typeof v == 'object' ?
+                                            <img src={URL.createObjectURL(v)} />
+                                            :
+                                            <img src={IMAGE_URL + v} width={'50px'} height={'50px'} />
+
+                                    ))
+                                    : null
                             }
+
 
                         </form>
                     </DialogContent>
@@ -293,6 +294,7 @@ function Category(props) {
                         <TableRow>
                             <TableCell>Name</TableCell>
                             <TableCell align="center">Description</TableCell>
+                            <TableCell align="center">File</TableCell>
                             <TableCell align="right">Action</TableCell>
                         </TableRow>
                     </TableHead>
@@ -306,6 +308,13 @@ function Category(props) {
                                     {row.name}
                                 </TableCell>
                                 <TableCell align="center">{row.description}</TableCell>
+                                <TableCell align="center">
+                                    {
+                                        row.category_img.map((v) => (
+                                            <img src={IMAGE_URL + v} width={'50px'} height={'50px'} />
+                                        ))
+                                    }
+                                </TableCell>
                                 <TableCell align="right">
                                     <>
                                         <IconButton aria-label="delete" onClick={() => dispatch(deleteCategory(row))}>
