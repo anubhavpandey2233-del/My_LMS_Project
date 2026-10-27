@@ -107,6 +107,8 @@ function Category(props) {
 
             if (update === null) {
                 dispatch(addCategory(values));
+                console.log("updateupdateupdateupdateupdateupdate");
+                
             } else {
                 dispatch(updateCategory(values))
                 setUpdate(null)
@@ -149,7 +151,6 @@ function Category(props) {
     const searchByName = () => {
 
         if (search) {
-
 
             dispatch(searchCategory(search))
 
@@ -267,7 +268,7 @@ function Category(props) {
 
                                    values?.category_img.map((v) => (
                                         typeof v == 'object' ?
-                                            <img src={URL.createObjectURL(v)} />
+                                            <img src={URL.createObjectURL(v)} width={'50px'} height={'50px'} />
                                             :
                                             <img src={IMAGE_URL + v} width={'50px'} height={'50px'} />
 

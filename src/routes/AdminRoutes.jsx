@@ -2,9 +2,9 @@ import React from 'react';
 import Layout from '../admin/component/layout/Layout';
 import { Route, Routes } from 'react-router';
 import Category from '../admin/container/Category/Category';
-import Courses from '../admin/container/Courses/Courses';
 import Section from '../admin/container/Section/Section';
 import Dashboard from '../component/Dashboard/Dashboard';
+import Courses from '../admin/container/Courses/Courses';
 
 function AdminRoutes(props) {
     return (

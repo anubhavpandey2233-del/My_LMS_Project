@@ -1,268 +1,144 @@
 import React, { useEffect } from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import { array, object, string } from 'yup';
-import { useFormik } from 'formik';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import { styled } from '@mui/material/styles';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
+import { Form, Formik } from 'formik';
+import { array, mixed, object, string } from 'yup';
+import TextBox from '../../../container/TextBox';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 import { useDispatch, useSelector } from 'react-redux';
+import FileUpload from '../../../container/FileUpload';
+import { fetchCourses } from '../../../redux/slice/course.slice';
+import { IMAGE_URL } from '../../../utills/url';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import { fetchCategory } from '../../../redux/slice/category.slice';
-import Form from "react-bootstrap/Form";
 
+function Courses(props) {
 
-
-const VisuallyHiddenInput = styled('input')({
-    clip: 'rect(0 0 0 0)',
-    clipPath: 'inset(50%)',
-    height: 1,
-    overflow: 'hidden',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    whiteSpace: 'nowrap',
-    width: 1,
-});
-
-
-function Course(props) {
-
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const courseData = useSelector((state) => state.course)
+    console.log(courseData);
 
     const categoryData = useSelector((state) => state.category)
-
     console.log(categoryData);
+
+
     const dispatch = useDispatch()
 
+
+    let yupSchema = object({
+        category: string().required(),
+        course: string().required(),
+        description: string().required(),
+        fees: string().required(),
+
+        course_img: mixed()
+            .test("course_img", "Plese select only .png,.jpg,jpeg files", function (val) {
+                const fileType = ["image/jpg", "image/jpeg", "image/png"]
+
+                console.log(val);
+
+
+                return val?.every((v) => fileType.includes(v.type))
+
+
+
+            })
+            .test("course_img", "Plese select files under 2MB", function (val) {
+                return val?.every((v) => v.size < 2 * 1024 * 1024)
+            }),
+
+    })
+
     useEffect(() => {
+        dispatch(fetchCourses())
         dispatch(fetchCategory())
     }, [])
 
-    let categorySchema = object({
-        name: string()
-            .required("Please enter name...")
-            .matches(/^[a-zA-Z ]+$/, "Please enter valid name"),
-
-        duration: string()
-            .required("Please enter duration..."),
-
-        fees: string()
-            .required("Please enter fees"),
-
-        description: string()
-            .required("Please enter descrtiption..."),
-
-        // .min(5,"Minimu 5 letter required")
-        // .max(20,"Maximum 20 letter you can write")
-
-        profileImg: array()
-            .test("profileImg", "Plese select only .png,.jpg,jpeg files", function (val) {
-                const fileType = ["image/jpg", "image/jpeg", "image/png"]
-
-                return val.every((v) => fileType.includes(v.type))
-                console.log(val);
-
-            })
-            .test("profileImg", "Plese select files under 2MB", function (val) {
-                return val.every((v) => v.size < 2 * 1024 * 1024)
-            }),
-        cat: string()
-            .required("Please select any category")
-    })
-
-    const formik = useFormik({
-        initialValues: {
-            name: '',
-            duration: '',
-            fees: '',
-            description: '',
-            profileImg: [],
-        },
-        validationSchema: categorySchema,
-        onSubmit: values => {
-            console.log(values);
-
-        },
-    });
-    console.log(formik.errors);
-
-    //Destructuring
-    const { handleSubmit, touched, handleChange, handleBlur, errors, values, setFieldValue, setFieldTouched } = formik
-
     return (
+        <div>
+            <Formik
+                initialValues={{
+                    category: '',
+                    course: '',
+                    description: '',
+                    fees: '',
+                    course_img: [],
 
-        <Box>
-            <h2 className='my-4'>Formik Yup Validation</h2>
-            <React.Fragment>
-                <Button variant="outlined" onClick={handleClickOpen}>
-                    Add Course
-                </Button>
-                <Dialog open={open} onClose={handleClose}>
-                    <DialogTitle>Formik</DialogTitle>
-                    <DialogContent>
+                }}
+                validationSchema={yupSchema}
+                onSubmit={(values, actions) => {
+                    console.log(values);
 
-                        <TextField
-                            error={errors.cat && touched.cat}
-                            id="standard-select-currency-native"
-                            select
-                            name="cat"
-                            label="select"
-                            type="text"
-                            defaultValue="EUR"
-                            slotProps={{
-                                select: {
-                                    native: true,
-                                },
-                            }}
-                            fullWidth
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            helperText={errors.cat && touched.cat ? errors.cat : ''}
-                            variant="standard"
-                        >
-                            <option value="">--Select Category--</option>
-                            {categoryData.category.map((option, _id) => (
-                                <option key={option.value} value={option.value}>
-                                    {option.name}
-                                </option>
-                            ))}
-                        </TextField>
-
-
-                        <form onSubmit={handleSubmit} id="subscription-form">
-                            <TextField
-                                error={errors.name && touched.name}
-                                margin="normal"
-                                id="name"
-                                name="name"
-                                label="Name"
-                                type="text"
-                                fullWidth
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                variant="standard"
-                                helperText={errors.name && touched.name ? errors.name : ''}
-                            />
-                            <TextField
-                                error={errors.duration && touched.duration}
-                                margin="normal"
-                                id="duration"
-                                name="duration"
-                                label="duration"
-                                type="text"
-                                fullWidth
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                variant="standard"
-                                helperText={errors.duration && touched.duration ? errors.duration : ''}
-                            />
-
-                            <TextField
-                                error={errors.fees && touched.fees}
-                                margin="normal"
-                                id="fees"
-                                name="fees"
-                                label="fees"
-                                type="number"
-                                fullWidth
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                variant="standard"
-                                helperText={errors.fees && touched.fees ? errors.fees : ''}
-                            />
-
-
-                            <TextField
-                                error={errors.description && touched.description}
-                                margin="dense"
-                                id="description"
-                                name="description"
-                                label="Description"
-                                type="text"
-                                fullWidth
-                                variant="standard"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                multiline
-                                rows={5}
-                                helperText={errors.description && touched.description ? errors.description : ''}
-                            />
+                }}
+            >
+                <Form>
+                    <TextBox name="category" label="category" select categoryData={categoryData?.category} />
+                    <TextBox name="course" type="text" label="course" />
+                    <TextBox name="description" type="text" label="description" />
+                    <TextBox name="fees" type="text" label="description" />
+                    <FileUpload name="course_img" type="file" multiple={true} />
+                    <button type="submit">Submit</button>
+                </Form>
+            </Formik>
 
 
 
-
-
-                            <Button
-                                component="label"
-                                role={undefined}
-                                variant="contained"
-                                tabIndex={-1}
-                                startIcon={<CloudUploadIcon />}
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Sr.No</TableCell>
+                            <TableCell align="right">Category</TableCell>
+                            <TableCell align="right">Name</TableCell>
+                            <TableCell align="right">Description</TableCell>
+                            <TableCell align="right">Fees</TableCell>
+                            <TableCell align="right">File</TableCell>
+                            <TableCell align="right">Actions</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {courseData?.course?.map((row, i) => (
+                            <TableRow
+                                key={i}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                                Upload files
-                                <VisuallyHiddenInput
-                                    name='profileImg'
-                                    type="file"
-                                    onChange={(event) => {
-                                        const files = Array.from(event.target.files)
-                                        setFieldValue("profileImg", files)
-                                        console.log(files);
-
-                                        setFieldTouched("profileImg", true, false)
-
+                                <TableCell component="th" scope="row">
+                                    {i + 1}
+                                </TableCell>
+                                <TableCell align="right">{ }</TableCell>
+                                <TableCell align="right">{row.name}</TableCell>
+                                <TableCell align="right">{row.description}</TableCell>
+                                <TableCell align="right">{row.fees}</TableCell>
+                                <TableCell align="center">
+                                    {
+                                        row.course_img.map((v) => (
+                                            <img src={IMAGE_URL + v} width={'50px'} height={'50px'} />
+                                        ))
                                     }
-                                    }
-                                    multiple
-                                />
-                            </Button>
-                            <p className='error'>
-                                {
-                                    errors.profileImg && touched.profileImg ? errors.profileImg : ''
-                                }
-                            </p>
-                            {
-                                values.profileImg?.map((v) => (
-                                    <img src={URL.createObjectURL(v)} alt="" width={"100px"} height={"100px"} />
-                                ))
-                            }
+                                </TableCell>
+                                <TableCell align="right">
+                                    <>
+                                        <IconButton aria-label="delete">
+                                            <DeleteIcon />
+                                        </IconButton>
 
-
-
-                        </form>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose}>Cancel</Button>
-                        <Button type="submit" form="subscription-form">
-                            Submit
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-            </React.Fragment>
-        </Box>
+                                        <IconButton aria-label="delete">
+                                            <EditIcon />
+                                        </IconButton>
+                                    </>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </div>
     );
 }
 
-export default Course;
+export default Courses;

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { BASE_URL } from "../../utills/url"
+import axios from "axios"
 
 const initialState = {
     isLoading: false,
@@ -12,13 +13,18 @@ export const fetchCategory = createAsyncThunk(
     async () => {
 
         try {
-            const response = await fetch(BASE_URL + 'category/getAllCategory')
-            const cData = await response.json()
+            const response=await axios.get(BASE_URL + 'category/getAllCategory')
 
-            console.log(cData);
+            // const response = await fetch(BASE_URL + 'category/getAllCategory')
+            // const cData = await response.json()
 
+            // console.log(cData);
 
-            return cData.data
+            console.log("responsedata",response);
+            
+
+            return response.data.data
+            // return cData.data
         } catch (error) {
             console.log(error);
 
@@ -34,14 +40,16 @@ export const deleteCategory = createAsyncThunk(
 
         console.log(data);
 
-
         try {
-            const response = await fetch(`${BASE_URL}category/deleteCategory/${data._id}`, {
-                method: "DELETE"
-            })
-            const delData = await response.json()
 
-            return delData.data._id
+            const response=await axios.delete(`${BASE_URL}category/deleteCategory/${data._id}`)
+
+            // const response = await fetch(`${BASE_URL}category/deleteCategory/${data._id}`, {
+            //     method: "DELETE"
+            // })
+            // const delData = await response.json()
+
+            return response.data._id
         } catch (error) {
             console.log(error);
 
@@ -72,13 +80,18 @@ export const addCategory = createAsyncThunk(
 
 
         try {
-            const response = await fetch(BASE_URL + 'category/postCategory', {
-                method: "POST",
-                body: formData,
 
-            })
-            const addData = await response.json()
-            return addData.data
+            const response=await axios.post(BASE_URL + 'category/postCategory',formData)
+
+            // const response = await fetch(BASE_URL + 'category/postCategory', {
+            //     method: "POST",
+            //     body: formData,
+
+            // })
+            // const addData = await response.json()
+            // return addData.data
+
+            return response.data
         } catch (error) {
             console.log(error);
 
@@ -93,16 +106,19 @@ export const updateCategory = createAsyncThunk(
     async (data) => {
 
         try {
-            const response = await fetch(`${BASE_URL}category/updateCategory/${data._id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            })
-            const updateData = await response.json();
 
-            return updateData.data
+            const response=await axios.put(`${BASE_URL}category/updateCategory/${data._id}`)
+
+            // const response = await fetch(`${BASE_URL}category/updateCategory/${data._id}`, {
+            //     method: "PUT",
+            //     headers: {
+            //         "Content-Type": "application/json"
+            //     },
+            //     body: JSON.stringify(data)
+            // })
+            // const updateData = await response.json();
+
+            return response.data
 
         } catch (error) {
             console.log(error);
@@ -114,13 +130,16 @@ export const updateCategory = createAsyncThunk(
 export const searchCategory = createAsyncThunk(
     'category/searchCategory',
     async (data) => {
-        const response = await fetch(`${BASE_URL}category/searchbyname/${data}`)
 
-        const searchData = await response.json()
+        const response=await axios(`${BASE_URL}category/searchbyname/${data}`)
 
-        console.log(searchData);
+        // const response = await fetch(`${BASE_URL}category/searchbyname/${data}`)
 
-        return searchData.data
+        // const searchData = await response.json()
+
+        // console.log(searchData);
+
+        return response.data
     }
 )
 
