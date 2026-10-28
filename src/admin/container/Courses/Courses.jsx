@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Formik } from 'formik';
 import { array, mixed, object, string } from 'yup';
 import TextBox from '../../../container/TextBox';
@@ -11,14 +11,18 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useDispatch, useSelector } from 'react-redux';
 import FileUpload from '../../../container/FileUpload';
-import { fetchCourses } from '../../../redux/slice/course.slice';
+import { addCourse, deleteCourse, fetchCourses, searchCourse } from '../../../redux/slice/course.slice';
 import { IMAGE_URL } from '../../../utills/url';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { fetchCategory } from '../../../redux/slice/category.slice';
+import { TextField } from '@mui/material';
+import { Button } from '@mui/material';
 
 function Courses(props) {
+
+    const [search, setSearch] = useState()
 
     const courseData = useSelector((state) => state.course)
     console.log(courseData);
@@ -31,8 +35,8 @@ function Courses(props) {
 
 
     let yupSchema = object({
-        category: string().required(),
-        course: string().required(),
+        category_id: string().required("Please select category"),
+        name: string().required("Please enter course name"),
         description: string().required(),
         fees: string().required(),
 
@@ -59,28 +63,56 @@ function Courses(props) {
         dispatch(fetchCategory())
     }, [])
 
+
+    const searchByName = () => {
+        if (search) {
+            dispatch(searchCourse(search))
+        } else {
+            dispatch(fetchCourses())
+        }
+    }
+
     return (
         <div>
             <Formik
                 initialValues={{
-                    category: '',
-                    course: '',
-                    description: '',
-                    fees: '',
+                    category_id: "",
+                    name: "",
+                    description: "",
+                    fees: "",
                     course_img: [],
-
                 }}
                 validationSchema={yupSchema}
-                onSubmit={(values, actions) => {
-                    console.log(values);
-
+                onSubmit={(values, { resetForm }) => {
+                    console.log("SUBMIT VALUES:", values);
+                    dispatch(addCourse(values));
+                    resetForm();
                 }}
             >
-                <Form>
-                    <TextBox name="category" label="category" select categoryData={categoryData?.category} />
-                    <TextBox name="course" type="text" label="course" />
+
+
+                {/* <TextField
+                    id="outlined-multiline-flexible"
+                    label="Search"
+                    multiline
+                    maxRows={4}
+                    onChange={(e) => setSearch(e.target.value)}
+                />
+
+                <Button variant="outlined" sx={{ ml: 2 }} onClick={searchByName}>
+                    Search
+                </Button> */}
+
+                <Form enctype="multipart/form-data">
+                    <TextBox
+                        name="category_id"
+                        label="Category"
+                        select
+                        categoryData={categoryData?.category}
+                    />
+                    <TextBox name="name" type="text" label="Course" />
                     <TextBox name="description" type="text" label="description" />
-                    <TextBox name="fees" type="text" label="description" />
+                    <TextBox name="fees" type="text" label="Fees" />
                     <FileUpload name="course_img" type="file" multiple={true} />
                     <button type="submit">Submit</button>
                 </Form>
@@ -110,7 +142,11 @@ function Courses(props) {
                                 <TableCell component="th" scope="row">
                                     {i + 1}
                                 </TableCell>
-                                <TableCell align="right">{ }</TableCell>
+                                <TableCell align="right">
+                                    {
+                                        categoryData?.category?.find((v) => v?._id === row?.category_id)?.name
+                                    }
+                                </TableCell>
                                 <TableCell align="right">{row.name}</TableCell>
                                 <TableCell align="right">{row.description}</TableCell>
                                 <TableCell align="right">{row.fees}</TableCell>
@@ -123,7 +159,7 @@ function Courses(props) {
                                 </TableCell>
                                 <TableCell align="right">
                                     <>
-                                        <IconButton aria-label="delete">
+                                        <IconButton aria-label="delete" onClick={() => dispatch(deleteCourse(row))}>
                                             <DeleteIcon />
                                         </IconButton>
 

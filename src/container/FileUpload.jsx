@@ -21,11 +21,11 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 
-function FileUpload({multiple,...props}) {
+function FileUpload({ multiple, ...props }) {
 
-     const [field, meta,helper] = useField(props);
+    const [field, meta, helper] = useField(props);
 
-    const {setValue}=helper
+    const { setValue } = helper
 
     return (
         <>
@@ -56,8 +56,10 @@ function FileUpload({multiple,...props}) {
                 }
             </p>
             {
-                field.value?.map((v) => (
-                    <img src={URL.createObjectURL(v)} alt="" width={"100px"} height={"100px"} />
+                field?.value?.map((v,i) => (
+                    <img
+                        key={`${v.name}-${i}`}
+                        src={URL.createObjectURL(v)} alt="" width={"100px"} height={"100px"} />
                 ))
             }
         </>

@@ -22,7 +22,7 @@ function TextBox({ label,type,categoryData=[], ...props }) {
 
              {
                 categoryData?.map((v, i) => (
-                    <MenuItem key={v.value} value={v.value}>
+                    <MenuItem key={v._id} value={v._id}>
                         {v.name}
                     </MenuItem>
                 ))}
