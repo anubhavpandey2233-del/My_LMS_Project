@@ -1,9 +1,10 @@
 import { Button } from '@mui/material';
 import { useField } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { styled } from '@mui/material/styles';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { IMAGE_URL } from '../utills/url';
 
 
 
@@ -26,6 +27,13 @@ function FileUpload({ multiple, ...props }) {
     const [field, meta, helper] = useField(props);
 
     const { setValue } = helper
+
+  
+    useEffect(() => {
+        console.log("ddddd", field);
+        
+    }, [])
+    
 
     return (
         <>
@@ -56,11 +64,14 @@ function FileUpload({ multiple, ...props }) {
                 }
             </p>
             {
-                field?.value?.map((v,i) => (
-                    <img
-                        key={`${v.name}-${i}`}
-                        src={URL.createObjectURL(v)} alt="" width={"100px"} height={"100px"} />
-                ))
+                field?.value ?
+                field?.value?.map((v, i) => (
+                    typeof v=="object" ?
+                    <img src={URL.createObjectURL(v)} alt="" width={"100px"} height={"100px"} />
+                    :
+                    <img src={IMAGE_URL + v} width={'50px'} height={'50px'} />
+                    
+                )):null
             }
         </>
     );

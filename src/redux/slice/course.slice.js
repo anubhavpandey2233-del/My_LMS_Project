@@ -31,7 +31,7 @@ export const deleteCourse = createAsyncThunk(
             console.log("Okk COURse");
 
 
-            return response.data._id
+            return response.data.data._id
         } catch (error) {
             console.log(error)
         }
@@ -71,11 +71,41 @@ export const searchCourse = createAsyncThunk(
             return response.data
         } catch (error) {
             console.log(error);
-            
+
         }
     }
 )
 
+export const updateCourse = createAsyncThunk(
+    'course/updateCourse',
+    async (data) => {
+
+        try {
+
+
+            const fd = new FormData()
+            fd.append("category_id", data.category_id);
+            fd.append("name", data.name);
+            fd.append("description", data.description);
+            fd.append("fees", data.fees);
+
+            for (let i = 0; i < data.course_img?.length; i++) {
+                fd.append("course_img", data.course_img[i]);
+            }
+
+            console.log("fddddddddddddd", fd);
+
+
+            const response = await axios.put(`${BASE_URL}course/updateCourse/${data._id}`, fd)
+
+            return response.data.data
+
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
+)
 
 const courseSlice = createSlice({
     name: 'course',
@@ -94,6 +124,16 @@ const courseSlice = createSlice({
         })
         builder.addCase(searchCourse.fulfilled, (state, action) => {
             state.course = action.payload
+        })
+
+        builder.addCase(updateCourse.fulfilled, (state, action) => {
+            const index = state.course.findIndex(
+                (v) => v._id === action.payload._id
+            );
+            console.log(index);
+
+            state.course[index] = action.payload
+
         })
     }
 })
