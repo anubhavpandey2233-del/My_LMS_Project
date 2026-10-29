@@ -159,7 +159,7 @@ function Courses(props) {
                 {
                     (fd) => (
                         <>
-                            <Form enctype="multipart/form-data">
+                            <Form encType="multipart/form-data">
                                 <TextBox
                                     name="category_id"
                                     label="Category"
