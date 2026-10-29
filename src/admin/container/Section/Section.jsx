@@ -26,7 +26,7 @@ import Paper from '@mui/material/Paper';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 import { fetchCourses } from '../../../redux/slice/course.slice';
-import { addSection, deleteSection, fetchSection, updateSection } from '../../../redux/slice/section.slice';
+import { addSection, deleteSection, fetchCatToCou, fetchSection, updateSection } from '../../../redux/slice/section.slice';
 
 function Section(props) {
 
@@ -81,6 +81,7 @@ function Section(props) {
                 dispatch(addSection(values))
 
             } else {
+
                 dispatch(updateSection(values))
                 setEdit(null)
             }
@@ -95,12 +96,23 @@ function Section(props) {
     console.log(formik.errors);
     const { handleSubmit, touched, handleChange, handleBlur, errors, setValues, setFieldValue, values, setFieldTouched } = formik
 
-    const handleEdit = (row) => {
+    const handleEdit = async (row) => {
+        await dispatch(fetchCatToCou(row.category_id))
         handleClickOpen()
         setValues(row)
+        // setValues(sectionData?.courseCat?.name)
         setEdit(row._id)
-       
+
     }
+
+    const handleCategory = (a) => {
+        console.log("aaaaaaaaaaaaaaaaa", a);
+
+
+        dispatch(fetchCatToCou(a))
+    }
+
+    console.log("okoko", values, sectionData?.courseCat);
 
     return (
         <Box>
@@ -125,7 +137,7 @@ function Section(props) {
                                 select
                                 value={values.category_id}
                                 fullWidth
-                                onChange={handleChange}
+                                onChange={(e) => { handleChange(e); handleCategory(e.target.value) }}
                                 onBlur={handleBlur}
                                 variant="standard"
                                 helperText={errors.category_id && touched.category_id ? errors.category_id : ''}
@@ -151,9 +163,10 @@ function Section(props) {
                                 multiline
                                 rows={5}
                                 helperText={errors.course_id && touched.course_id ? errors.course_id : ''}
+                                setValues={sectionData?.courseCat?.name}
                             >
                                 {
-                                    courseData?.course?.map((v) => (
+                                    sectionData?.courseCat?.map((v) => (
                                         <MenuItem key={v._id} value={v._id}>
                                             {v.name}
                                         </MenuItem>

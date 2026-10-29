@@ -301,18 +301,18 @@ function Category(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {categoryData.category.map((row, i) => (
+                        {categoryData?.category?.map((row, i) => (
                             <TableRow
                                 key={i}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row">
-                                    {row.name}
+                                    {row?.name}
                                 </TableCell>
-                                <TableCell align="center">{row.description}</TableCell>
+                                <TableCell align="center">{row?.description}</TableCell>
                                 <TableCell align="center">
                                     {
-                                        row.category_img.map((v) => (
+                                        row?.category_img?.map((v) => (
                                             <img src={IMAGE_URL + v} width={'50px'} height={'50px'} />
                                         ))
                                     }

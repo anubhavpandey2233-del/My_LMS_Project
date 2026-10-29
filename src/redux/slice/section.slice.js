@@ -6,6 +6,7 @@ import axios from "axios"
 const initialState = {
     isLoading: false,
     section: [],
+    courseCat: [],
     error: null
 }
 
@@ -22,6 +23,20 @@ export const fetchSection = createAsyncThunk(
     }
 )
 
+export const fetchCatToCou =createAsyncThunk(
+    'courseCat/fetchCatToCou',
+    async (id) => {
+        try {
+            const response = await axios.get(`${BASE_URL}section/getCatToCourse/${id}`)
+            console.log("responseresponse",response);
+            return response.data.data
+        } catch (error) {
+            console.log(error)
+        }
+    }
+)
+
+
 export const deleteSection = createAsyncThunk(
     'section/deleteSection',
     async (data) => {
@@ -29,7 +44,7 @@ export const deleteSection = createAsyncThunk(
 
         try {
             const response = await axios.delete(`${BASE_URL}section/deleteSection/${data._id}`)
-            return response.data.data._id
+            return response.data._id
         } catch (error) {
             console.log(error)
         }
@@ -57,7 +72,7 @@ export const updateSection = createAsyncThunk(
     'section/updateSection',
     async (data) => {
         try {
-            const response = await axios.put(`${BASE_URL}section/updateSection/${data._id}`,data)
+            const response = await axios.put(`${BASE_URL}section/updateSection/${data._id}`, data)
             return response.data.data
         } catch (error) {
             console.log(error)
@@ -86,8 +101,15 @@ const sectionSlice = createSlice({
             state.section = action.payload
         })
 
+        builder.addCase(fetchCatToCou.fulfilled, (state, action) => {
+            state.courseCat =action.payload
+            console.log("courseCat",action.payload);
+            
+        })
+
         builder.addCase(deleteSection.fulfilled, (state, action) => {
             state.section = state.section.filter((v) => v._id !== action.payload)
+
 
         })
 
@@ -95,6 +117,7 @@ const sectionSlice = createSlice({
             if (action.payload) {
                 state.section.push(action.payload)
             }
+            log
         })
 
 

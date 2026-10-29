@@ -91,7 +91,7 @@ export const addCategory = createAsyncThunk(
             // const addData = await response.json()
             // return addData.data
 
-            return response.data
+            return response?.data
         } catch (error) {
             console.log(error);
 
