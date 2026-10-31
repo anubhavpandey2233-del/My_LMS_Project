@@ -1,9 +1,13 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../../context/reducer/ThemeContext';
+import { FaFacebookSquare } from "react-icons/fa";
+import { FaInstagramSquare } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { FaLinkedin } from "react-icons/fa";
 
 function Footer(props) {
 
-    const theme=useContext(ThemeContext)
+    const theme = useContext(ThemeContext)
 
     return (
         <footer className="pt-5">
@@ -20,10 +24,10 @@ function Footer(props) {
                         <p className="my-3">Eduport education theme, built specifically for the education centers which is dedicated to teaching and involve learners.</p>
                         {/* Social media icon */}
                         <ul className="list-inline mb-0 mt-3">
-                            <li className="list-inline-item"> <a className="btn btn-white btn-sm shadow px-2 text-facebook" href="#"><i className="fab fa-fw fa-facebook-f" /></a> </li>
-                            <li className="list-inline-item"> <a className="btn btn-white btn-sm shadow px-2 text-instagram" href="#"><i className="fab fa-fw fa-instagram" /></a> </li>
-                            <li className="list-inline-item"> <a className="btn btn-white btn-sm shadow px-2 text-twitter" href="#"><i className="fab fa-fw fa-twitter" /></a> </li>
-                            <li className="list-inline-item"> <a className="btn btn-white btn-sm shadow px-2 text-linkedin" href="#"><i className="fab fa-fw fa-linkedin-in" /></a> </li>
+                            <li className="list-inline-item"> <a className={theme.theme=='dark'?`bodyBG iconSize btn btn-white btn-sm shadow px-2 text-facebook`:"iconSize btn btn-white btn-sm shadow px-2 text-facebook"} href="#"><FaFacebookSquare/></a> </li>
+                            <li className="list-inline-item"> <a className={theme.theme=='dark'?`bodyBG iconSize btn btn-white btn-sm shadow px-2 text-instagram`:"iconSize btn btn-white btn-sm shadow px-2 text-instagram"} href="#"><FaInstagramSquare /></a> </li>
+                            <li className="list-inline-item"> <a className={theme.theme=='dark'?`bodyBG iconSize btn btn-white btn-sm shadow px-2 text-twitter`:"iconSize btn btn-white btn-sm shadow px-2 text-twitter"} href="#"><FaXTwitter /></a> </li>
+                            <li className="list-inline-item"> <a className={theme.theme=='dark'?`bodyBG iconSize btn btn-white btn-sm shadow px-2 text-linkedin`:"iconSize btn btn-white btn-sm shadow px-2 text-linkedin"} href="#"><FaLinkedin /></a> </li>
                         </ul>
                     </div>
                     {/* Widget 1 END */}
@@ -68,10 +72,10 @@ function Footer(props) {
                         <h5 className="mb-2 mb-md-4 ">Contact</h5>
                         {/* Time */}
                         <p className="mb-2 whiteText">
-                            Toll free:<span className={theme.theme=='dark'?`spanText h6 fw-light ms-2`:"h6 fw-light ms-2"}>+1234 568 963</span>
+                            Toll free:<span className={theme.theme == 'dark' ? `spanText h6 fw-light ms-2` : "h6 fw-light ms-2"}>+1234 568 963</span>
                             <span className="d-block small">(9:AM to 8:PM IST)</span>
                         </p>
-                        <p className="mb-0">Email:<span className={theme.theme=='dark'?`spanText h6 fw-light ms-2`:"h6 fw-light ms-2"}>example@gmail.com</span></p>
+                        <p className="mb-0">Email:<span className={theme.theme == 'dark' ? `spanText h6 fw-light ms-2` : "h6 fw-light ms-2"}>example@gmail.com</span></p>
                         <div className="row g-2 mt-2">
                             {/* Google play store button */}
                             <div className="col-6 col-sm-4 col-md-3 col-lg-6 ">
@@ -92,7 +96,7 @@ function Footer(props) {
                     <div className="container px-0">
                         <div className="d-md-flex justify-content-between align-items-center py-3 text-center text-md-left">
                             {/* copyright text */}
-                            <div className="text-primary-hover"> Copyrights <a href="#" className="text-body">©2021 Eduport</a>. All rights reserved. </div>
+                            <div className="text-primary-hover"> Copyrights <a href="#" className="text-body">©2026 Eduport</a>. All rights reserved. </div>
                             {/* copyright links*/}
                             <div className=" mt-3 mt-md-0">
                                 <ul className="list-inline mb-0">

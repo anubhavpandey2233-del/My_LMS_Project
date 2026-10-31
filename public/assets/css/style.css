@@ -4696,7 +4696,7 @@ fieldset:disabled .btn {
 .btn-sm,
 .btn-group-sm>.btn {
   padding: 0.4rem 0.8rem;
-  font-size: 0.8125rem;
+  /* font-size: 0.8125rem; */
   border-radius: 0.2rem;
 }
 
@@ -20018,7 +20018,7 @@ fieldset:disabled .btn {
     bottom: 0;
     right: 0;
     left: 0;
-    background: #fff;
+    /* background: #fff; */
     -webkit-box-shadow: 0px 0px 40px rgba(29, 58, 83, 0.15);
     box-shadow: 0px 0px 40px rgba(29, 58, 83, 0.15);
     border-radius: inherit;
@@ -22335,26 +22335,44 @@ html[dir=rtl] .choices__input {
 .dark h4,
 .dark h5,
 .dark h6,
-.dark .h6{
+.dark .h6 {
   color: white;
 }
-.bodyBG{
+
+.bodyBG {
   background-color: #221E35;
   color: white;
 }
-.dark footer .nav-link,.dark footer .whiteText{
+
+.dark footer .nav-link,
+.dark footer .whiteText {
   color: white;
 }
-.spanText{
-  color:white;
+
+.spanText {
+  color: white;
 }
-.cardData{
+
+.cardData {
   background-color: black;
   color: white;
 }
-.tickIcon{
- color: green;
+
+.tickIcon {
+  color: green;
 }
 
+.dark ul li a {
+  color: white;
+}
+
+.iconSize{
+  font-size: 20px;
+}
+
+/* .bodyBG .navbar-expand-xl .dropdown-menu-shadow-stacked .dropdown-menu:before {
+  background-color: #221E35 !important;
+  color: white !important;
+} */
 
 /*User CSS*/

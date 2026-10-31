@@ -39,15 +39,15 @@ function Header(props) {
                             {/* Nav item 1 Demos */}
                             <li className="nav-item dropdown dropdown-menu-shadow-stacked">
                                 <a className="nav-link bg-primary bg-opacity-10 rounded-3 text-primary px-3 py-3 py-xl-0" href="#" id="categoryMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="bi bi-ui-radios-grid me-2" /><span>Category</span></a>
-                                <ul className="dropdown-menu" aria-labelledby="categoryMenu">
+                                <ul className={theme.theme=='dark'?`bodyBG dropdown-menu`:"dropdown-menu"} aria-labelledby="categoryMenu">
                                     {/* Dropdown submenu */}
-                                    <li className="dropdown-submenu dropend">
+                                    <li className={theme.theme=='dark'?`bodyBG dropdown-submenu dropend`:"dropdown-submenu dropend"}>
                                         <a className="dropdown-item dropdown-toggle" href="#">Development</a>
-                                        <ul className="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+                                        <ul className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-menu-start`:"dropdown-menu dropdown-menu-start"} data-bs-popper="none">
                                             {/* dropdown submenu open right */}
                                             <li className="dropdown-submenu dropend">
                                                 <a className="dropdown-item dropdown-toggle" href="#">Web Development</a>
-                                                <ul className="dropdown-menu" data-bs-popper="none">
+                                                <ul className={theme.theme=='dark'?`bodyBG dropdown-menu`:"dropdown-menu"} data-bs-popper="none">
                                                     <li> <a className="dropdown-item" href="#">Css</a> </li>
                                                     <li> <a className="dropdown-item" href="#">Java Script</a> </li>
                                                     <li> <a className="dropdown-item" href="#">Angular</a> </li>
@@ -68,7 +68,7 @@ function Header(props) {
                                     {/* Dropdown submenu */}
                                     <li className="dropdown-submenu dropend">
                                         <a className="dropdown-item dropdown-toggle" href="#">Marketing</a>
-                                        <div className="dropdown-menu dropdown-menu-start dropdown-width-lg" data-bs-popper="none">
+                                        <div className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-menu-start dropdown-width-lg`:"dropdown-menu dropdown-menu-start dropdown-width-lg"} data-bs-popper="none">
                                             <div className="row p-4">
                                                 {/* Dropdown column item */}
                                                 <div className="col-xl-6 col-xxl-4 mb-4 mb-xl-0">
@@ -217,8 +217,8 @@ function Header(props) {
                         <ul className="navbar-nav navbar-nav-scroll me-auto">
                             {/* Nav item 1 Demos */}
                             <li className="nav-item dropdown">
-                                <a className={theme.theme=='dark'?`spanText nav-link dropdown-toggle active`:"nav-link dropdown-toggle active"} href="#" id="demoMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Demos</a>
-                                <ul className="dropdown-menu" aria-labelledby="demoMenu">
+                                <a className={theme.theme == 'dark' ? `spanText nav-link dropdown-toggle active` : "nav-link dropdown-toggle active"} href="#" id="demoMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Demos</a>
+                                <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu` : "dropdown-menu"} aria-labelledby="demoMenu">
                                     <li> <a className="dropdown-item active" href="index.html">Home Default</a></li>
                                     <li> <a className="dropdown-item" href="index-2.html">Home Education</a></li>
                                     <li> <a className="dropdown-item" href="index-3.html">Home Academy</a></li>
@@ -235,11 +235,11 @@ function Header(props) {
                                     <li> <hr className="dropdown-divider" /></li>
                                     <li className="dropdown-submenu dropend">
                                         <a className="dropdown-item dropdown-toggle" href="#">Dropdown levels</a>
-                                        <ul className="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+                                        <ul className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-menu-start`:"dropdown-menu dropdown-menu-start"} data-bs-popper="none">
                                             {/* dropdown submenu open right */}
                                             <li className="dropdown-submenu dropend">
                                                 <a className="dropdown-item dropdown-toggle" href="#">Dropdown (end)</a>
-                                                <ul className="dropdown-menu" data-bs-popper="none">
+                                                <ul className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-menu-start`:"dropdown-menu dropdown-menu-start"} data-bs-popper="none">
                                                     <li> <a className="dropdown-item" href="#">Dropdown item</a> </li>
                                                     <li> <a className="dropdown-item" href="#">Dropdown item</a> </li>
                                                 </ul>
@@ -248,7 +248,7 @@ function Header(props) {
                                             {/* dropdown submenu open left */}
                                             <li className="dropdown-submenu dropstart">
                                                 <a className="dropdown-item dropdown-toggle" href="#">Dropdown (start)</a>
-                                                <ul className="dropdown-menu dropdown-menu-end" data-bs-popper="none">
+                                                <ul className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-menu-start`:"dropdown-menu dropdown-menu-start"} data-bs-popper="none">
                                                     <li> <a className="dropdown-item" href="#">Dropdown item</a> </li>
                                                     <li> <a className="dropdown-item" href="#">Dropdown item</a> </li>
                                                 </ul>
@@ -260,12 +260,12 @@ function Header(props) {
                             </li>
                             {/* Nav item 2 Pages */}
                             <li className="nav-item dropdown">
-                                <a className={theme.theme==='dark'?`spanText nav-link dropdown-toggle`:"nav-link dropdown-toggle"} href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-                                <ul className="dropdown-menu" aria-labelledby="pagesMenu">
+                                <a className={theme.theme === 'dark' ? `spanText nav-link dropdown-toggle` : "nav-link dropdown-toggle"} href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+                                <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu` : "dropdown-menu"} aria-labelledby="pagesMenu">
                                     {/* Dropdown submenu */}
                                     <li className="dropdown-submenu dropend">
                                         <a className="dropdown-item dropdown-toggle" href="#">Course</a>
-                                        <ul className="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+                                        <ul className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-menu-start`:"dropdown-menu dropdown-menu-start"} data-bs-popper="none">
                                             <li> <a className="dropdown-item" href="course-grid.html">Course Grid Classic</a></li>
                                             <li> <a className="dropdown-item" href="course-grid-2.html">Course Grid Minimal</a></li>
                                             <li> <hr className="dropdown-divider" /></li>
@@ -281,7 +281,7 @@ function Header(props) {
                                     {/* Dropdown submenu */}
                                     <li className="dropdown-submenu dropend">
                                         <a className="dropdown-item dropdown-toggle" href="#">About</a>
-                                        <ul className="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+                                        <ul className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-menu-start`:"dropdown-menu dropdown-menu-start"} data-bs-popper="none">
                                             <li> <a className="dropdown-item" href="about.html">About Us</a></li>
                                             <li> <a className="dropdown-item" href="contact-us.html">Contact Us</a></li>
                                             <li> <a className="dropdown-item" href="blog-grid.html">Blog Grid</a></li>
@@ -296,7 +296,7 @@ function Header(props) {
                                     {/* Dropdown submenu */}
                                     <li className="dropdown-submenu dropend">
                                         <a className="dropdown-item dropdown-toggle" href="#">Authentication</a>
-                                        <ul className="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+                                        <ul className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-menu-start`:"dropdown-menu dropdown-menu-start"} data-bs-popper="none">
                                             <li> <a className="dropdown-item" href="sign-in.html">Sign In</a></li>
                                             <li> <a className="dropdown-item" href="sign-up.html">Sign Up</a></li>
                                             <li> <a className="dropdown-item" href="forgot-password.html">Forgot Password</a></li>
@@ -313,12 +313,12 @@ function Header(props) {
                             </li>
                             {/* Nav item 3 Account */}
                             <li className="nav-item dropdown">
-                                <a className={theme.theme=='dark'?`spanText nav-link dropdown-toggle`:"nav-link dropdown-toggle"} href="#" id="accounntMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accounts</a>
-                                <ul className="dropdown-menu" aria-labelledby="accounntMenu">
+                                <a className={theme.theme == 'dark' ? `spanText nav-link dropdown-toggle` : "nav-link dropdown-toggle"} href="#" id="accounntMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accounts</a>
+                                <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu` : "dropdown-menu"} aria-labelledby="accounntMenu">
                                     {/* Dropdown submenu */}
                                     <li className="dropdown-submenu dropend">
                                         <a className="dropdown-item dropdown-toggle" href="#"><i className="fas fa-user-tie fa-fw me-1" />Instructor</a>
-                                        <ul className="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+                                        <ul className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-menu-start`:"dropdown-menu dropdown-menu-start"} data-bs-popper="none">
                                             <li> <a className="dropdown-item" href="instructor-dashboard.html"><i className="bi bi-grid-fill fa-fw me-1" />Dashboard</a> </li>
                                             <li> <a className="dropdown-item" href="instructor-manage-course.html"><i className="bi bi-basket-fill fa-fw me-1" />Courses</a> </li>
                                             <li> <a className="dropdown-item" href="instructor-create-course.html"><i className="bi bi-file-earmark-plus-fill fa-fw me-1" />Create Course</a> </li>
@@ -333,7 +333,7 @@ function Header(props) {
                                     {/* Dropdown submenu */}
                                     <li className="dropdown-submenu dropend">
                                         <a className="dropdown-item dropdown-toggle" href="#"><i className="fas fa-user-graduate fa-fw me-1" />Student</a>
-                                        <ul className="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+                                        <ul className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-menu-start`:"dropdown-menu dropdown-menu-start"} data-bs-popper="none">
                                             <li> <a className="dropdown-item" href="student-dashboard.html"><i className="bi bi-grid-fill fa-fw me-1" />Dashboard</a> </li>
                                             <li> <a className="dropdown-item" href="student-subscription.html"><i className="bi bi-card-checklist fa-fw me-1" />My Subscriptions</a> </li>
                                             <li> <a className="dropdown-item" href="student-course-list.html"><i className="bi bi-basket-fill fa-fw me-1" />Courses</a> </li>
@@ -350,8 +350,8 @@ function Header(props) {
                             </li>
                             {/* Nav item 4 Megamenu*/}
                             <li className="nav-item dropdown dropdown-fullwidth">
-                                <a className={theme.theme==='dark'?`spanText nav-link dropdown-toggle`:"nav-link dropdown-toggle"} href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Megamenu</a>
-                                <div className="dropdown-menu dropdown-menu-end pb-0" data-bs-popper="none">
+                                <a className={theme.theme === 'dark' ? `spanText nav-link dropdown-toggle` : "nav-link dropdown-toggle"} href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Megamenu</a>
+                                <div className={theme.theme == 'dark' ? `bodyBG dropdown-menu dropdown-menu-end pb-0` : "dropdown-menu dropdown-menu-end pb-0"} data-bs-popper="none">
                                     <div className="row p-4 g-4">
                                         {/* Dropdown column item */}
                                         <div className="col-xl-6 col-xxl-3">
@@ -462,10 +462,10 @@ function Header(props) {
                             </li>
                             {/* Nav item 5 link*/}
                             <li className="nav-item dropdown">
-                                <a className={theme.theme=='dark'?`spanText nav-link`:"nav-link"} href="#" id="advanceMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a className={theme.theme == 'dark' ? `spanText nav-link` : "nav-link"} href="#" id="advanceMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i className="fas fa-ellipsis-h" />
                                 </a>
-                                <ul className="dropdown-menu dropdown-menu-end min-w-auto" data-bs-popper="none">
+                                <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu dropdown-menu-end min-w-auto` : "dropdown-menu dropdown-menu-end min-w-auto"} data-bs-popper="none">
                                     <li>
                                         <a className="dropdown-item" href="https://support.webestica.com/" target="_blank">
                                             <i className="text-warning fa-fw bi bi-life-preserver me-2" />Support
