@@ -158,9 +158,9 @@ Main Banner START */}
                             <p className="my-4 lead">Online learning and teaching marketplace with 5K+ courses &amp; 10M students. Taught by experts to help you acquire new skills.</p>
                             {/* Info */}
                             <ul className="list-inline position-relative justify-content-center justify-content-lg-start mb-4">
-                                <li className="list-inline-item me-2"> <i className="bi bi-patch-check-fill h6 me-1" />Learn with experts</li>
-                                <li className="list-inline-item me-2"> <i className="bi bi-patch-check-fill h6 me-1" />Get certificate</li>
-                                <li className="list-inline-item"> <i className="bi bi-patch-check-fill h6 me-1" />Get membership</li>
+                                <li className="list-inline-item me-2"> <i className={theme.theme=='dark'?`tickIcon bi bi-patch-check-fill h6 me-1`:"bi bi-patch-check-fill h6 me-1"} />Learn with experts</li>
+                                <li className="list-inline-item me-2"> <i className={theme.theme=='dark'?`tickIcon bi bi-patch-check-fill h6 me-1`:"bi bi-patch-check-fill h6 me-1"} />Get certificate</li>
+                                <li className="list-inline-item"> <i className={theme.theme=='dark'?`tickIcon bi bi-patch-check-fill h6 me-1`:"bi bi-patch-check-fill h6 me-1"} />Get membership</li>
                             </ul>
                             <div className="d-sm-flex align-items-center justify-content-center justify-content-lg-start">
                                 {/* Button */}
@@ -286,8 +286,8 @@ Counter START */}
                             </div>
                         </div>
                         {/* Counter item */}
-                        <div className="col-sm-6 col-xl-3">
-                            <div className="d-flex justify-content-center align-items-center p-4 bg-blue bg-opacity-10 rounded-3">
+                        <div className={theme.theme=='dark'?`bodyBG col-sm-6 col-xl-3`:"col-sm-6 col-xl-3"}>
+                            <div className={theme.theme==='dark'?`bodyBG d-flex justify-content-center align-items-center p-4 bg-blue bg-opacity-10 rounded-3`:"d-flex justify-content-center align-items-center p-4 bg-blue bg-opacity-10 rounded-3"}>
                                 <span className="display-6 lh-1 text-blue mb-0"><i className="fas fa-user-tie" /></span>
                                 <div className="ms-4 h6 fw-normal">
                                     <div className="d-flex">
@@ -368,10 +368,10 @@ Popular course START */}
                     <div className="tab-content" id="course-pills-tabContent">
                         {/* Content START */}
                         <div className="tab-pane fade show active" id="course-pills-tabs-1" role="tabpanel" aria-labelledby="course-pills-tab-1">
-                            <div className="row g-4">
+                            <div className={theme.theme=='dark'?`cardData row g-4`:"row g-4"}>
                                 {/* Card item START */}
                                 <div className={theme.theme==='dark'?`cardData col-sm-6 col-lg-4 col-xl-3`:"col-sm-6 col-lg-4 col-xl-3"}>
-                                    <div className="card shadow h-100">
+                                    <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/08.jpg" className={theme.theme=='dark'?`cardData card-img-top`:"card-img-top"} alt="course image" />
                                         {/* Card body */}
@@ -382,7 +382,7 @@ Popular course START */}
                                                 <a href="#" className="h6 mb-0"><i className="far fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">Sketch from A to Z: for app designer</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>Sketch from A to Z: for app designer</a></h5>
                                             <p className="mb-2 text-truncate-2">Proposal indulged no do sociable he throwing settling.</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -395,7 +395,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />12h 56m</span>
@@ -407,7 +407,7 @@ Popular course START */}
                                 {/* Card item END */}
                                 {/* Card item START */}
                                 <div className="col-sm-6 col-lg-4 col-xl-3">
-                                    <div className="card shadow h-100">
+                                   <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/02.jpg" className="card-img-top" alt="course image" />
                                         <div className="card-body pb-0">
@@ -417,7 +417,7 @@ Popular course START */}
                                                 <a href="#" className="text-danger"><i className="fas fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">Graphic Design Masterclass</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>Graphic Design Masterclass</a></h5>
                                             <p className="mb-2 text-truncate-2">Rooms oh fully taken by worse do Points afraid but may end Rooms Points afraid but may end Rooms</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -430,7 +430,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between ">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />9h 56m</span>
@@ -442,7 +442,7 @@ Popular course START */}
                                 {/* Card item END */}
                                 {/* Card item START */}
                                 <div className="col-sm-6 col-lg-4 col-xl-3">
-                                    <div className="card shadow h-100">
+                                   <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/03.jpg" className="card-img-top" alt="course image" />
                                         <div className="card-body pb-0">
@@ -452,7 +452,7 @@ Popular course START */}
                                                 <a href="#" className="h6 fw-light mb-0"><i className="far fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">Create a Design System in Figma</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>Create a Design System in Figma</a></h5>
                                             <p className="mb-2 text-truncate-2">Rooms oh fully taken by worse do. Points afraid but may end afraid but may end.</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -465,7 +465,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />5h 56m</span>
@@ -477,7 +477,7 @@ Popular course START */}
                                 {/* Card item END */}
                                 {/* Card item START */}
                                 <div className="col-sm-6 col-lg-4 col-xl-3">
-                                    <div className="card shadow h-100">
+                                   <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/07.jpg" className="card-img-top" alt="course image" />
                                         <div className="card-body pb-0">
@@ -487,7 +487,7 @@ Popular course START */}
                                                 <a href="#" className="text-danger"><i className="fas fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">Deep Learning with React-Native </a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>Deep Learning with React-Native </a></h5>
                                             <p className="mb-2 text-truncate-2">Far advanced settling say finished raillery. Offered chiefly farther</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -500,7 +500,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />18h 56m</span>
@@ -512,7 +512,7 @@ Popular course START */}
                                 {/* Card item END */}
                                 {/* Card item START */}
                                 <div className="col-sm-6 col-lg-4 col-xl-3">
-                                    <div className="card shadow h-100">
+                                   <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/11.jpg" className="card-img-top" alt="course image" />
                                         <div className="card-body pb-0">
@@ -522,7 +522,7 @@ Popular course START */}
                                                 <a href="#" className="text-danger"><i className="fas fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">Build Responsive Websites with HTML</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>Build Responsive Websites with HTML</a></h5>
                                             <p className="mb-2 text-truncate-2">Far advanced settling say finished raillery. Offered chiefly farther</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -535,7 +535,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />15h 30m</span>
@@ -547,7 +547,7 @@ Popular course START */}
                                 {/* Card item END */}
                                 {/* Card item START */}
                                 <div className="col-sm-6 col-lg-4 col-xl-3">
-                                    <div className="card shadow h-100">
+                                   <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/12.jpg" className="card-img-top" alt="course image" />
                                         <div className="card-body pb-0">
@@ -557,7 +557,7 @@ Popular course START */}
                                                 <a href="#" className="h6 fw-light mb-0"><i className="far fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">Build Websites with CSS</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>Build Websites with CSS</a></h5>
                                             <p className="text-truncate-2 mb-2">Far advanced settling say finished raillery. Offered chiefly farther</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -570,7 +570,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between mt-2">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />36h 30m</span>
@@ -582,7 +582,7 @@ Popular course START */}
                                 {/* Card item END */}
                                 {/* Card item START */}
                                 <div className="col-sm-6 col-lg-4 col-xl-3">
-                                    <div className="card shadow h-100">
+                                   <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/04.jpg" className="card-img-top" alt="course image" />
                                         <div className="card-body pb-0">
@@ -592,7 +592,7 @@ Popular course START */}
                                                 <a href="#" className="text-danger"><i className="fas fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">Learn Invision</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>Learn Invision</a></h5>
                                             <p className="mb-2">Arrived off she elderly beloved him Course regard to up he hardly.</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -605,7 +605,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between mt-2">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />6h 56m</span>
@@ -617,7 +617,7 @@ Popular course START */}
                                 {/* Card item END */}
                                 {/* Card item START */}
                                 <div className="col-sm-6 col-lg-4 col-xl-3">
-                                    <div className="card shadow h-100">
+                                   <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/09.jpg" className="card-img-top" alt="course image" />
                                         <div className="card-body pb-0">
@@ -627,7 +627,7 @@ Popular course START */}
                                                 <a href="#" className="h6 fw-light mb-0"><i className="far fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">JavaScript: Full Understanding</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>JavaScript: Full Understanding</a></h5>
                                             <p className="text-truncate-2 mb-2">Far advanced settling say finished raillery. Offered chiefly farther.</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -640,7 +640,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />35h 20m</span>
@@ -658,7 +658,7 @@ Popular course START */}
                             <div className="row g-4">
                                 {/* Card item START */}
                                 <div className="col-sm-6 col-lg-4 col-xl-3">
-                                    <div className="card shadow h-100">
+                                   <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/05.jpg" className="card-img-top" alt="course image" />
                                         <div className="card-body pb-0">
@@ -668,7 +668,7 @@ Popular course START */}
                                                 <a href="#" className="h6 fw-light mb-0"><i className="far fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">The Complete Web Development in python</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>The Complete Web Development in python</a></h5>
                                             <p className="text-truncate-2 mb-2">Mention Mr manners opinion if garrets enabled.</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -681,7 +681,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between mt-2">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />10h 00m</span>
@@ -693,7 +693,7 @@ Popular course START */}
                                 {/* Card item END */}
                                 {/* Card item START */}
                                 <div className="col-sm-6 col-lg-4 col-xl-3">
-                                    <div className="card shadow h-100">
+                                   <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/06.jpg" className="card-img-top" alt="course image" />
                                         <div className="card-body pb-0">
@@ -703,7 +703,7 @@ Popular course START */}
                                                 <a href="#" className="h6 fw-light mb-0"><i className="far fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">Angular – The Complete Guider</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>Angular – The Complete Guider</a></h5>
                                             <p className="text-truncate-2 mb-2">Rooms oh fully taken by worse do. Points afraid but may end.</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -716,7 +716,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between mt-2">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />9h 32m</span>
@@ -738,7 +738,7 @@ Popular course START */}
                                                 <a href="#" className="text-danger"><i className="fas fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">Deep Learning with React-Native</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>Deep Learning with React-Native</a></h5>
                                             <p className="text-truncate-2 mb-2">Far advanced settling say finished raillery. Offered chiefly farther</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -751,7 +751,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />18h 56m</span>
@@ -763,7 +763,7 @@ Popular course START */}
                                 {/* Card item END */}
                                 {/* Card item START */}
                                 <div className="col-sm-6 col-lg-4 col-xl-3">
-                                    <div className="card shadow h-100">
+                                   <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/09.jpg" className="card-img-top" alt="course image" />
                                         <div className="card-body pb-0">
@@ -773,7 +773,7 @@ Popular course START */}
                                                 <a href="#" className="h6 fw-light mb-0"><i className="far fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">JavaScript: Full Understanding</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>JavaScript: Full Understanding</a></h5>
                                             <p className="text-truncate-2 mb-2">Far advanced settling say finished raillery. Offered chiefly farther</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -786,7 +786,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />35h 20m</span>
@@ -798,17 +798,17 @@ Popular course START */}
                                 {/* Card item END */}
                                 {/* Card item START */}
                                 <div className="col-sm-6 col-lg-4 col-xl-3">
-                                    <div className="card shadow h-100">
+                                   <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/10.jpg" className="card-img-top" alt="course image" />
-                                        <div className="card-body pb-0">
+                                        <div className={theme.theme=='dark'?`spanText card-body pb-0`:"card-body pb-0"}>
                                             {/* Badge and favorite */}
                                             <div className="d-flex justify-content-between mb-2">
                                                 <a href="#" className="badge bg-info bg-opacity-10 text-info">Intermediate</a>
                                                 <a href="#" className="text-danger"><i className="fas fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">Bootstrap 5 From Scratch</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>Bootstrap 5 From Scratch</a></h5>
                                             <p className="text-truncate-2 mb-2">Far advanced settling say finished raillery. Offered chiefly farther</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -817,11 +817,11 @@ Popular course START */}
                                                 <li className="list-inline-item me-0 small"><i className="fas fa-star text-warning" /></li>
                                                 <li className="list-inline-item me-0 small"><i className="fas fa-star text-warning" /></li>
                                                 <li className="list-inline-item me-0 small"><i className="fas fa-star-half-alt text-warning" /></li>
-                                                <li className="list-inline-item ms-2 h6 fw-light mb-0">4.5/5.0</li>
+                                                <li className="list-inline-item ms-2 h6 mb-0">4.5/5.0</li>
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between mt-2">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />25h 56m</span>
@@ -833,7 +833,7 @@ Popular course START */}
                                 {/* Card item END */}
                                 {/* Card item START */}
                                 <div className="col-sm-6 col-lg-4 col-xl-3">
-                                    <div className="card shadow h-100">
+                                   <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/13.jpg" className="card-img-top" alt="course image" />
                                         <div className="card-body pb-0">
@@ -843,7 +843,7 @@ Popular course START */}
                                                 <a href="#" className="h6 fw-light mb-0"><i className="far fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">PHP with - CMS Project</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>PHP with - CMS Project</a></h5>
                                             <p className="text-truncate-2 mb-2">Far advanced settling say finished raillery. Offered chiefly farther</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -856,7 +856,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />21h 22m</span>
@@ -874,7 +874,7 @@ Popular course START */}
                             <div className="row g-4">
                                 {/* Card item START */}
                                 <div className="col-sm-6 col-lg-4 col-xl-3">
-                                    <div className="card shadow h-100">
+                                   <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/08.jpg" className="card-img-top" alt="course image" />
                                         <div className="card-body pb-0">
@@ -884,7 +884,7 @@ Popular course START */}
                                                 <a href="#" className="h6 fw-light mb-0"><i className="far fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">Sketch from A to Z: for app designer</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>Sketch from A to Z: for app designer</a></h5>
                                             <p className="text-truncate-2 mb-2">Proposal indulged no do sociable he throwing settling</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -897,7 +897,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />12h 56m</span>
@@ -909,7 +909,7 @@ Popular course START */}
                                 {/* Card item END */}
                                 {/* Card item START */}
                                 <div className="col-sm-6 col-lg-4 col-xl-3">
-                                    <div className="card shadow h-100">
+                                   <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/04.jpg" className="card-img-top" alt="course image" />
                                         <div className="card-body pb-0">
@@ -919,7 +919,7 @@ Popular course START */}
                                                 <a href="#" className="text-danger"><i className="fas fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">Learn Invision</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>Learn Invision</a></h5>
                                             <p className="mb-2">Arrived off she elderly beloved him Course regard to up he hardly.</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -932,7 +932,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between mt-2">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />6h 56m</span>
@@ -944,7 +944,7 @@ Popular course START */}
                                 {/* Card item END */}
                                 {/* Card item START */}
                                 <div className="col-sm-6 col-lg-4 col-xl-3">
-                                    <div className="card shadow h-100">
+                                   <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/02.jpg" className="card-img-top" alt="course image" />
                                         <div className="card-body pb-0">
@@ -954,7 +954,7 @@ Popular course START */}
                                                 <a href="#" className="text-danger"><i className="fas fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">Graphic Design Masterclass</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>Graphic Design Masterclass</a></h5>
                                             <p className="text-truncate-2 mb-2">Rooms oh fully taken by worse do. Points afraid but may end.</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -967,7 +967,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />9h 56m</span>
@@ -979,7 +979,7 @@ Popular course START */}
                                 {/* Card item END */}
                                 {/* Card item START */}
                                 <div className="col-sm-6 col-lg-4 col-xl-3">
-                                    <div className="card shadow h-100">
+                                   <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/03.jpg" className="card-img-top" alt="course image" />
                                         <div className="card-body pb-0">
@@ -989,7 +989,7 @@ Popular course START */}
                                                 <a href="#" className="h6 fw-light mb-0"><i className="far fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">Create a Design System in Figma</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>Create a Design System in Figma</a></h5>
                                             <p className="text-truncate-2 mb-2">Rooms oh fully taken by worse do. Points afraid but may end.</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -1002,7 +1002,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />5h 56m</span>
@@ -1020,7 +1020,7 @@ Popular course START */}
                             <div className="row g-4">
                                 {/* Card item START */}
                                 <div className="col-sm-6 col-lg-4 col-xl-3">
-                                    <div className="card shadow h-100">
+                                   <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/01.jpg" className="card-img-top" alt="course image" />
                                         <div className="card-body pb-0">
@@ -1030,7 +1030,7 @@ Popular course START */}
                                                 <a href="#" className="text-danger"><i className="fas fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">Digital Marketing Masterclass</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>Digital Marketing Masterclass</a></h5>
                                             <p className="text-truncate-2 mb-2">Delivered dejection necessary objection do Mr prevailed.</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -1043,7 +1043,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />6h 56m</span>
@@ -1055,7 +1055,7 @@ Popular course START */}
                                 {/* Card item END */}
                                 {/* Card item START */}
                                 <div className="col-sm-6 col-lg-4 col-xl-3">
-                                    <div className="card shadow h-100">
+                                   <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/08.jpg" className="card-img-top" alt="course image" />
                                         <div className="card-body pb-0">
@@ -1065,7 +1065,7 @@ Popular course START */}
                                                 <a href="#" className="h6 fw-light mb-0"><i className="far fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">Sketch from A to Z: for app designer</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>Sketch from A to Z: for app designer</a></h5>
                                             <p className="text-truncate-2 mb-2">Proposal indulged no do sociable he throwing settling.</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -1078,7 +1078,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />12h 56m</span>
@@ -1096,7 +1096,7 @@ Popular course START */}
                             <div className="row g-4">
                                 {/* Card item START */}
                                 <div className="col-sm-6 col-lg-4 col-xl-3">
-                                    <div className="card shadow h-100">
+                                   <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/04.jpg" className="card-img-top" alt="course image" />
                                         <div className="card-body pb-0">
@@ -1106,7 +1106,7 @@ Popular course START */}
                                                 <a href="#" className="text-danger"><i className="fas fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">Learn Invision</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>Learn Invision</a></h5>
                                             <p className="text-truncate-2 mb-2">Arrived off she elderly beloved him Course regard to up he hardly.</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -1119,7 +1119,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />6h 56m</span>
@@ -1131,7 +1131,7 @@ Popular course START */}
                                 {/* Card item END */}
                                 {/* Card item START */}
                                 <div className="col-sm-6 col-lg-4 col-xl-3">
-                                    <div className="card shadow h-100">
+                                   <div className={theme.theme==='dark'?` cardData card shadow h-100`:"card shadow h-100"}>
                                         {/* Image */}
                                         <img src="assets/images/courses/4by3/09.jpg" className="card-img-top" alt="course image" />
                                         <div className="card-body pb-0">
@@ -1141,7 +1141,7 @@ Popular course START */}
                                                 <a href="#" className="h6 fw-light mb-0"><i className="far fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#">JavaScript: Full Understanding</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme=='dark'?`spanText`:''}>JavaScript: Full Understanding</a></h5>
                                             <p className="text-truncate-2 mb-2">Far advanced settling say finished raillery. Offered chiefly farther.</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -1154,7 +1154,7 @@ Popular course START */}
                                             </ul>
                                         </div>
                                         {/* Card footer */}
-                                        <div className="card-footer pt-0 pb-3">
+                                        <div className={theme.theme=='dark'?`cardData card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                             <hr />
                                             <div className="d-flex justify-content-between">
                                                 <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />35h 20m</span>

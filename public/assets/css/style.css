@@ -22334,7 +22334,8 @@ html[dir=rtl] .choices__input {
 .dark h3,
 .dark h4,
 .dark h5,
-.dark h6 {
+.dark h6,
+.dark .h6{
   color: white;
 }
 .bodyBG{
@@ -22351,7 +22352,9 @@ html[dir=rtl] .choices__input {
   background-color: black;
   color: white;
 }
-
+.tickIcon{
+ color: green;
+}
 
 
 /*User CSS*/
