@@ -1,8 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ThemeContext } from '../../context/reducer/ThemeContext';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
+import { Link } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCategory } from '../../redux/slice/category.slice';
 
 function Header(props) {
 
@@ -10,9 +13,17 @@ function Header(props) {
     console.log("Themmmmeeeeeeeee");
     console.log(theme);
 
+    const categoryData = useSelector((state) => state.category)
 
+    console.log(categoryData);
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchCategory())
+    }, [])
 
     return (
+
 
         <header className="navbar-sticky header-static">
             {/* Logo Nav START */}
@@ -20,8 +31,14 @@ function Header(props) {
                 <div className="container-fluid px-3 px-xl-5">
                     {/* Logo START */}
                     <a className="navbar-brand" href="index.html">
-                        <img className="light-mode-item navbar-brand-item" src="assets/images/logo.svg" alt="logo" />
-                        <img className="dark-mode-item navbar-brand-item" src="assets/images/logo-light.svg" alt="logo" />
+                        {
+                            theme.theme === 'dark' ?
+                            <img className="light-mode-item navbar-brand-item" src="assets/images/logo_white.png" alt="logo" />
+                              
+                                :
+                                  <img className="light-mode-item navbar-brand-item" src="assets/images/logo.svg" alt="logo" />
+                        }
+
                     </a>
                     {/* Logo END */}
                     {/* Responsive navbar toggler */}
@@ -38,16 +55,27 @@ function Header(props) {
                         <ul className="navbar-nav navbar-nav-scroll me-auto">
                             {/* Nav item 1 Demos */}
                             <li className="nav-item dropdown dropdown-menu-shadow-stacked">
-                                <a className="nav-link bg-primary bg-opacity-10 rounded-3 text-primary px-3 py-3 py-xl-0" href="#" id="categoryMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="bi bi-ui-radios-grid me-2" /><span>Category</span></a>
-                                <ul className={theme.theme=='dark'?`bodyBG dropdown-menu`:"dropdown-menu"} aria-labelledby="categoryMenu">
-                                    {/* Dropdown submenu */}
-                                    <li className={theme.theme=='dark'?`bodyBG dropdown-submenu dropend`:"dropdown-submenu dropend"}>
+                                <a className={theme.theme === 'dark' ? 'bodyBG nav-link bg-primary bg-opacity-10 rounded-3 text-primary px-3 py-3 py-xl-0' : `nav-link bg-primary bg-opacity-10 rounded-3 text-primary px-3 py-3 py-xl-0`} href="#" id="categoryMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className={theme.theme === 'dark' ? ' bodyBG bi bi-ui-radios-grid me-2' : `bi bi-ui-radios-grid me-2`} /><span className={theme.theme === 'dark' ? 'bodyBG' : ``}>
+
+
+                                    Category
+
+                                </span></a>
+                                <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu` : "dropdown-menu"} aria-labelledby="categoryMenu">
+
+                                    {
+                                        categoryData?.category?.map((v, i) => (
+                                           <li>{v.name}</li>
+                                        ))
+                                    }
+
+
+                                    {/* <li className={theme.theme == 'dark' ? `bodyBG dropdown-submenu dropend` : "dropdown-submenu dropend"}>
                                         <a className="dropdown-item dropdown-toggle" href="#">Development</a>
-                                        <ul className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-menu-start`:"dropdown-menu dropdown-menu-start"} data-bs-popper="none">
-                                            {/* dropdown submenu open right */}
+                                        <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu dropdown-menu-start` : "dropdown-menu dropdown-menu-start"} data-bs-popper="none"> 
                                             <li className="dropdown-submenu dropend">
                                                 <a className="dropdown-item dropdown-toggle" href="#">Web Development</a>
-                                                <ul className={theme.theme=='dark'?`bodyBG dropdown-menu`:"dropdown-menu"} data-bs-popper="none">
+                                                <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu` : "dropdown-menu"} data-bs-popper="none">
                                                     <li> <a className="dropdown-item" href="#">Css</a> </li>
                                                     <li> <a className="dropdown-item" href="#">Java Script</a> </li>
                                                     <li> <a className="dropdown-item" href="#">Angular</a> </li>
@@ -65,15 +93,15 @@ function Header(props) {
                                         </ul>
                                     </li>
                                     <li> <a className="dropdown-item" href="#">Design</a></li>
-                                    {/* Dropdown submenu */}
+                                  
                                     <li className="dropdown-submenu dropend">
                                         <a className="dropdown-item dropdown-toggle" href="#">Marketing</a>
-                                        <div className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-menu-start dropdown-width-lg`:"dropdown-menu dropdown-menu-start dropdown-width-lg"} data-bs-popper="none">
+                                        <div className={theme.theme == 'dark' ? `bodyBG dropdown-menu dropdown-menu-start dropdown-width-lg` : "dropdown-menu dropdown-menu-start dropdown-width-lg"} data-bs-popper="none">
                                             <div className="row p-4">
-                                                {/* Dropdown column item */}
+                                              
                                                 <div className="col-xl-6 col-xxl-4 mb-4 mb-xl-0">
                                                     <h6 className="mb-0">Get started</h6>
-                                                    <hr /> {/* Divider */}
+                                                    <hr />
                                                     <ul className="list-unstyled">
                                                         <li> <a className="dropdown-item" href="#">Market Research</a> </li>
                                                         <li> <a className="dropdown-item" href="#">Advertising</a> </li>
@@ -88,11 +116,11 @@ function Header(props) {
                                                         <li> <a className="dropdown-item" href="#">Business Marketing</a> </li>
                                                     </ul>
                                                 </div>
-                                                {/* Dropdown column item */}
+                                                
                                                 <div className="col-xl-6 col-xxl-4 mb-4 mb-xl-0">
                                                     <h6 className="mb-0">Degree</h6>
-                                                    <hr /> {/* Divider */}
-                                                    {/* Dropdown item */}
+                                                    <hr /> 
+
                                                     <div className="d-flex mb-4 position-relative">
                                                         <img src="assets/images/client/uni-logo-01.svg" className="icon-md" alt />
                                                         <div className="ms-3">
@@ -100,7 +128,7 @@ function Header(props) {
                                                             <p className="mb-0 small">Bachelor of computer science</p>
                                                         </div>
                                                     </div>
-                                                    {/* Dropdown item */}
+
                                                     <div className="d-flex mb-4 position-relative">
                                                         <img src="assets/images/client/uni-logo-02.svg" className="icon-md" alt />
                                                         <div className="ms-3">
@@ -108,7 +136,7 @@ function Header(props) {
                                                             <p className="mb-0 small">Masters of computer science</p>
                                                         </div>
                                                     </div>
-                                                    {/* Dropdown item */}
+
                                                     <div className="d-flex mb-4 position-relative">
                                                         <img src="assets/images/client/uni-logo-03.svg" className="icon-md" alt />
                                                         <div className="ms-3">
@@ -116,7 +144,7 @@ function Header(props) {
                                                             <p className="mb-0 small">Medical science college</p>
                                                         </div>
                                                     </div>
-                                                    {/* Dropdown item */}
+
                                                     <div className="d-flex mb-4 position-relative">
                                                         <img src="assets/images/client/uni-logo-01.svg" className="icon-md" alt />
                                                         <div className="ms-3">
@@ -124,7 +152,7 @@ function Header(props) {
                                                             <p className="mb-0 small">Bachelor of computer science</p>
                                                         </div>
                                                     </div>
-                                                    {/* Dropdown item */}
+
                                                     <div className="d-flex position-relative">
                                                         <img src="assets/images/client/uni-logo-04.svg" className="icon-md" alt />
                                                         <div className="ms-3">
@@ -133,11 +161,11 @@ function Header(props) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                {/* Dropdown column item */}
+                                               
                                                 <div className="col-xl-6 col-xxl-4">
                                                     <h6 className="mb-0">Certificate</h6>
-                                                    <hr /> {/* Divider */}
-                                                    {/* Dropdown item */}
+                                                    <hr />
+
                                                     <div className="d-flex mb-4 position-relative">
                                                         <h2 className="mb-0"><i className="fab fa-fw fa-google text-google-icon" /></h2>
                                                         <div className="ms-2">
@@ -145,7 +173,7 @@ function Header(props) {
                                                             <p className="mb-0 small">No prerequisites</p>
                                                         </div>
                                                     </div>
-                                                    {/* Dropdown item */}
+
                                                     <div className="d-flex mb-4 position-relative">
                                                         <h2 className="mb-0"><i className="fab fa-fw fa-linkedin-in text-linkedin" /></h2>
                                                         <div className="ms-2">
@@ -153,7 +181,7 @@ function Header(props) {
                                                             <p className="mb-0 small">No prerequisites</p>
                                                         </div>
                                                     </div>
-                                                    {/* Dropdown item */}
+
                                                     <div className="d-flex mb-4 position-relative">
                                                         <h2 className="mb-0"><i className="fab fa-fw fa-facebook text-facebook" /></h2>
                                                         <div className="ms-2">
@@ -161,7 +189,7 @@ function Header(props) {
                                                             <p className="mb-0 small">Expert advice</p>
                                                         </div>
                                                     </div>
-                                                    {/* Dropdown item */}
+
                                                     <div className="d-flex mb-4 position-relative">
                                                         <h2 className="mb-0"><i className="fas fa-fw fa-basketball-ball text-dribbble" /></h2>
                                                         <div className="ms-2">
@@ -171,11 +199,11 @@ function Header(props) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            {/* Advertisement */}
+                                            
                                             <div className="row">
                                                 <div className="col-12">
                                                     <div className="card bg-blue rounded-0 rounded-bottom p-3 position-relative overflow-hidden" style={{ background: 'url(assets/images/pattern/05.png) no-repeat center center', backgroundSize: 'cover' }}>
-                                                        {/* SVG decoration */}
+                                                      
                                                         <figure className="position-absolute bottom-0 end-0 mb-n4 d-none d-md-block">
                                                             <svg width="92.6px" height="135.2px">
                                                                 <path className="fill-white" d="M71.5,131.4c0.2,0.1,0.4,0.1,0.6-0.1c0,0,0.6-0.7,1.6-1.9c0.2-0.2,0.1-0.5-0.1-0.7c-0.2-0.2-0.5-0.1-0.7,0.1 c-1,1.2-1.6,1.8-1.6,1.8c-0.2,0.2-0.2,0.5,0,0.7C71.4,131.3,71.4,131.4,71.5,131.4z" />
@@ -186,12 +214,12 @@ function Header(props) {
                                                                 <polygon className="fill-warning opacity-6" points="21.5,19.5 15,24.8 4.7,5.4 " />
                                                             </svg>
                                                         </figure>
-                                                        {/* Body */}
+                                                       
                                                         <div className="card-body">
-                                                            {/* Title */}
+
                                                             <h5 className="card-title text-white mb-2">Access 25K Online courses from 120 institutions, Start today!</h5>
                                                             <p className="text-white text-opacity-75">Here is the description of premium features which will allow users to get benefits and save a lot of money</p>
-                                                            {/* Button */}
+                                                            
                                                             <a href="#" className="btn btn-sm btn-dark mb-0">Purchase Premium</a>
                                                         </div>
                                                     </div>
@@ -208,7 +236,7 @@ function Header(props) {
                                     <li> <a className="dropdown-item" href="#">Social science</a></li>
                                     <li> <a className="dropdown-item" href="#">Math &amp; logic</a></li>
                                     <li> <hr className="dropdown-divider" /></li>
-                                    <li> <a className="dropdown-item bg-primary text-primary bg-opacity-10 rounded-2 mb-0" href="#">View all categories</a></li>
+                                    <li> <a className="dropdown-item bg-primary text-primary bg-opacity-10 rounded-2 mb-0" href="#">View all categories</a></li> */}
                                 </ul>
                             </li>
                         </ul>
@@ -217,8 +245,9 @@ function Header(props) {
                         <ul className="navbar-nav navbar-nav-scroll me-auto">
                             {/* Nav item 1 Demos */}
                             <li className="nav-item dropdown">
-                                <a className={theme.theme == 'dark' ? `spanText nav-link dropdown-toggle active` : "nav-link dropdown-toggle active"} href="#" id="demoMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Demos</a>
-                                <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu` : "dropdown-menu"} aria-labelledby="demoMenu">
+                                {/* <a className={theme.theme == 'dark' ? `spanText nav-link dropdown-toggle active` : "nav-link dropdown-toggle active"} href="About.jsx" id="demoMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a> */}
+                                <Link to="/about" className={theme.theme == 'dark' ? `spanText nav-link  active` : "nav-link  active"}>About </Link>
+                                {/* <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu` : "dropdown-menu"} aria-labelledby="demoMenu">
                                     <li> <a className="dropdown-item active" href="index.html">Home Default</a></li>
                                     <li> <a className="dropdown-item" href="index-2.html">Home Education</a></li>
                                     <li> <a className="dropdown-item" href="index-3.html">Home Academy</a></li>
@@ -235,20 +264,20 @@ function Header(props) {
                                     <li> <hr className="dropdown-divider" /></li>
                                     <li className="dropdown-submenu dropend">
                                         <a className="dropdown-item dropdown-toggle" href="#">Dropdown levels</a>
-                                        <ul className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-menu-start`:"dropdown-menu dropdown-menu-start"} data-bs-popper="none">
-                                            {/* dropdown submenu open right */}
+                                        <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu dropdown-menu-start` : "dropdown-menu dropdown-menu-start"} data-bs-popper="none">
+                                           
                                             <li className="dropdown-submenu dropend">
                                                 <a className="dropdown-item dropdown-toggle" href="#">Dropdown (end)</a>
-                                                <ul className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-menu-start`:"dropdown-menu dropdown-menu-start"} data-bs-popper="none">
+                                                <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu dropdown-menu-start` : "dropdown-menu dropdown-menu-start"} data-bs-popper="none">
                                                     <li> <a className="dropdown-item" href="#">Dropdown item</a> </li>
                                                     <li> <a className="dropdown-item" href="#">Dropdown item</a> </li>
                                                 </ul>
                                             </li>
                                             <li> <a className="dropdown-item" href="#">Dropdown item</a> </li>
-                                            {/* dropdown submenu open left */}
+                                           
                                             <li className="dropdown-submenu dropstart">
                                                 <a className="dropdown-item dropdown-toggle" href="#">Dropdown (start)</a>
-                                                <ul className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-menu-start`:"dropdown-menu dropdown-menu-start"} data-bs-popper="none">
+                                                <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu dropdown-menu-start` : "dropdown-menu dropdown-menu-start"} data-bs-popper="none">
                                                     <li> <a className="dropdown-item" href="#">Dropdown item</a> </li>
                                                     <li> <a className="dropdown-item" href="#">Dropdown item</a> </li>
                                                 </ul>
@@ -256,16 +285,20 @@ function Header(props) {
                                             <li> <a className="dropdown-item" href="#">Dropdown item</a> </li>
                                         </ul>
                                     </li>
-                                </ul>
+                                </ul> */}
                             </li>
                             {/* Nav item 2 Pages */}
                             <li className="nav-item dropdown">
-                                <a className={theme.theme === 'dark' ? `spanText nav-link dropdown-toggle` : "nav-link dropdown-toggle"} href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
-                                <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu` : "dropdown-menu"} aria-labelledby="pagesMenu">
-                                    {/* Dropdown submenu */}
+                                {/* <a className={theme.theme === 'dark' ? `spanText nav-link dropdown-toggle` : "nav-link dropdown-toggle"} href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a> */}
+
+                                <Link to="/courses" className={theme.theme === 'dark' ? `spanText nav-link ` : "nav-link "}>Courses</Link>
+
+
+                                {/* <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu` : "dropdown-menu"} aria-labelledby="pagesMenu">
+                                    
                                     <li className="dropdown-submenu dropend">
                                         <a className="dropdown-item dropdown-toggle" href="#">Course</a>
-                                        <ul className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-menu-start`:"dropdown-menu dropdown-menu-start"} data-bs-popper="none">
+                                        <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu dropdown-menu-start` : "dropdown-menu dropdown-menu-start"} data-bs-popper="none">
                                             <li> <a className="dropdown-item" href="course-grid.html">Course Grid Classic</a></li>
                                             <li> <a className="dropdown-item" href="course-grid-2.html">Course Grid Minimal</a></li>
                                             <li> <hr className="dropdown-divider" /></li>
@@ -278,10 +311,10 @@ function Header(props) {
                                             <li> <a className="dropdown-item" href="course-video-player.html">Course Full Screen Video</a></li>
                                         </ul>
                                     </li>
-                                    {/* Dropdown submenu */}
+                                    
                                     <li className="dropdown-submenu dropend">
                                         <a className="dropdown-item dropdown-toggle" href="#">About</a>
-                                        <ul className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-menu-start`:"dropdown-menu dropdown-menu-start"} data-bs-popper="none">
+                                        <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu dropdown-menu-start` : "dropdown-menu dropdown-menu-start"} data-bs-popper="none">
                                             <li> <a className="dropdown-item" href="about.html">About Us</a></li>
                                             <li> <a className="dropdown-item" href="contact-us.html">Contact Us</a></li>
                                             <li> <a className="dropdown-item" href="blog-grid.html">Blog Grid</a></li>
@@ -293,10 +326,10 @@ function Header(props) {
                                     <li> <a className="dropdown-item" href="instructor-list.html">Instructor List</a></li>
                                     <li> <a className="dropdown-item" href="instructor-single.html">Instructor Single</a></li>
                                     <li> <a className="dropdown-item" href="become-instructor.html">Become an Instructor</a></li>
-                                    {/* Dropdown submenu */}
+                                    
                                     <li className="dropdown-submenu dropend">
                                         <a className="dropdown-item dropdown-toggle" href="#">Authentication</a>
-                                        <ul className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-menu-start`:"dropdown-menu dropdown-menu-start"} data-bs-popper="none">
+                                        <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu dropdown-menu-start` : "dropdown-menu dropdown-menu-start"} data-bs-popper="none">
                                             <li> <a className="dropdown-item" href="sign-in.html">Sign In</a></li>
                                             <li> <a className="dropdown-item" href="sign-up.html">Sign Up</a></li>
                                             <li> <a className="dropdown-item" href="forgot-password.html">Forgot Password</a></li>
@@ -309,16 +342,19 @@ function Header(props) {
                                     <li> <a className="dropdown-item" href="checkout.html">Checkout</a></li>
                                     <li> <a className="dropdown-item" href="empty-cart.html">Empty Cart</a></li>
                                     <li> <a className="dropdown-item" href="wishlist.html">Wishlist</a></li>
-                                </ul>
+                                </ul> */}
                             </li>
                             {/* Nav item 3 Account */}
                             <li className="nav-item dropdown">
-                                <a className={theme.theme == 'dark' ? `spanText nav-link dropdown-toggle` : "nav-link dropdown-toggle"} href="#" id="accounntMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accounts</a>
-                                <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu` : "dropdown-menu"} aria-labelledby="accounntMenu">
-                                    {/* Dropdown submenu */}
-                                    <li className="dropdown-submenu dropend">
+                                {/* <a className={theme.theme == 'dark' ? `spanText nav-link dropdown-toggle` : "nav-link dropdown-toggle"} href="#" id="accounntMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accounts</a> */}
+
+                                <Link to='/cart' className={theme.theme == 'dark' ? `spanText nav-link ` : "nav-link "}>Cart</Link>
+
+                                {/* <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu` : "dropdown-menu"} aria-labelledby="accounntMenu"> */}
+                                {/* Dropdown submenu */}
+                                {/* <li className="dropdown-submenu dropend">
                                         <a className="dropdown-item dropdown-toggle" href="#"><i className="fas fa-user-tie fa-fw me-1" />Instructor</a>
-                                        <ul className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-menu-start`:"dropdown-menu dropdown-menu-start"} data-bs-popper="none">
+                                        <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu dropdown-menu-start` : "dropdown-menu dropdown-menu-start"} data-bs-popper="none">
                                             <li> <a className="dropdown-item" href="instructor-dashboard.html"><i className="bi bi-grid-fill fa-fw me-1" />Dashboard</a> </li>
                                             <li> <a className="dropdown-item" href="instructor-manage-course.html"><i className="bi bi-basket-fill fa-fw me-1" />Courses</a> </li>
                                             <li> <a className="dropdown-item" href="instructor-create-course.html"><i className="bi bi-file-earmark-plus-fill fa-fw me-1" />Create Course</a> </li>
@@ -329,11 +365,11 @@ function Header(props) {
                                             <li> <a className="dropdown-item" href="instructor-review.html"><i className="bi bi-star-fill fa-fw me-1" />Reviews</a> </li>
                                             <li> <a className="dropdown-item" href="instructor-payout.html"><i className="fas fa-wallet fa-fw me-1" />Payout</a> </li>
                                         </ul>
-                                    </li>
-                                    {/* Dropdown submenu */}
-                                    <li className="dropdown-submenu dropend">
+                                    </li> */}
+                                {/* Dropdown submenu */}
+                                {/* <li className="dropdown-submenu dropend">
                                         <a className="dropdown-item dropdown-toggle" href="#"><i className="fas fa-user-graduate fa-fw me-1" />Student</a>
-                                        <ul className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-menu-start`:"dropdown-menu dropdown-menu-start"} data-bs-popper="none">
+                                        <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu dropdown-menu-start` : "dropdown-menu dropdown-menu-start"} data-bs-popper="none">
                                             <li> <a className="dropdown-item" href="student-dashboard.html"><i className="bi bi-grid-fill fa-fw me-1" />Dashboard</a> </li>
                                             <li> <a className="dropdown-item" href="student-subscription.html"><i className="bi bi-card-checklist fa-fw me-1" />My Subscriptions</a> </li>
                                             <li> <a className="dropdown-item" href="student-course-list.html"><i className="bi bi-basket-fill fa-fw me-1" />Courses</a> </li>
@@ -345,15 +381,33 @@ function Header(props) {
                                     <li> <hr className="dropdown-divider" /></li>
                                     <li> <a className="dropdown-item" href="instructor-edit-profile.html"><i className="fas fa-fw fa-edit me-1" />Edit Profile</a> </li>
                                     <li> <a className="dropdown-item" href="instructor-setting.html"><i className="fas fa-fw fa-cog me-1" />Settings</a> </li>
-                                    <li> <a className="dropdown-item" href="instructor-delete-account.html"><i className="fas fa-fw fa-trash-alt me-1" />Delete Profile</a> </li>
-                                </ul>
+                                    <li> <a className="dropdown-item" href="instructor-delete-account.html"><i className="fas fa-fw fa-trash-alt me-1" />Delete Profile</a> </li> */}
+                                {/* </ul> */}
                             </li>
+
+                            <li>
+                                <Link to='/wishlist' className={theme.theme == 'dark' ? `spanText nav-link ` : "nav-link "}>Wishlist</Link>
+                            </li>
+
+                            <li>
+                                <Link to='/checkout' className={theme.theme == 'dark' ? `spanText nav-link ` : "nav-link "}>Checkout</Link>
+                            </li>
+
+                            <li>
+                                <Link to='/contact' className={theme.theme == 'dark' ? `spanText nav-link ` : "nav-link "}>Contact Us</Link>
+                            </li>
+
+                              <li>
+                                <Link to='/faqs' className={theme.theme == 'dark' ? `spanText nav-link ` : "nav-link "}>FAQs</Link>
+                            </li>
+
+
                             {/* Nav item 4 Megamenu*/}
-                            <li className="nav-item dropdown dropdown-fullwidth">
+                            {/* <li className="nav-item dropdown dropdown-fullwidth">
                                 <a className={theme.theme === 'dark' ? `spanText nav-link dropdown-toggle` : "nav-link dropdown-toggle"} href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Megamenu</a>
                                 <div className={theme.theme == 'dark' ? `bodyBG dropdown-menu dropdown-menu-end pb-0` : "dropdown-menu dropdown-menu-end pb-0"} data-bs-popper="none">
                                     <div className="row p-4 g-4">
-                                        {/* Dropdown column item */}
+                                     
                                         <div className="col-xl-6 col-xxl-3">
                                             <h6 className="mb-0">Get started</h6>
                                             <hr />
@@ -371,31 +425,31 @@ function Header(props) {
                                                 <li> <a className="dropdown-item" href="#">Business marketing</a> </li>
                                             </ul>
                                         </div>
-                                        {/* Dropdown column item */}
+                                
                                         <div className="col-xl-6 col-xxl-3">
                                             <h6 className="mb-0">Degree</h6>
                                             <hr />
-                                            {/* Dropdown item */}
+                                       
                                             <div className="mb-2 position-relative bg-primary-soft-hover rounded-2 transition-base p-3">
                                                 <a className="stretched-link h6 mb-0" href="#">Contact management</a>
                                                 <p className="mb-0 small text-truncate-2">Speedily say has suitable disposal add boy. On forth doubt miles of child.</p>
                                             </div>
-                                            {/* Dropdown item */}
+                                 
                                             <div className="mb-2 position-relative bg-primary-soft-hover rounded-2 transition-base p-3">
                                                 <a className="stretched-link h6 mb-0" href="#">Sales pipeline</a>
                                                 <p className="mb-0 small text-truncate-2">Speedily say has suitable disposal add boy. On forth doubt miles of child.</p>
                                             </div>
-                                            {/* Dropdown item */}
+                                     
                                             <div className="mb-2 position-relative bg-primary-soft-hover rounded-2 transition-base p-3">
                                                 <a className="stretched-link h6 mb-0" href="#">Security &amp; Permission</a>
                                                 <p className="mb-0 small text-truncate-2">Speedily say has suitable disposal add boy. On forth doubt miles of child.</p>
                                             </div>
                                         </div>
-                                        {/* Dropdown column item */}
+                  
                                         <div className="col-xl-6 col-xxl-3">
                                             <h6 className="mb-0">Certificate</h6>
                                             <hr />
-                                            {/* Dropdown item */}
+                                     
                                             <div className="d-flex mb-4 position-relative">
                                                 <h2 className="mb-0"><i className="fab fa-fw fa-google text-google-icon" /></h2>
                                                 <div className="ms-2">
@@ -403,7 +457,7 @@ function Header(props) {
                                                     <p className="mb-0 small">No prerequisites</p>
                                                 </div>
                                             </div>
-                                            {/* Dropdown item */}
+                                     
                                             <div className="d-flex mb-4 position-relative">
                                                 <h2 className="mb-0"><i className="fab fa-fw fa-linkedin-in text-linkedin" /></h2>
                                                 <div className="ms-2">
@@ -411,7 +465,7 @@ function Header(props) {
                                                     <p className="mb-0 small">No prerequisites</p>
                                                 </div>
                                             </div>
-                                            {/* Dropdown item */}
+                                     
                                             <div className="d-flex mb-4 position-relative">
                                                 <h2 className="mb-0"><i className="fab fa-fw fa-facebook text-facebook" /></h2>
                                                 <div className="ms-2">
@@ -419,7 +473,7 @@ function Header(props) {
                                                     <p className="mb-0 small">Expert advice</p>
                                                 </div>
                                             </div>
-                                            {/* Dropdown item */}
+                                     
                                             <div className="d-flex mb-4 position-relative">
                                                 <h2 className="mb-0"><i className="fas fa-fw fa-basketball-ball text-dribbble" /></h2>
                                                 <div className="ms-2">
@@ -428,38 +482,38 @@ function Header(props) {
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* Dropdown column item */}
+                                        
                                         <div className="col-xl-6 col-xxl-3">
                                             <h6 className="mb-0">Download Eduport</h6>
                                             <hr />
-                                            {/* Image */}
+                                           
                                             <img src="assets/images/element/14.svg" alt />
-                                            {/* Download button */}
+                                            
                                             <div className="row g-2 justify-content-center mt-3">
-                                                {/* Google play store button */}
+                                    
                                                 <div className="col-6 col-sm-4 col-xxl-6">
                                                     <a href="#"> <img src="assets/images/client/google-play.svg" className="btn-transition" alt="google-store" /> </a>
                                                 </div>
-                                                {/* App store button */}
+                                                
                                                 <div className="col-6 col-sm-4 col-xxl-6">
                                                     <a href="#"> <img src="assets/images/client/app-store.svg" className="btn-transition" alt="app-store" /> </a>
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* Action box */}
+                                       
                                         <div className="col-12">
                                             <div className="alert alert-success alert-dismissible fade show mt-2 mb-0 rounded-3" role="alert">
-                                                {/* Avatar */}
+                                               
                                                 <div className="avatar avatar-xs me-2">
                                                     <img className="avatar-img rounded-circle" src="assets/images/avatar/09.jpg" alt="avatar" />
                                                 </div>
-                                                {/* Info */}
+                                               
                                                 The personality development class starts at 2:00 pm, click to <a href="#" className="alert-link">Join Now</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </li>
+                            </li> */}
                             {/* Nav item 5 link*/}
                             <li className="nav-item dropdown">
                                 <a className={theme.theme == 'dark' ? `spanText nav-link` : "nav-link"} href="#" id="advanceMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

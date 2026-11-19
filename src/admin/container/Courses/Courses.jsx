@@ -34,7 +34,7 @@ function Courses(props) {
 
 
     let yupSchema = object({
-        category_id: string().required("Please select category"),
+        category_id: string(),
         name: string().required("Please enter course name"),
         description: string().required(),
         fees: string().required(),

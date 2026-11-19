@@ -5,6 +5,12 @@ import { Route, Routes } from 'react-router';
 import Header from '../component/Header/Header';
 import Footer from '../component/Footer/Footer';
 import { ThemeContext } from '../context/reducer/ThemeContext';
+import About from '../container/About';
+import AllCoursesList from '../container/AllCoursesList';
+import Cart from '../container/Cart';
+import Wishlist from '../container/Wishlist';
+import Checkout from '../container/Checkout';
+import Faqs from '../container/Faqs';
 
 function UserRoutes(props) {
     const theme = useContext(ThemeContext)
@@ -13,7 +19,13 @@ function UserRoutes(props) {
             <Header />
             <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/contact' element={Contact} />
+                <Route path='/about' element={<About />} />
+                <Route path='/courses' element={<AllCoursesList />} />
+                <Route path='/cart' element={<Cart />} />
+                <Route path='/wishlist' element={<Wishlist />} />
+                <Route path='/checkout' element={<Checkout />} />
+                <Route path='/faqs' element={<Faqs />} />
+                <Route path='/contact' element={<Contact />} />
             </Routes>
             <Footer />
         </div>

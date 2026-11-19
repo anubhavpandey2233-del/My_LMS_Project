@@ -6,7 +6,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Box } from '@mui/material';
+import { Box, MenuItem } from '@mui/material';
 import { array, mixed, object, string } from 'yup';
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -53,6 +53,7 @@ function Category(props) {
     }, [])
 
     let categorySchema = object({
+        category: string(),
         name: string().required("Please enter name..."),
         description: string().required("Please enter descrtiption..."),
         category_img: mixed()
@@ -97,6 +98,7 @@ function Category(props) {
 
     const formik = useFormik({
         initialValues: {
+            category: '',
             name: '',
             description: '',
             category_img: []
@@ -199,6 +201,30 @@ function Category(props) {
                     <DialogContent>
 
                         <form onSubmit={handleSubmit} id="subscription-form" enctype="multipart/form-data">
+
+                            <TextField
+                                error={errors.category_id && touched.category_id}
+                                margin="normal"
+                                id="category_id"
+                                name="category_id"
+                                label="Category"
+                                select
+                                value={values.category_id}
+                                fullWidth
+                                onChange={(e) => { handleChange(e); handleCategory(e.target.value) }}
+                                onBlur={handleBlur}
+                                variant="standard"
+                                helperText={errors.category_id && touched.category_id ? errors.category_id : ''}
+                            >
+                                
+
+                                {categoryData.category?.map((v) => (
+                                    <MenuItem key={v._id} value={v._id}>
+                                        {v.name}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+
                             <TextField
                                 error={errors.name && touched.name}
                                 margin="normal"
@@ -294,6 +320,7 @@ function Category(props) {
                 <Table sx={{ minWidth: 650, mt: 5 }} size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
+                            <TableCell>Parent Category</TableCell>
                             <TableCell>Name</TableCell>
                             <TableCell align="center">Description</TableCell>
                             <TableCell align="center">File</TableCell>
@@ -306,6 +333,10 @@ function Category(props) {
                                 key={i}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
+                                <TableCell component="th" scope="row">
+                                    {categoryData.category?.find((v) => v._id === row.category_id
+                                    )?.name}
+                                </TableCell>
                                 <TableCell component="th" scope="row">
                                     {row?.name}
                                 </TableCell>
