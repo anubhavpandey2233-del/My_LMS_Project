@@ -26,6 +26,7 @@ import Paper from '@mui/material/Paper';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 import { IMAGE_URL } from '../../../utills/url';
+import { fetchCatToCou } from '../../../redux/slice/section.slice';
 
 
 function Category(props) {
@@ -48,12 +49,19 @@ function Category(props) {
     console.log(categoryData);
     const dispatch = useDispatch()
 
+    const handleCategory = (a) => {
+            console.log("aaaaaaaaaaaaaaaaa", a);
+    
+    
+            dispatch(fetchCatToCou(a))
+        }
+    
+
     useEffect(() => {
         dispatch(fetchCategory())
     }, [])
 
     let categorySchema = object({
-        category: string(),
         name: string().required("Please enter name..."),
         description: string().required("Please enter descrtiption..."),
         category_img: mixed()
@@ -98,7 +106,7 @@ function Category(props) {
 
     const formik = useFormik({
         initialValues: {
-            category: '',
+            category_id: null,
             name: '',
             description: '',
             category_img: []
@@ -203,24 +211,27 @@ function Category(props) {
                         <form onSubmit={handleSubmit} id="subscription-form" enctype="multipart/form-data">
 
                             <TextField
-                                error={errors.category_id && touched.category_id}
+                                // error={errors.category_id && touched.category_id}
                                 margin="normal"
                                 id="category_id"
                                 name="category_id"
-                                label="Category"
+                                label="--Select Category--"
                                 select
                                 value={values.category_id}
                                 fullWidth
+                                defaultValue="null"
                                 onChange={(e) => { handleChange(e); handleCategory(e.target.value) }}
                                 onBlur={handleBlur}
                                 variant="standard"
-                                helperText={errors.category_id && touched.category_id ? errors.category_id : ''}
+                                // helperText={errors.category_id && touched.category_id ? errors.category_id : ''}
                             >
-                                
+                                <MenuItem value='null'>
+                                       --Select Category--
+                                    </MenuItem>
 
-                                {categoryData.category?.map((v) => (
-                                    <MenuItem key={v._id} value={v._id}>
-                                        {v.name}
+                                {categoryData?.category?.map((v) => (
+                                    <MenuItem key={v?._id} value={v?._id}>
+                                        {v?.name}
                                     </MenuItem>
                                 ))}
                             </TextField>
@@ -328,40 +339,59 @@ function Category(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {categoryData?.category?.map((row, i) => (
-                            <TableRow
-                                key={i}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            >
-                                <TableCell component="th" scope="row">
-                                    {categoryData.category?.find((v) => v._id === row.category_id
-                                    )?.name}
-                                </TableCell>
-                                <TableCell component="th" scope="row">
-                                    {row?.name}
-                                </TableCell>
-                                <TableCell align="center">{row?.description}</TableCell>
-                                <TableCell align="center">
-                                    {
-                                        row?.category_img?.map((v) => (
-                                            <img src={IMAGE_URL + v} width={'50px'} height={'50px'} />
-                                        ))
-                                    }
-                                </TableCell>
-                                <TableCell align="right">
-                                    <>
-                                        <IconButton aria-label="delete" onClick={() => dispatch(deleteCategory(row))}>
-                                            <DeleteIcon />
-                                        </IconButton>
+    {categoryData?.category
+        ?.filter((row) => row)
+        .map((row, i) => (
+            <TableRow
+                key={row?._id || i}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+                <TableCell component="th" scope="row">
+                    {row?.category_id
+                        ? categoryData?.category?.find(
+                              (v) => v?._id === row?.category_id
+                          )?.name
+                        : 'Parent Category'}
+                </TableCell>
 
-                                        <IconButton aria-label="delete" onClick={() => handleEdit(row)}>
-                                            <EditIcon />
-                                        </IconButton>
-                                    </>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
+                <TableCell component="th" scope="row">
+                    {row?.name}
+                </TableCell>
+
+                <TableCell align="center">
+                    {row?.description}
+                </TableCell>
+
+                <TableCell align="center">
+                    {row?.category_img?.map((v, index) => (
+                        <img
+                            key={index}
+                            src={IMAGE_URL + v}
+                            width="50px"
+                            height="50px"
+                            alt={row?.name}
+                        />
+                    ))}
+                </TableCell>
+
+                <TableCell align="right">
+                    <IconButton
+                        aria-label="delete"
+                        onClick={() => dispatch(deleteCategory(row))}
+                    >
+                        <DeleteIcon />
+                    </IconButton>
+
+                    <IconButton
+                        aria-label="edit"
+                        onClick={() => handleEdit(row)}
+                    >
+                        <EditIcon />
+                    </IconButton>
+                </TableCell>
+            </TableRow>
+        ))}
+</TableBody>
                 </Table>
             </TableContainer>
 

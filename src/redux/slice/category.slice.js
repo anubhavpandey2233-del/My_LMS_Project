@@ -13,15 +13,15 @@ export const fetchCategory = createAsyncThunk(
     async () => {
 
         try {
-            const response=await axios.get(BASE_URL + 'category/getAllCategory')
+            const response = await axios.get(BASE_URL + 'category/getAllCategory')
 
             // const response = await fetch(BASE_URL + 'category/getAllCategory')
             // const cData = await response.json()
 
             // console.log(cData);
 
-            console.log("responsedata",response);
-            
+            console.log("responsedata", response);
+
 
             return response.data.data
             // return cData.data
@@ -42,7 +42,7 @@ export const deleteCategory = createAsyncThunk(
 
         try {
 
-            const response=await axios.delete(`${BASE_URL}category/deleteCategory/${data._id}`)
+            const response = await axios.delete(`${BASE_URL}category/deleteCategory/${data._id}`)
 
             // const response = await fetch(`${BASE_URL}category/deleteCategory/${data._id}`, {
             //     method: "DELETE"
@@ -66,6 +66,7 @@ export const addCategory = createAsyncThunk(
 
         const formData = new FormData()
         formData.append("name", data.name)
+        formData.append("category_id", data.category_id)
         formData.append("description", data.description)
 
 
@@ -81,7 +82,7 @@ export const addCategory = createAsyncThunk(
 
         try {
 
-            const response=await axios.post(BASE_URL + 'category/postCategory',formData)
+            const response = await axios.post(BASE_URL + 'category/postCategory', formData)
 
             // const response = await fetch(BASE_URL + 'category/postCategory', {
             //     method: "POST",
@@ -91,7 +92,7 @@ export const addCategory = createAsyncThunk(
             // const addData = await response.json()
             // return addData.data
 
-            return response?.data
+            return response?.data?.data
         } catch (error) {
             console.log(error);
 
@@ -107,7 +108,7 @@ export const updateCategory = createAsyncThunk(
 
         try {
 
-            const response=await axios.put(`${BASE_URL}category/updateCategory/${data._id}`)
+            const response = await axios.put(`${BASE_URL}category/updateCategory/${data._id}`)
 
             // const response = await fetch(`${BASE_URL}category/updateCategory/${data._id}`, {
             //     method: "PUT",
@@ -131,7 +132,7 @@ export const searchCategory = createAsyncThunk(
     'category/searchCategory',
     async (data) => {
 
-        const response=await axios(`${BASE_URL}category/searchbyname/${data}`)
+        const response = await axios(`${BASE_URL}category/searchbyname/${data}`)
 
         // const response = await fetch(`${BASE_URL}category/searchbyname/${data}`)
 
