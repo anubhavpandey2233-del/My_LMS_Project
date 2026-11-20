@@ -49,7 +49,7 @@ export const deleteCategory = createAsyncThunk(
             // })
             // const delData = await response.json()
 
-            return response.data._id
+            return response.data.data._id
         } catch (error) {
             console.log(error);
 
@@ -95,7 +95,6 @@ export const addCategory = createAsyncThunk(
             return response?.data?.data
         } catch (error) {
             console.log(error);
-
         }
 
 

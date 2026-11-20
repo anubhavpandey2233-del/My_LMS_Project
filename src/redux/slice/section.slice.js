@@ -44,7 +44,7 @@ export const deleteSection = createAsyncThunk(
 
         try {
             const response = await axios.delete(`${BASE_URL}section/deleteSection/${data._id}`)
-            return response.data._id
+            return response.data.data._id
         } catch (error) {
             console.log(error)
         }
@@ -61,7 +61,7 @@ export const addSection = createAsyncThunk(
                 BASE_URL + 'section/postSection',
                 data
             )
-            return response.data.data
+            return response?.data?.data
         } catch (error) {
             console.log(error)
         }
