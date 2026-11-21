@@ -34,176 +34,176 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import { visuallyHidden } from '@mui/utils';
 
 
-function descendingComparator(a, b, orderBy) {
-    if (b[orderBy] < a[orderBy]) {
-        return -1;
-    }
-    if (b[orderBy] > a[orderBy]) {
-        return 1;
-    }
-    return 0;
-}
+// function descendingComparator(a, b, orderBy) {
+//     if (b[orderBy] < a[orderBy]) {
+//         return -1;
+//     }
+//     if (b[orderBy] > a[orderBy]) {
+//         return 1;
+//     }
+//     return 0;
+// }
 
-function getComparator(order, orderBy) {
-    return order === 'desc'
-        ? (a, b) => descendingComparator(a, b, orderBy)
-        : (a, b) => -descendingComparator(a, b, orderBy);
-}
+// function getComparator(order, orderBy) {
+//     return order === 'desc'
+//         ? (a, b) => descendingComparator(a, b, orderBy)
+//         : (a, b) => -descendingComparator(a, b, orderBy);
+// }
 
-const headCells = [
-    {
-        id: 'category_ic',
-        numeric: false,
-        disablePadding: true,
-        label: 'Category',
-    },
-    {
-        id: 'name',
-        numeric: false,
-        disablePadding: true,
-        label: 'Name',
-    },
-    {
-        id: 'description',
-        numeric: false,
-        disablePadding: true,
-        label: 'Description',
-    },
-    {
-        id: 'file',
-        numeric: false,
-        disablePadding: true,
-        label: 'File',
-    },
-    {
-        id: 'Action',
-        numeric: false,
-        disablePadding: true,
-        label: 'Action',
-    },
-];
+// const headCells = [
+//     {
+//         id: 'category_ic',
+//         numeric: false,
+//         disablePadding: true,
+//         label: 'Category',
+//     },
+//     {
+//         id: 'name',
+//         numeric: false,
+//         disablePadding: true,
+//         label: 'Name',
+//     },
+//     {
+//         id: 'description',
+//         numeric: false,
+//         disablePadding: true,
+//         label: 'Description',
+//     },
+//     {
+//         id: 'file',
+//         numeric: false,
+//         disablePadding: true,
+//         label: 'File',
+//     },
+//     {
+//         id: 'Action',
+//         numeric: false,
+//         disablePadding: true,
+//         label: 'Action',
+//     },
+// ];
 
-function EnhancedTableHead(props) {
-    const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
-        props;
-    const createSortHandler = (property) => (event) => {
-        onRequestSort(event, property);
-    };
+// function EnhancedTableHead(props) {
+//     const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
+//         props;
+//     const createSortHandler = (property) => (event) => {
+//         onRequestSort(event, property);
+//     };
 
-    return (
-        <TableHead>
-            <TableRow>
-                {/* <TableCell padding="checkbox">
-                    <Checkbox
-                        color="primary"
-                        indeterminate={numSelected > 0 && numSelected < rowCount}
-                        checked={rowCount > 0 && numSelected === rowCount}
-                        onChange={onSelectAllClick}
-                        slotProps={{
-                            input: { 'aria-label': 'select all desserts' },
-                        }}
-                    />
-                </TableCell> */}
-                {headCells.map((headCell) => (
-                    <TableCell
-                        key={headCell.id}
-                        align={headCell.numeric ? 'right' : 'left'}
-                        padding={headCell.disablePadding ? 'none' : 'normal'}
-                        sortDirection={orderBy === headCell.id ? order : false}
-                    >
-                        <TableSortLabel
-                            active={orderBy === headCell.id}
-                            direction={orderBy === headCell.id ? order : 'asc'}
-                            onClick={createSortHandler(headCell.id)}
-                        >
-                            {headCell.label}
-                            {orderBy === headCell.id ? (
-                                <Box component="span" sx={visuallyHidden}>
-                                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                                </Box>
-                            ) : null}
-                        </TableSortLabel>
-                    </TableCell>
-                ))}
-            </TableRow>
-        </TableHead>
-    );
-}
+//     return (
+//         <TableHead>
+//             <TableRow>
+//                 {/* <TableCell padding="checkbox">
+//                     <Checkbox
+//                         color="primary"
+//                         indeterminate={numSelected > 0 && numSelected < rowCount}
+//                         checked={rowCount > 0 && numSelected === rowCount}
+//                         onChange={onSelectAllClick}
+//                         slotProps={{
+//                             input: { 'aria-label': 'select all desserts' },
+//                         }}
+//                     />
+//                 </TableCell> */}
+//                 {headCells.map((headCell) => (
+//                     <TableCell
+//                         key={headCell.id}
+//                         align={headCell.numeric ? 'right' : 'left'}
+//                         padding={headCell.disablePadding ? 'none' : 'normal'}
+//                         sortDirection={orderBy === headCell.id ? order : false}
+//                     >
+//                         <TableSortLabel
+//                             active={orderBy === headCell.id}
+//                             direction={orderBy === headCell.id ? order : 'asc'}
+//                             onClick={createSortHandler(headCell.id)}
+//                         >
+//                             {headCell.label}
+//                             {orderBy === headCell.id ? (
+//                                 <Box component="span" sx={visuallyHidden}>
+//                                     {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+//                                 </Box>
+//                             ) : null}
+//                         </TableSortLabel>
+//                     </TableCell>
+//                 ))}
+//             </TableRow>
+//         </TableHead>
+//     );
+// }
 
-EnhancedTableHead.propTypes = {
-    numSelected: PropTypes.number.isRequired,
-    onRequestSort: PropTypes.func.isRequired,
-    onSelectAllClick: PropTypes.func.isRequired,
-    order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-    orderBy: PropTypes.string.isRequired,
-    rowCount: PropTypes.number.isRequired,
-};
+// EnhancedTableHead.propTypes = {
+//     numSelected: PropTypes.number.isRequired,
+//     onRequestSort: PropTypes.func.isRequired,
+//     onSelectAllClick: PropTypes.func.isRequired,
+//     order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+//     orderBy: PropTypes.string.isRequired,
+//     rowCount: PropTypes.number.isRequired,
+// };
 
-EnhancedTableHead.propTypes = {
-    numSelected: PropTypes.number.isRequired,
-    onRequestSort: PropTypes.func.isRequired,
-    onSelectAllClick: PropTypes.func.isRequired,
-    order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-    orderBy: PropTypes.string.isRequired,
-    rowCount: PropTypes.number.isRequired,
-};
+// EnhancedTableHead.propTypes = {
+//     numSelected: PropTypes.number.isRequired,
+//     onRequestSort: PropTypes.func.isRequired,
+//     onSelectAllClick: PropTypes.func.isRequired,
+//     order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+//     orderBy: PropTypes.string.isRequired,
+//     rowCount: PropTypes.number.isRequired,
+// };
 
-function EnhancedTableToolbar(props) {
-    const { numSelected } = props;
-    return (
-        <Toolbar
-            sx={[
-                {
-                    pl: { sm: 2 },
-                    pr: { xs: 1, sm: 1 },
-                },
-                numSelected > 0 && {
-                    bgcolor: (theme) =>
-                        alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
-                },
-            ]}
-        >
-            {numSelected > 0 ? (
-                <Typography
-                    variant="subtitle1"
-                    component="div"
-                    sx={{
-                        color: 'inherit',
-                        flex: '1 1 100%',
-                    }}
-                >
-                    {numSelected} selected
-                </Typography>
-            ) : (
-                <Typography
-                    sx={{ flex: '1 1 100%' }}
-                    variant="h6"
-                    id="tableTitle"
-                    component="div"
-                >
-                    Nutrition
-                </Typography>
-            )}
-            {numSelected > 0 ? (
-                <Tooltip title="Delete">
-                    <IconButton>
-                        <DeleteIcon />
-                    </IconButton>
-                </Tooltip>
-            ) : (
-                <Tooltip title="Filter list">
-                    <IconButton>
-                        <FilterListIcon />
-                    </IconButton>
-                </Tooltip>
-            )}
-        </Toolbar>
-    );
-}
+// function EnhancedTableToolbar(props) {
+//     const { numSelected } = props;
+//     return (
+//         <Toolbar
+//             sx={[
+//                 {
+//                     pl: { sm: 2 },
+//                     pr: { xs: 1, sm: 1 },
+//                 },
+//                 numSelected > 0 && {
+//                     bgcolor: (theme) =>
+//                         alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
+//                 },
+//             ]}
+//         >
+//             {numSelected > 0 ? (
+//                 <Typography
+//                     variant="subtitle1"
+//                     component="div"
+//                     sx={{
+//                         color: 'inherit',
+//                         flex: '1 1 100%',
+//                     }}
+//                 >
+//                     {numSelected} selected
+//                 </Typography>
+//             ) : (
+//                 <Typography
+//                     sx={{ flex: '1 1 100%' }}
+//                     variant="h6"
+//                     id="tableTitle"
+//                     component="div"
+//                 >
+//                     Nutrition
+//                 </Typography>
+//             )}
+//             {numSelected > 0 ? (
+//                 <Tooltip title="Delete">
+//                     <IconButton>
+//                         <DeleteIcon />
+//                     </IconButton>
+//                 </Tooltip>
+//             ) : (
+//                 <Tooltip title="Filter list">
+//                     <IconButton>
+//                         <FilterListIcon />
+//                     </IconButton>
+//                 </Tooltip>
+//             )}
+//         </Toolbar>
+//     );
+// }
 
-EnhancedTableToolbar.propTypes = {
-    numSelected: PropTypes.number.isRequired,
-};
+// EnhancedTableToolbar.propTypes = {
+//     numSelected: PropTypes.number.isRequired,
+// };
 
 
 function Category(props) {
@@ -349,7 +349,7 @@ function Category(props) {
     }
 
 
-    // const paginationModel = { page: 0, pageSize: 5 };
+    const paginationModel = { page: 0, pageSize: 5 };
 
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
@@ -358,66 +358,111 @@ function Category(props) {
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-    const handleRequestSort = (event, property) => {
-        const isAsc = orderBy === property && order === 'asc';
-        setOrder(isAsc ? 'desc' : 'asc');
-        setOrderBy(property);
-    };
+    // const handleRequestSort = (event, property) => {
+    //     const isAsc = orderBy === property && order === 'asc';
+    //     setOrder(isAsc ? 'desc' : 'asc');
+    //     setOrderBy(property);
+    // };
 
-    const handleSelectAllClick = (event) => {
-        if (event.target.checked) {
-            const newSelected = categoryData?.category?.map((n) => n.id);
-            setSelected(newSelected);
-            return;
-        }
-        setSelected([]);
-    };
+    // const handleSelectAllClick = (event) => {
+    //     if (event.target.checked) {
+    //         const newSelected = categoryData?.category?.map((n) => n.id);
+    //         setSelected(newSelected);
+    //         return;
+    //     }
+    //     setSelected([]);
+    // };
 
-    const handleClick = (event, id) => {
-        const selectedIndex = selected.indexOf(id);
-        let newSelected = [];
+    // const handleClick = (event, id) => {
+    //     const selectedIndex = selected.indexOf(id);
+    //     let newSelected = [];
 
-        if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, id);
-        } else if (selectedIndex === 0) {
-            newSelected = newSelected.concat(selected.slice(1));
-        } else if (selectedIndex === selected.length - 1) {
-            newSelected = newSelected.concat(selected.slice(0, -1));
-        } else if (selectedIndex > 0) {
-            newSelected = newSelected.concat(
-                selected.slice(0, selectedIndex),
-                selected.slice(selectedIndex + 1),
-            );
-        }
-        setSelected(newSelected);
-    };
+    //     if (selectedIndex === -1) {
+    //         newSelected = newSelected.concat(selected, id);
+    //     } else if (selectedIndex === 0) {
+    //         newSelected = newSelected.concat(selected.slice(1));
+    //     } else if (selectedIndex === selected.length - 1) {
+    //         newSelected = newSelected.concat(selected.slice(0, -1));
+    //     } else if (selectedIndex > 0) {
+    //         newSelected = newSelected.concat(
+    //             selected.slice(0, selectedIndex),
+    //             selected.slice(selectedIndex + 1),
+    //         );
+    //     }
+    //     setSelected(newSelected);
+    // };
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
+    // const handleChangePage = (event, newPage) => {
+    //     setPage(newPage);
+    // };
 
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-    };
+    // const handleChangeRowsPerPage = (event) => {
+    //     setRowsPerPage(parseInt(event.target.value, 10));
+    //     setPage(0);
+    // };
 
-    const handleChangeDense = (event) => {
-        setDense(event.target.checked);
-    };
+    // const handleChangeDense = (event) => {
+    //     setDense(event.target.checked);
+    // };
 
-    // Avoid a layout jump when reaching the last page with empty rows.
-    const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - categoryData?.category?.length) : 0;
+    // // Avoid a layout jump when reaching the last page with empty rows.
+    // const emptyRows =
+    //     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - categoryData?.category?.length) : 0;
 
-    const visibleRows = React.useMemo(
-        () =>
-            [...categoryData?.category]
-                .sort(getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
-        [order, orderBy, page, rowsPerPage],
-    );
+    // const visibleRows = React.useMemo(
+    //     () =>
+    //         [...categoryData?.category]
+    //             .sort(getComparator(order, orderBy))
+    //             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage),
+    //     [order, orderBy, page, rowsPerPage],
+    // );
 
 
+    const columns = [
+        {
+            field: 'parent_category_id', headerName: 'Parent Category', width: 200,
+            valueGetter: (value, row) => categoryData?.category?.find((v) => v?._id === row?.parent_category_id)?.name,
+        },
+        {
+            field: 'name',
+            headerName: 'Name',
+            width: 150,
+            editable: true,
+        },
+        {
+            field: 'description',
+            headerName: 'Description',
+            width: 350,
+            editable: true,
+        },
+        {
+            field: 'category_img',
+            headerName: 'Images',
+            type: 'number',
+            width: 110,
+            editable: true,
+            valueGetter: (value, row) => {
+                row?.category_img?.map((v, index) => (
+                    <img
+                        key={index}
+                        src={IMAGE_URL + v}
+                        width="50px"
+                        height="50px"
+                        alt={row?.name}
+                    />
+                ))
+            },
+        },
+        {
+            field: 'Action',
+            headerName: 'Action',
+            rowHeader: true,
+            description: 'This column has a value getter and is not sortable.',
+            sortable: false,
+            width: 160,
+
+        },
+    ];
 
 
 
@@ -571,9 +616,9 @@ function Category(props) {
             </React.Fragment>
 
 
-            <TableContainer component={Paper}>
+            {/* <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650, mt: 5 }} size="small" aria-label="a dense table">
-                    {/* <TableHead>
+                    <TableHead>
                         <TableRow>
                             <TableCell>Parent Category</TableCell>
                             <TableCell>Name</TableCell>
@@ -581,7 +626,7 @@ function Category(props) {
                             <TableCell align="center">File</TableCell>
                             <TableCell align="right">Action</TableCell>
                         </TableRow>
-                    </TableHead> */}
+                    </TableHead>
                     <EnhancedTableHead
                         numSelected={selected.length}
                         order={order}
@@ -596,9 +641,7 @@ function Category(props) {
                                 key={i}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                                 {/* <TableCell align="left">
-                                  
-                                </TableCell> */}
+                                
                                 <TableCell align="left">
                                     {
                                         categoryData?.category?.find((v) => v?._id === row?.parent_category_id)?.name
@@ -644,9 +687,9 @@ function Category(props) {
                         ))}
                     </TableBody>
                 </Table>
-            </TableContainer>
+            </TableContainer> */}
 
-            <TablePagination
+            {/* <TablePagination
                 rowsPerPageOptions={[5, 10, 15]}
                 component="div"
                 count={categoryData.category.length}
@@ -654,19 +697,26 @@ function Category(props) {
                 page={page}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
-            />
+            /> */}
 
 
 
-            {/* <DataGrid
+            <DataGrid
                 rows={categoryData.category}
                 columns={columns}
-                initialState={{ pagination: { paginationModel } }}
+                initialState={{
+                    pagination: {
+                        paginationModel: {
+                            pageSize: 5,
+                        },
+                    },
+                }}
+
                 pageSizeOptions={[5, 10]}
                 checkboxSelection
                 getRowId={(row) => row._id}
                 sx={{ border: 0 }}
-            /> */}
+            />
         </Box>
     );
 }
