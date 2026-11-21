@@ -3,7 +3,7 @@ import { ThemeContext } from '../../context/reducer/ThemeContext';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import { Link } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCategory } from '../../redux/slice/category.slice';
 
@@ -22,6 +22,11 @@ function Header(props) {
         dispatch(fetchCategory())
     }, [])
 
+    const fCat = categoryData?.category?.filter((v) => v.parent_category_id == null)
+
+    console.log(fCat);
+
+
     return (
 
 
@@ -33,10 +38,10 @@ function Header(props) {
                     <a className="navbar-brand" href="index.html">
                         {
                             theme.theme === 'dark' ?
-                            <img className="light-mode-item navbar-brand-item" src="assets/images/logo_white.png" alt="logo" />
-                              
+                                <img className="light-mode-item navbar-brand-item" src="assets/images/logo_white.png" alt="logo" />
+
                                 :
-                                  <img className="light-mode-item navbar-brand-item" src="assets/images/logo.svg" alt="logo" />
+                                <img className="light-mode-item navbar-brand-item" src="assets/images/logo.svg" alt="logo" />
                         }
 
                     </a>
@@ -64,9 +69,72 @@ function Header(props) {
                                 <ul className={theme.theme == 'dark' ? `bodyBG dropdown-menu` : "dropdown-menu"} aria-labelledby="categoryMenu">
 
                                     {
-                                        categoryData?.category?.map((v, i) => (
-                                           <li>{v.name}</li>
-                                        ))
+
+                                        fCat.map((v, i) => {
+                                            const sCat = categoryData?.category?.filter((v1) => v._id === v1.parent_category_id)
+
+                                            console.log(sCat);
+
+
+                                            return (
+                                                <li className={theme.theme == 'dark' ? `bodyBG dropdown-submenu dropend` : "dropdown-submenu dropend"}>
+                                                    <NavLink to={`/courses/${v._id}`} className={sCat.length > 0 ? 'dropdown-item dropdown-toggle' : 'dropdown-item'}>
+                                                        {v.name}
+                                                    </NavLink>
+
+                                                    <ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+                                                        {
+                                                            sCat &&
+                                                            sCat.map(v2 => {
+
+                                                                const tCat = categoryData?.category?.filter((v3) => v2._id === v3.parent_category_id)
+
+                                                                console.log(tCat);
+
+
+                                                                return (
+                                                                    <li className={theme.theme == 'dark' ? `bodyBG dropdown-submenu dropend` : "dropdown-submenu dropend"}>
+                                                                        <NavLink to={`/courses/${v2._id}`} className={tCat.length > 0 ? 'dropdown-item dropdown-toggle' : 'dropdown-item'} href="#">
+                                                                            {v2.name}
+                                                                        </NavLink>
+
+                                                                        <ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+                                                                            {
+                                                                                tCat &&
+                                                                                tCat.map(v4 => {
+
+                                                                                    return (
+                                                                                        <li className={theme.theme == 'dark' ? `bodyBG dropdown-submenu dropend` : "dropdown-submenu dropend"}>
+                                                                                            <NavLink to={`/courses/${v4._id}`} className='dropdown-item' href="#">
+                                                                                                {v4.name}
+                                                                                            </NavLink>
+
+
+
+                                                                                        </li>
+                                                                                    )
+                                                                                })
+
+
+                                                                            }
+
+                                                                        </ul>
+
+                                                                    </li>
+                                                                )
+                                                            })
+
+
+                                                        }
+
+                                                    </ul>
+
+                                                </li>
+                                            )
+
+                                        })
+
+
                                     }
 
 
@@ -91,8 +159,8 @@ function Header(props) {
                                             <li> <a className="dropdown-item" href="#">Software Engineering</a> </li>
                                             <li> <a className="dropdown-item" href="#">Software Development Tools</a> </li>
                                         </ul>
-                                    </li>
-                                    <li> <a className="dropdown-item" href="#">Design</a></li>
+                                    </li> */}
+                                    {/*  <li> <a className="dropdown-item" href="#">Design</a></li>
                                   
                                     <li className="dropdown-submenu dropend">
                                         <a className="dropdown-item dropdown-toggle" href="#">Marketing</a>
@@ -397,7 +465,7 @@ function Header(props) {
                                 <Link to='/contact' className={theme.theme == 'dark' ? `spanText nav-link ` : "nav-link "}>Contact Us</Link>
                             </li>
 
-                              <li>
+                            <li>
                                 <Link to='/faqs' className={theme.theme == 'dark' ? `spanText nav-link ` : "nav-link "}>FAQs</Link>
                             </li>
 

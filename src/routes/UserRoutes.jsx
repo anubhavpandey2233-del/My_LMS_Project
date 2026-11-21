@@ -20,7 +20,7 @@ function UserRoutes(props) {
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/about' element={<About />} />
-                <Route path='/courses' element={<AllCoursesList />} />
+                <Route path='/courses/:id' element={<AllCoursesList />} />
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/wishlist' element={<Wishlist />} />
                 <Route path='/checkout' element={<Checkout />} />

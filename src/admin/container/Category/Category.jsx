@@ -421,7 +421,10 @@ function Category(props) {
     const columns = [
         {
             field: 'parent_category_id', headerName: 'Parent Category', width: 200,
-            valueGetter: (value, row) => categoryData?.category?.find((v) => v?._id === row?.parent_category_id)?.name,
+            renderCell: (params) => (
+                categoryData?.category?.find((v) => v?._id === params?.row?.parent_category_id)?.name
+            )
+            // valueGetter: (value, row) => categoryData?.category?.find((v) => v?._id === row?.parent_category_id)?.name,
         },
         {
             field: 'name',
@@ -438,28 +441,43 @@ function Category(props) {
         {
             field: 'category_img',
             headerName: 'Images',
-            type: 'number',
             width: 110,
-            editable: true,
-            valueGetter: (value, row) => {
-                row?.category_img?.map((v, index) => (
-                    <img
-                        key={index}
-                        src={IMAGE_URL + v}
-                        width="50px"
-                        height="50px"
-                        alt={row?.name}
-                    />
-                ))
-            },
+            renderCell: (params) => (
+                <img src={IMAGE_URL + params.row.category_img} width="50px" height="50px" />
+            )
+            // valueGetter: (value, row) => {
+            //     row?.category_img?.map((v, index) => (
+            //         <img
+            //             key={index}
+            //             src={IMAGE_URL + v}
+            //             width="50px"
+            //              
+            //             alt={row?.name}
+            //         />
+            //     ))
+            // },
         },
         {
             field: 'Action',
             headerName: 'Action',
-            rowHeader: true,
-            description: 'This column has a value getter and is not sortable.',
-            sortable: false,
             width: 160,
+            renderCell: (params) => (
+                <>
+                    <IconButton
+                        aria-label="delete"
+                        onClick={() => dispatch(deleteCategory(params?.row))}
+                    >
+                        <DeleteIcon />
+                    </IconButton>
+
+                    <IconButton
+                        aria-label="edit"
+                        onClick={() => handleEdit(params?.row)}
+                    >
+                        <EditIcon />
+                    </IconButton>
+                </>
+            )
 
         },
     ];

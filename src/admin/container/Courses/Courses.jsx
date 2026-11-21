@@ -17,6 +17,8 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { fetchCategory } from '../../../redux/slice/category.slice';
+import { DataGrid } from '@mui/x-data-grid';
+
 
 function Courses(props) {
 
@@ -113,6 +115,57 @@ function Courses(props) {
     console.log(edit);
 
 
+    const columns = [
+        {
+            field: 'category_id', headerName: 'Category', width: 90,
+            renderCell: (params) => (
+                categoryData?.category?.find((v) => v?._id === params?.row?.category_id)?.name
+            )
+        },
+        {
+            field: 'name',
+            headerName: 'Name',
+            width: 150,
+        },
+        {
+            field: 'description',
+            headerName: 'Description',
+            width: 150
+        },
+        {
+            field: 'fees',
+            headerName: 'Fees',
+            type: 'number',
+            width: 110,
+            editable: true,
+        },
+        {
+            field: 'course_img',
+            headerName: 'File',
+            width: 160,
+            renderCell: (params) => (
+                <img src={IMAGE_URL + params?.row?.course_img} width={'50px'} height={'50px'} />
+            )
+        },
+        {
+            field: 'Action',
+            headerName: 'Action',
+            width: 160,
+            renderCell: (params) => (
+                <>
+                    <IconButton aria-label="delete" onClick={() => dispatch(deleteCourse(params?.row))}>
+                        <DeleteIcon />
+                    </IconButton>
+                    <IconButton aria-label="delete" onClick={() => handleEdit(params?.row, fd)}>
+                        <EditIcon />
+                    </IconButton>
+                </>
+            )
+
+        },
+    ];
+
+
     return (
         <div>
             <Formik
@@ -172,7 +225,7 @@ function Courses(props) {
                             </Form>
 
 
-                            <TableContainer component={Paper}>
+                            {/* <TableContainer component={Paper}>
                                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                                     <TableHead>
                                         <TableRow>
@@ -223,8 +276,24 @@ function Courses(props) {
                                         ))}
                                     </TableBody>
                                 </Table>
-                            </TableContainer>
+                            </TableContainer> */}
 
+
+                            <DataGrid
+                                rows={courseData?.course}
+                                columns={columns}
+                                initialState={{
+                                    pagination: {
+                                        paginationModel: {
+                                            pageSize: 5,
+                                        },
+                                    },
+                                }}
+                                pageSizeOptions={[5]}
+                                checkboxSelection
+                                getRowId={(row) => row._id}
+                                disableRowSelectionOnClick
+                            />
 
 
                         </>
