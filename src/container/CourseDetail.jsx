@@ -2,16 +2,26 @@
 import React, { useEffect } from "react";
 import { fetchCourses } from "../redux/slice/course.slice";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
 
 function CourseDetail() {
-const courseData = useSelector(state => state.course)
+    const courseData = useSelector(state => state.course)
     console.log(courseData);
+
+      const { id } = useParams();
 
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(fetchCourses())
     }, [])
+
+    const selectedCourse = courseData?.course?.find(
+        (v) => v.parent_category_id === id
+    );
+
+    console.log("Selected Course:", selectedCourse);
+    
 
     return (
         <main>
@@ -25,17 +35,15 @@ const courseData = useSelector(state => state.course)
                         <div className="col-lg-7">
 
                             <span className="badge bg-purple bg-opacity-10 text-purple mb-3">
-                               {courseData?.course?.name}
+                                {selectedCourse.name}
                             </span>
 
                             <h1 className="display-5 fw-bold mb-3">
-                                Complete Web Development Course
+                                 {selectedCourse.name}
                             </h1>
 
                             <p className="lead text-muted mb-4">
-                                Learn web development from beginner to advanced
-                                level with practical projects and real-world
-                                examples.
+                                {selectedCourse.description}
                             </p>
 
                             {/* Rating */}
@@ -64,7 +72,7 @@ const courseData = useSelector(state => state.course)
                                     <i className="far fa-clock text-danger me-2" />
                                     <strong>Duration</strong>
                                     <div className="text-muted">
-                                        12h 56m
+                                     {selectedCourse.duration}
                                     </div>
                                 </div>
 
@@ -95,7 +103,7 @@ const courseData = useSelector(state => state.course)
                             <div className="card shadow border-0">
 
                                 <img
-                                    src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+                                    src={selectedCourse.course_img?.[0]}
                                     className="card-img-top"
                                     alt="Course"
                                     style={{
@@ -108,12 +116,10 @@ const courseData = useSelector(state => state.course)
 
                                     <div className="mb-3">
 
-                                        <span className="text-muted text-decoration-line-through me-2">
-                                            ₹2,999
-                                        </span>
+                                      
 
                                         <span className="fs-2 fw-bold">
-                                            ₹1,499
+                                          {selectedCourse.fees}
                                         </span>
 
                                     </div>
