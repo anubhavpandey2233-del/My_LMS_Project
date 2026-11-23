@@ -418,7 +418,7 @@ Popular course START */}
                                                 <a href="#" className="text-danger"><i className="fas fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme == 'dark' ? `spanText` : ''}>Graphic Design Masterclass</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" className={theme.theme == 'dark' ? `spanText` : ''}>Graphic Design Masterclass</a></h5>
                                             <p className="mb-2 text-truncate-2">Rooms oh fully taken by worse do Points afraid but may end Rooms Points afraid but may end Rooms</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -453,7 +453,7 @@ Popular course START */}
                                                 <a href="#" className="h6 fw-light mb-0"><i className="far fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme == 'dark' ? `spanText` : ''}>Create a Design System in Figma</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" className={theme.theme == 'dark' ? `spanText` : ''}>Create a Design System in Figma</a></h5>
                                             <p className="mb-2 text-truncate-2">Rooms oh fully taken by worse do. Points afraid but may end afraid but may end.</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -488,7 +488,7 @@ Popular course START */}
                                                 <a href="#" className="text-danger"><i className="fas fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme == 'dark' ? `spanText` : ''}>Deep Learning with React-Native </a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" className={theme.theme == 'dark' ? `spanText` : ''}>Deep Learning with React-Native </a></h5>
                                             <p className="mb-2 text-truncate-2">Far advanced settling say finished raillery. Offered chiefly farther</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -558,7 +558,7 @@ Popular course START */}
                                                 <a href="#" className="h6 fw-light mb-0"><i className="far fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme == 'dark' ? `spanText` : ''}>Build Websites with CSS</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" className={theme.theme == 'dark' ? `spanText` : ''}>Build Websites with CSS</a></h5>
                                             <p className="text-truncate-2 mb-2">Far advanced settling say finished raillery. Offered chiefly farther</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -628,7 +628,7 @@ Popular course START */}
                                                 <a href="#" className="h6 fw-light mb-0"><i className="far fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme == 'dark' ? `spanText` : ''}>JavaScript: Full Understanding</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" className={theme.theme == 'dark' ? `spanText` : ''}>JavaScript: Full Understanding</a></h5>
                                             <p className="text-truncate-2 mb-2">Far advanced settling say finished raillery. Offered chiefly farther.</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -739,7 +739,7 @@ Popular course START */}
                                                 <a href="#" className="text-danger"><i className="fas fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme == 'dark' ? `spanText` : ''}>Deep Learning with React-Native</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" className={theme.theme == 'dark' ? `spanText` : ''}>Deep Learning with React-Native</a></h5>
                                             <p className="text-truncate-2 mb-2">Far advanced settling say finished raillery. Offered chiefly farther</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">
@@ -885,7 +885,7 @@ Popular course START */}
                                                 <a href="#" className="h6 fw-light mb-0"><i className="far fa-heart" /></a>
                                             </div>
                                             {/* Title */}
-                                            <h5 className="card-title fw-normal"><a href="#" class={theme.theme == 'dark' ? `spanText` : ''}>Sketch from A to Z: for app designer</a></h5>
+                                            <h5 className="card-title fw-normal"><a href="#" className={theme.theme == 'dark' ? `spanText` : ''}>Sketch from A to Z: for app designer</a></h5>
                                             <p className="text-truncate-2 mb-2">Proposal indulged no do sociable he throwing settling</p>
                                             {/* Rating star */}
                                             <ul className="list-inline mb-0">

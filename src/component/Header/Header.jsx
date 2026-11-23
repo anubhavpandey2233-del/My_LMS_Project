@@ -82,7 +82,7 @@ function Header(props) {
                                                         {v.name}
                                                     </NavLink>
 
-                                                    <ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+                                                    <ul className="dropdown-menu dropdown-menu-start" data-bs-popper="none">
                                                         {
                                                             sCat &&
                                                             sCat.map(v2 => {
@@ -98,7 +98,7 @@ function Header(props) {
                                                                             {v2.name}
                                                                         </NavLink>
 
-                                                                        <ul class="dropdown-menu dropdown-menu-start" data-bs-popper="none">
+                                                                        <ul className="dropdown-menu dropdown-menu-start" data-bs-popper="none">
                                                                             {
                                                                                 tCat &&
                                                                                 tCat.map(v4 => {
