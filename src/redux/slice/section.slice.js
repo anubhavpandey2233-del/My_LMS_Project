@@ -117,7 +117,7 @@ const sectionSlice = createSlice({
             if (action.payload) {
                 state.section.push(action.payload)
             }
-            log
+            
         })
 
 

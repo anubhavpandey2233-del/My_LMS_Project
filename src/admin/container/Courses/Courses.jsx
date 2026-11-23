@@ -40,6 +40,8 @@ function Courses(props) {
         name: string().required("Please enter course name"),
         description: string().required(),
         fees: string().required(),
+        level:string().required(),
+        language:string().required(),
 
         course_img: mixed()
             .test("course_img", "Plese select only .png,.jpg,jpeg files", function (val) {
@@ -166,6 +168,14 @@ function Courses(props) {
     ];
 
 
+     const selectLevel = [
+        { value: '', label: 'Select level' },
+        { value: 'beginner', label: 'Beginner' },
+        { value: 'intermidiate', label: 'Intermidiate' },
+         { value: 'advance', label: 'Advance' }
+
+    ]
+
     return (
         <div>
             <Formik
@@ -174,6 +184,8 @@ function Courses(props) {
                     name: "",
                     description: "",
                     fees: "",
+                    level:"",
+                    language:"",
                     course_img: [],
                 }}
                 validationSchema={yupSchema}
@@ -220,9 +232,11 @@ function Courses(props) {
                                 <TextBox name="name" type="text" label="Course" />
                                 <TextBox name="description" type="text" label="description" />
                                 <TextBox name="fees" type="text" label="Fees" />
+                                <TextBox name="level" type="text" selectLevel={selectLevel}  select/>
+                                <TextBox name="language" type="text" label="Language"  select/>
                                 <FileUpload name="course_img" type="file" multiple={true} />
                                 <button type="submit">Submit</button>
-                            </Form>
+                            </Form>k
 
 
                             {/* <TableContainer component={Paper}>

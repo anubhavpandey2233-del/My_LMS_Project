@@ -3,25 +3,37 @@ import React, { useEffect } from "react";
 import { fetchCourses } from "../redux/slice/course.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { IMAGE_URL } from "../utills/url";
+import { fetchSection } from "../redux/slice/section.slice";
+import Accordion from 'react-bootstrap/Accordion';
+
 
 function CourseDetail() {
     const courseData = useSelector(state => state.course)
     console.log(courseData);
 
-      const { id } = useParams();
+    const sectionData = useSelector(state => state.section)
+    console.log("sectionDatasectionData", sectionData.section);
+
+    const { id } = useParams();
 
     const dispatch = useDispatch()
 
+    const sData = sectionData?.section?.filter((v) => v.course_id === id)
+
+    console.log(sData);
+
     useEffect(() => {
         dispatch(fetchCourses())
+        dispatch(fetchSection())
     }, [])
 
     const selectedCourse = courseData?.course?.find(
-        (v) => v.parent_category_id === id
+        (v) => v._id === id
     );
 
     console.log("Selected Course:", selectedCourse);
-    
+
 
     return (
         <main>
@@ -35,15 +47,15 @@ function CourseDetail() {
                         <div className="col-lg-7">
 
                             <span className="badge bg-purple bg-opacity-10 text-purple mb-3">
-                                {selectedCourse.name}
+                                {selectedCourse?.name}
                             </span>
 
                             <h1 className="display-5 fw-bold mb-3">
-                                 {selectedCourse.name}
+                                {selectedCourse?.name}
                             </h1>
 
                             <p className="lead text-muted mb-4">
-                                {selectedCourse.description}
+                                {selectedCourse?.description}
                             </p>
 
                             {/* Rating */}
@@ -72,7 +84,7 @@ function CourseDetail() {
                                     <i className="far fa-clock text-danger me-2" />
                                     <strong>Duration</strong>
                                     <div className="text-muted">
-                                     {selectedCourse.duration}
+                                        {selectedCourse?.duration}
                                     </div>
                                 </div>
 
@@ -103,7 +115,7 @@ function CourseDetail() {
                             <div className="card shadow border-0">
 
                                 <img
-                                    src={selectedCourse.course_img?.[0]}
+                                    src={IMAGE_URL + selectedCourse?.course_img}
                                     className="card-img-top"
                                     alt="Course"
                                     style={{
@@ -116,10 +128,10 @@ function CourseDetail() {
 
                                     <div className="mb-3">
 
-                                      
+
 
                                         <span className="fs-2 fw-bold">
-                                          {selectedCourse.fees}
+                                            ${selectedCourse?.fees}
                                         </span>
 
                                     </div>
@@ -188,11 +200,7 @@ function CourseDetail() {
                                 </h2>
 
                                 <p className="text-muted">
-                                    This course is designed to help you learn
-                                    web development from the basics. You will
-                                    understand HTML, CSS, JavaScript and modern
-                                    web development concepts through practical
-                                    examples.
+                                    {selectedCourse?.description}
                                 </p>
 
                                 <p className="text-muted">
@@ -277,167 +285,24 @@ function CourseDetail() {
                                     Course Curriculum
                                 </h2>
 
-                                <div className="accordion" id="courseAccordion">
-
-                                    <div className="accordion-item">
-
-                                        <h2 className="accordion-header">
-                                            <button
-                                                className="accordion-button"
-                                                type="button"
-                                                data-bs-toggle="collapse"
-                                                data-bs-target="#chapterOne"
-                                            >
-                                                Chapter 1 - Introduction
-                                            </button>
-                                        </h2>
-
-                                        <div
-                                            id="chapterOne"
-                                            className="accordion-collapse collapse show"
-                                        >
-
-                                            <div className="accordion-body">
-
-                                                <div className="d-flex justify-content-between border-bottom py-3">
-
-                                                    <span>
-                                                        <i className="fas fa-play-circle text-primary me-2" />
-                                                        Introduction to Web Development
-                                                    </span>
-
-                                                    <span className="text-muted">
-                                                        12 min
-                                                    </span>
-
-                                                </div>
-
-                                                <div className="d-flex justify-content-between py-3">
-
-                                                    <span>
-                                                        <i className="fas fa-play-circle text-primary me-2" />
-                                                        Setting Up Development Environment
-                                                    </span>
-
-                                                    <span className="text-muted">
-                                                        18 min
-                                                    </span>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
+                                {
+                                    sData?.map((v, i) => (
 
 
-                                    <div className="accordion-item">
-
-                                        <h2 className="accordion-header">
-                                            <button
-                                                className="accordion-button collapsed"
-                                                type="button"
-                                                data-bs-toggle="collapse"
-                                                data-bs-target="#chapterTwo"
-                                            >
-                                                Chapter 2 - HTML Fundamentals
-                                            </button>
-                                        </h2>
-
-                                        <div
-                                            id="chapterTwo"
-                                            className="accordion-collapse collapse"
-                                        >
-
-                                            <div className="accordion-body">
-
-                                                <div className="d-flex justify-content-between py-3">
-
-                                                    <span>
-                                                        <i className="fas fa-play-circle text-primary me-2" />
-                                                        HTML Basics
-                                                    </span>
-
-                                                    <span className="text-muted">
-                                                        20 min
-                                                    </span>
-
-                                                </div>
-
-                                                <div className="d-flex justify-content-between py-3">
-
-                                                    <span>
-                                                        <i className="fas fa-play-circle text-primary me-2" />
-                                                        HTML Forms
-                                                    </span>
-
-                                                    <span className="text-muted">
-                                                        25 min
-                                                    </span>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
+                                        <Accordion>
+                                            <Accordion.Item eventKey={i}>
+                                                <Accordion.Header>{v.name}</Accordion.Header>
+                                                <Accordion.Body>
+                                                   {v.description}
+                                                </Accordion.Body>
+                                            </Accordion.Item>
+                                            
+                                        </Accordion>
 
 
-                                    <div className="accordion-item">
+                                    ))
 
-                                        <h2 className="accordion-header">
-                                            <button
-                                                className="accordion-button collapsed"
-                                                type="button"
-                                                data-bs-toggle="collapse"
-                                                data-bs-target="#chapterThree"
-                                            >
-                                                Chapter 3 - CSS Fundamentals
-                                            </button>
-                                        </h2>
-
-                                        <div
-                                            id="chapterThree"
-                                            className="accordion-collapse collapse"
-                                        >
-
-                                            <div className="accordion-body">
-
-                                                <div className="d-flex justify-content-between py-3">
-
-                                                    <span>
-                                                        <i className="fas fa-play-circle text-primary me-2" />
-                                                        CSS Basics
-                                                    </span>
-
-                                                    <span className="text-muted">
-                                                        22 min
-                                                    </span>
-
-                                                </div>
-
-                                                <div className="d-flex justify-content-between py-3">
-
-                                                    <span>
-                                                        <i className="fas fa-play-circle text-primary me-2" />
-                                                        Responsive Design
-                                                    </span>
-
-                                                    <span className="text-muted">
-                                                        30 min
-                                                    </span>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
+                                }
 
                             </div>
 

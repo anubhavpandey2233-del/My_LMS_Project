@@ -22,11 +22,11 @@ function UserRoutes(props) {
                 <Route path='/' element={<Home />} />
                 <Route path='/about' element={<About />} />
                 <Route path='/courses/:id' element={<AllCoursesList />} />
-                {/* <Route path='/courses/' element={<AllCoursesList />} /> */}
+                <Route path='/courses' element={<AllCoursesList />} />
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/wishlist' element={<Wishlist />} />
                 <Route path='/checkout' element={<Checkout />} />
-                <Route path='/course-detail' element={<CourseDetail/>}/>
+                <Route path='/course-detail/:id' element={<CourseDetail/>}/>
                 <Route path='/faqs' element={<Faqs />} />
                 <Route path='/contact' element={<Contact />} />
             </Routes>

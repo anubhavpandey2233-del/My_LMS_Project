@@ -1,23 +1,78 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router';
+import { Link, NavLink, useParams } from 'react-router';
 import { fetchCourses } from '../redux/slice/course.slice';
+import { IMAGE_URL } from '../utills/url';
+import Pagination from 'react-bootstrap/Pagination';
+import { fetchCategory } from '../redux/slice/category.slice';
 
 function AllCoursesList(props) {
 
-    const { id } = useParams()
+    const [currentPage, setCurrentPage] = useState(1)
+    const [search, setSearch] = useState('');
 
-    console.log(id);
 
     const courseData = useSelector(state => state.course)
     console.log(courseData);
+
+    const categoryData = useSelector((state) => state.category)
+    console.log(categoryData)
+
+    const fCat = categoryData?.category?.filter((v) => v.parent_category_id == null)
+
+
+
+    const { id } = useParams();
 
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(fetchCourses())
+        dispatch(fetchCategory())
     }, [])
 
+
+
+    const fData = courseData?.course?.filter(v => v.category_id === id)
+
+    console.log(fData);
+
+    let finalData = id ? fData : courseData?.course
+
+
+    let perPage = 4;
+    let page = Math.ceil(finalData.length / perPage) //0
+
+    const pageData = () => {
+        //20   0-4    5-9    10-14     15-19
+        const startIndex = (currentPage - 1) * 4
+        const endIndex = startIndex + perPage - 1
+
+        console.log(startIndex, endIndex);
+
+
+        let x = finalData.slice(startIndex, endIndex + 1)
+        console.log(x);
+
+        return x;
+    }
+
+    let paginationPage = pageData();
+
+
+    const searchData = () => {
+
+        console.log("search", search);
+
+
+        let searchData = finalData.filter((v) => v.name.toLowerCase().includes(search.toLowerCase()) ||
+            v.description.toLowerCase().includes(search.toLowerCase()) ||
+            v.fees.toString().includes(search)
+
+        )
+
+        return searchData
+    }
 
 
     return (
@@ -55,7 +110,7 @@ Page content START */}
                         <div className="row g-3">
                             {/* Input */}
                             <div className="col-xl-3">
-                                <input className="form-control me-1" type="search" placeholder="Enter keyword" />
+                                <input className="form-control me-1" type="search" placeholder="Enter keyword" onChange={(e) => setSearch(e.target.value)} />
                             </div>
                             {/* Select item */}
                             <div className="col-xl-8">
@@ -64,16 +119,11 @@ Page content START */}
                                     <div className="col-sm-6 col-md-3 pb-2 pb-md-0">
                                         <select className="form-select form-select-sm js-choice" aria-label=".form-select-sm example">
                                             <option value>Categories</option>
-                                            <option>All</option>
-                                            <option>Development</option>
-                                            <option>Design</option>
-                                            <option>Accounting</option>
-                                            <option>Translation</option>
-                                            <option>Finance</option>
-                                            <option>Legal</option>
-                                            <option>Photography</option>
-                                            <option>Writing</option>
-                                            <option>Marketing</option>
+                                            {
+                                                fCat?.map((v) => (
+                                                    <option>{v.name}</option>
+                                                ))
+                                            }
                                         </select>
                                     </div>
                                     {/* Search item */}
@@ -122,107 +172,107 @@ Page content START */}
                             {/* Course Grid START */}
                             <div className="row g-4">
                                 {/* Card item START */}
-                               {
-    courseData?.course?.map((v) => {
-        console.log("COURSE IMAGE:", v.course_img);
+                                {
+                                    paginationPage?.map((v) => {
+                                        console.log("COURSE IMAGE:", v.course_img);
 
-        return (
-            <div
-                key={v._id}
-                className="col-sm-6 col-lg-4 col-xl-3"
-            >
-                <Link 
-                  to='/course-detail'
-                    className="text-decoration-none text-dark"
-                >
-                    <div className="card shadow h-100">
+                                        return (
+                                            <div
+                                                key={v._id}
+                                                className="col-sm-6 col-lg-4 col-xl-3"
+                                            >
+                                                <NavLink
+                                                    to={`/course-detail/${v._id}`}
+                                                    className="text-decoration-none text-dark"
+                                                >
+                                                    <div className="card shadow h-100">
 
-                        {/* Image */}
-                        <img
-                            src={v.course_img}
-                            className="card-img-top"
-                            alt={v.name}
-                        />
+                                                        {/* Image */}
+                                                        <img
+                                                            src={IMAGE_URL + v.course_img}
+                                                            className="card-img-top"
+                                                            alt={v.name}
+                                                        />
 
-                        {/* Card body */}
-                        <div className="card-body pb-0">
+                                                        {/* Card body */}
+                                                        <div className="card-body pb-0">
 
-                            {/* Badge and favorite */}
-                            <div className="d-flex justify-content-between mb-2">
+                                                            {/* Badge and favorite */}
+                                                            <div className="d-flex justify-content-between mb-2">
 
-                                <span className="badge bg-purple bg-opacity-10 text-purple">
-                                    All level
-                                </span>
+                                                                {/* <span className="badge bg-purple bg-opacity-10 text-purple">
+                                                                    All level
+                                                                </span> */}
 
-                                <span className="h6 fw-light mb-0">
-                                    <i className="far fa-heart" />
-                                </span>
+                                                                <span className="h6 fw-light mb-0">
+                                                                    <i className="far fa-heart" />
+                                                                </span>
 
-                            </div>
+                                                            </div>
 
-                            {/* Title */}
-                            <h5 className="card-title">
-                                {v.name}
-                            </h5>
+                                                            {/* Title */}
+                                                            <h5 className="card-title">
+                                                                {v.name}
+                                                            </h5>
 
-                            {/* Rating */}
-                            <ul className="list-inline mb-0">
+                                                            {/* Rating */}
+                                                            <ul className="list-inline mb-0">
 
-                                <li className="list-inline-item me-0 small">
-                                    <i className="fas fa-star text-warning" />
-                                </li>
+                                                                <li className="list-inline-item me-0 small">
+                                                                    <i className="fas fa-star text-warning" />
+                                                                </li>
 
-                                <li className="list-inline-item me-0 small">
-                                    <i className="fas fa-star text-warning" />
-                                </li>
+                                                                <li className="list-inline-item me-0 small">
+                                                                    <i className="fas fa-star text-warning" />
+                                                                </li>
 
-                                <li className="list-inline-item me-0 small">
-                                    <i className="fas fa-star text-warning" />
-                                </li>
+                                                                <li className="list-inline-item me-0 small">
+                                                                    <i className="fas fa-star text-warning" />
+                                                                </li>
 
-                                <li className="list-inline-item me-0 small">
-                                    <i className="fas fa-star text-warning" />
-                                </li>
+                                                                <li className="list-inline-item me-0 small">
+                                                                    <i className="fas fa-star text-warning" />
+                                                                </li>
 
-                                <li className="list-inline-item me-0 small">
-                                    <i className="far fa-star text-warning" />
-                                </li>
+                                                                <li className="list-inline-item me-0 small">
+                                                                    <i className="far fa-star text-warning" />
+                                                                </li>
 
-                                <li className="list-inline-item ms-2 h6 fw-light mb-0">
-                                    4.0/5.0
-                                </li>
+                                                                <li className="list-inline-item ms-2 h6 fw-light mb-0">
+                                                                    4.0/5.0
+                                                                </li>
 
-                            </ul>
+                                                            </ul>
 
-                        </div>
+                                                        </div>
 
-                        {/* Card footer */}
-                        <div className="card-footer pt-0 pb-3">
+                                                        {/* Card footer */}
+                                                        <div className="card-footer pt-0 pb-3">
 
-                            <hr />
+                                                            <hr />
 
-                            <div className="d-flex justify-content-between">
+                                                            <div className="d-flex justify-content-between">
 
-                                <span className="h6 fw-light mb-0">
-                                    <i className="far fa-clock text-danger me-2" />
-                                    12h 56m
-                                </span>
+                                                                <span className="h6 fw-light mb-0">
+                                                                    <i className="far fa-clock text-danger me-2" />
+                                                                    12h 56m
+                                                                </span>
 
-                                <span className="h6 fw-light mb-0">
-                                    <i className="fas fa-table text-orange me-2" />
-                                    15 lectures
-                                </span>
+                                                                <span className="h6 fw-light mb-0">
+                                                                    <i className="fas fa-table text-orange me-2" />
+                                                                    15 lectures
+                                                                </span>
 
-                            </div>
+                                                            </div>
 
-                        </div>
+                                                        </div>
 
-                    </div>
-                </Link>
-            </div>
-        );
-    })
-}
+                                                    </div>
+                                                </NavLink>
+                                            </div>
+                                        );
+                                    })
+                                }
 
                                 {/* Card item END */}
                                 {/* Card item START */}
@@ -230,20 +280,30 @@ Page content START */}
                                 {/* Card item END */}
                             </div>
                             {/* Course Grid END */}
+
+
+
+
+
                             {/* Pagination START */}
-                            <div className="col-12">
-                                <nav className="mt-4 d-flex justify-content-center" aria-label="navigation">
-                                    <ul className="pagination pagination-primary-soft rounded mb-0">
-                                        <li className="page-item mb-0"><a className="page-link" href="#" tabIndex={-1}><i className="fas fa-angle-double-left" /></a></li>
-                                        <li className="page-item mb-0"><a className="page-link" href="#">1</a></li>
-                                        <li className="page-item mb-0 active"><a className="page-link" href="#">2</a></li>
-                                        <li className="page-item mb-0"><a className="page-link" href="#">..</a></li>
-                                        <li className="page-item mb-0"><a className="page-link" href="#">6</a></li>
-                                        <li className="page-item mb-0"><a className="page-link" href="#"><i className="fas fa-angle-double-right" /></a></li>
-                                    </ul>
-                                </nav>
-                            </div>
+                            <Pagination className='mt-4 '>
+
+                                <Pagination.Prev onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} />
+                                {
+                                    Array.from({ length: page }, (_, i) =>
+
+                                        <Pagination.Item onClick={() => setCurrentPage(i + 1)} active={currentPage == i + 1}>{i + 1}</Pagination.Item>)
+                                }
+
+                                <Pagination.Next onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === page} />
+
+                            </Pagination>
                             {/* Pagination END */}
+
+
+
+
+
                         </div>
                         {/* Main content END */}
                     </div>{/* Row END */}
