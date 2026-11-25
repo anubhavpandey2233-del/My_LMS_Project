@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../context/reducer/ThemeContext';
 
 function Wishlist(props) {
+
+     const theme = useContext(ThemeContext)
+            console.log(theme);
+
     return (
         <main>
             {/* =======================
@@ -64,7 +69,7 @@ Page content START */}
                                     </ul>
                                 </div>
                                 {/* Card footer */}
-                                <div className="card-footer pt-0 pb-3">
+                             <div className={theme.theme==='dark'?`bodyBG card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                     <hr />
                                     <div className="d-flex justify-content-between ">
                                         <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />9h 56m</span>
@@ -99,7 +104,7 @@ Page content START */}
                                     </ul>
                                 </div>
                                 {/* Card footer */}
-                                <div className="card-footer pt-0 pb-3">
+                               <div className={theme.theme==='dark'?`bodyBG card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                     <hr />
                                     <div className="d-flex justify-content-between">
                                         <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />18h 56m</span>
@@ -111,7 +116,7 @@ Page content START */}
                         {/* Card item END */}
                         {/* Card item START */}
                         <div className="col-sm-6 col-lg-4 col-xl-3">
-                            <div className="card shadow h-100">
+                             <div className={theme.theme==='dark'?`bodyBG card shadow h-100`:"card shadow h-100"}>
                                 {/* Image */}
                                 <img src="assets/images/courses/4by3/04.jpg" className="card-img-top" alt="course image" />
                                 <div className="card-body pb-0">
@@ -134,7 +139,7 @@ Page content START */}
                                     </ul>
                                 </div>
                                 {/* Card footer */}
-                                <div className="card-footer pt-0 pb-3">
+                                <div className={theme.theme==='dark'?`bodyBG card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                     <hr />
                                     <div className="d-flex justify-content-between mt-2">
                                         <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />6h 56m</span>
@@ -146,7 +151,7 @@ Page content START */}
                         {/* Card item END */}
                         {/* Card item START */}
                         <div className="col-sm-6 col-lg-4 col-xl-3">
-                            <div className="card shadow h-100">
+                          <div className={theme.theme==='dark'?`bodyBG card shadow h-100`:"card shadow h-100"}>
                                 {/* Image */}
                                 <img src="assets/images/courses/4by3/11.jpg" className="card-img-top" alt="course image" />
                                 <div className="card-body pb-0">
@@ -169,7 +174,7 @@ Page content START */}
                                     </ul>
                                 </div>
                                 {/* Card footer */}
-                                <div className="card-footer pt-0 pb-3">
+                                <div className={theme.theme==='dark'?`bodyBG card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
                                     <hr />
                                     <div className="d-flex justify-content-between">
                                         <span className="h6 fw-light mb-0"><i className="far fa-clock text-danger me-2" />15h 30m</span>

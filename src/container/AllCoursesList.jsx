@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, useParams } from 'react-router';
 import { fetchCourses } from '../redux/slice/course.slice';
 import { IMAGE_URL } from '../utills/url';
 import Pagination from 'react-bootstrap/Pagination';
 import { fetchCategory } from '../redux/slice/category.slice';
+import { ThemeContext } from '../context/reducer/ThemeContext';
 
 function AllCoursesList(props) {
 
     const [currentPage, setCurrentPage] = useState(1)
     const [search, setSearch] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedLevel, setSelectedLevel] = useState('');
+    const [selectedLanguage, setSelectedLanguage] = useState('');
 
 
     const courseData = useSelector(state => state.course)
@@ -20,7 +24,10 @@ function AllCoursesList(props) {
 
     const fCat = categoryData?.category?.filter((v) => v.parent_category_id == null)
 
+    console.log(fCat);
 
+     const theme = useContext(ThemeContext)
+        console.log(theme);
 
     const { id } = useParams();
 
@@ -39,6 +46,31 @@ function AllCoursesList(props) {
 
     let finalData = id ? fData : courseData?.course
 
+    const filterData = finalData?.filter((v) => {
+        const searchMatch =
+            v.name?.toLowerCase().includes(search.toLowerCase()) ||
+            v.description?.toLowerCase().includes(search.toLowerCase());
+
+        const categoryMatch =
+            !selectedCategory ||
+            String(v.category_id) === String(selectedCategory);
+
+        const levelMatch =
+            !selectedLevel ||
+            v.level === selectedLevel;
+
+        const languageMatch =
+            !selectedLanguage ||
+            v.language === selectedLanguage;
+
+        return (
+            searchMatch &&
+            categoryMatch &&
+            levelMatch &&
+            languageMatch
+        )
+    })
+
 
     let perPage = 4;
     let page = Math.ceil(finalData.length / perPage) //0
@@ -51,28 +83,18 @@ function AllCoursesList(props) {
         console.log(startIndex, endIndex);
 
 
-        let x = finalData.slice(startIndex, endIndex + 1)
+        let x = filterData.slice(startIndex, endIndex + 1)
         console.log(x);
 
         return x;
     }
 
+
+
     let paginationPage = pageData();
 
 
-    const searchData = () => {
 
-        console.log("search", search);
-
-
-        let searchData = finalData.filter((v) => v.name.toLowerCase().includes(search.toLowerCase()) ||
-            v.description.toLowerCase().includes(search.toLowerCase()) ||
-            v.fees.toString().includes(search)
-
-        )
-
-        return searchData
-    }
 
 
     return (
@@ -84,13 +106,13 @@ Page Banner START */}
                     <div className="row">
                         <div className="col-12">
                             <div className="bg-light p-4 text-center rounded-3">
-                                <h1 className="m-0">Course Grid Minimal</h1>
+                                <h1 className="m-0">Courses</h1>
                                 {/* Breadcrumb */}
                                 <div className="d-flex justify-content-center">
                                     <nav aria-label="breadcrumb">
                                         <ol className="breadcrumb breadcrumb-dots mb-0">
                                             <li className="breadcrumb-item"><a href="#">Home</a></li>
-                                            <li className="breadcrumb-item active" aria-current="page">Course minimal</li>
+                                            <li className="breadcrumb-item active" aria-current="page">Courses</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -117,7 +139,10 @@ Page content START */}
                                 <div className="row g-3">
                                     {/* Select items */}
                                     <div className="col-sm-6 col-md-3 pb-2 pb-md-0">
-                                        <select className="form-select form-select-sm js-choice" aria-label=".form-select-sm example">
+                                        <select className="form-select form-select-sm js-choice" aria-label=".form-select-sm example"
+                                            onChange={(e) => {
+                                                setSelectedCategory(e.target.value);
+                                            }}>
                                             <option value>Categories</option>
                                             {
                                                 fCat?.map((v) => (
@@ -137,24 +162,29 @@ Page content START */}
                                     </div>
                                     {/* Search item */}
                                     <div className="col-sm-6 col-md-3 pb-2 pb-md-0">
-                                        <select className="form-select form-select-sm js-choice" aria-label=".form-select-sm example">
+                                        
+                                        <select className="form-select form-select-sm js-choice" aria-label=".form-select-sm example" onChange={(e) => {
+                                            setSelectedLevel(e.target.value);
+                                        }}>
                                             <option value>Skill level</option>
-                                            <option>All levels</option>
-                                            <option>Beginner</option>
-                                            <option>Intermediate</option>
-                                            <option>Advanced</option>
+                                            {
+                                                courseData?.course?.map((v) => (
+                                                    <option>{v.level}</option>
+                                                ))
+                                            }
                                         </select>
                                     </div>
                                     {/* Search item */}
                                     <div className="col-sm-6 col-md-3 pb-2 pb-md-0">
-                                        <select className="form-select form-select-sm js-choice" aria-label=".form-select-sm example">
+                                        <select className="form-select form-select-sm js-choice" aria-label=".form-select-sm example" onChange={(e) => {
+                                            setSelectedLanguage(e.target.value);
+                                        }}>
                                             <option value>Language</option>
-                                            <option>English</option>
-                                            <option>Francas</option>
-                                            <option>Russian</option>
-                                            <option>Hindi</option>
-                                            <option>Bengali</option>
-                                            <option>Spanish</option>
+                                            {
+                                                courseData?.course?.map((v) => (
+                                                    <option>{v.language}</option>
+                                                ))
+                                            }
                                         </select>
                                     </div>
                                 </div> {/* Row END */}
@@ -185,7 +215,7 @@ Page content START */}
                                                     to={`/course-detail/${v._id}`}
                                                     className="text-decoration-none text-dark"
                                                 >
-                                                    <div className="card shadow h-100">
+                                                    <div className={theme.theme==='dark'?`bodyBG card shadow h-100`:"card shadow h-100"}>
 
                                                         {/* Image */}
                                                         <img
@@ -216,7 +246,7 @@ Page content START */}
                                                             </h5>
 
                                                             {/* Rating */}
-                                                            <ul className="list-inline mb-0">
+                                                            <ul className={theme.theme==='dark'?`bodyBG list-inline mb-0`:"list-inline mb-0"}>
 
                                                                 <li className="list-inline-item me-0 small">
                                                                     <i className="fas fa-star text-warning" />
@@ -247,7 +277,7 @@ Page content START */}
                                                         </div>
 
                                                         {/* Card footer */}
-                                                        <div className="card-footer pt-0 pb-3">
+                                                        <div className={theme.theme==='dark'?`bodyBG card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
 
                                                             <hr />
 

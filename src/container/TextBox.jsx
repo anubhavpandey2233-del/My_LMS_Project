@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import { useField } from 'formik';
 import { MenuItem } from '@mui/material';
 
-function TextBox({ label, type, categoryData = [], selectLevel = [], ...props }) {
+function TextBox({ label, type, categoryData = [], selectLevel = [],selectLanguage=[], ...props }) {
     const [field, meta] = useField(props);
     console.log(categoryData)
     return (
@@ -32,6 +32,13 @@ function TextBox({ label, type, categoryData = [], selectLevel = [], ...props })
                     selectLevel.map((v1, i) => (
                         <MenuItem key={v1.value} value={v1.value}>
                             {v1.label}
+                        </MenuItem>
+                    ))
+                    },
+                      {
+                    selectLanguage.map((v2, i) => (
+                        <MenuItem key={v2.value} value={v2.value}>
+                            {v2.label}
                         </MenuItem>
                     ))
                     }

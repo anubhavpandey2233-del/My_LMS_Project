@@ -46,6 +46,8 @@ export const addCourse = createAsyncThunk(
         fd.append("name", data.name);
         fd.append("description", data.description);
         fd.append("fees", data.fees);
+        fd.append("level", data.level);
+        fd.append("language", data.language);
 
         for (let i = 0; i < data.course_img?.length; i++) {
             fd.append("course_img", data.course_img[i]);
@@ -88,6 +90,8 @@ export const updateCourse = createAsyncThunk(
             fd.append("name", data.name);
             fd.append("description", data.description);
             fd.append("fees", data.fees);
+            fd.append("level", data.level);
+            fd.append("language", data.language);
 
             for (let i = 0; i < data.course_img?.length; i++) {
                 fd.append("course_img", data.course_img[i]);

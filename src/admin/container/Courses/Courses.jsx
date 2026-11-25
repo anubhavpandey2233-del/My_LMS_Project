@@ -176,6 +176,15 @@ function Courses(props) {
 
     ]
 
+     const selectLanguage = [
+        { value: '', label: 'Select Language' },
+        { value: 'English', label: 'English' },
+        { value: 'Hindi', label: 'Hindi' },
+         { value: 'Gujarati', label: 'Gujarati' }
+
+    ]
+
+
     return (
         <div>
             <Formik
@@ -185,7 +194,7 @@ function Courses(props) {
                     description: "",
                     fees: "",
                     level:"",
-                    language:"",
+                    language    :"",
                     course_img: [],
                 }}
                 validationSchema={yupSchema}
@@ -233,7 +242,7 @@ function Courses(props) {
                                 <TextBox name="description" type="text" label="description" />
                                 <TextBox name="fees" type="text" label="Fees" />
                                 <TextBox name="level" type="text" selectLevel={selectLevel}  select/>
-                                <TextBox name="language" type="text" label="Language"  select/>
+                                <TextBox name="language" type="text" selectLanguage={selectLanguage}  select/>
                                 <FileUpload name="course_img" type="file" multiple={true} />
                                 <button type="submit">Submit</button>
                             </Form>k
