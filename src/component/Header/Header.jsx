@@ -35,7 +35,7 @@ function Header(props) {
             <nav className="navbar navbar-expand-xl">
                 <div className="container-fluid px-3 px-xl-5">
                     {/* Logo START */}
-                    <a className="navbar-brand" href="index.html">
+                    <NavLink to={`/`} className="navbar-brand" >
                         {
                             theme.theme === 'dark' ?
                                 <img className="light-mode-item navbar-brand-item" src="assets/images/logo_white.png" alt="logo" />
@@ -44,7 +44,7 @@ function Header(props) {
                                 <img className="light-mode-item navbar-brand-item" src="assets/images/logo.svg" alt="logo" />
                         }
 
-                    </a>
+                    </NavLink>
                     {/* Logo END */}
                     {/* Responsive navbar toggler */}
                     <button className="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -636,7 +636,7 @@ function Header(props) {
                         <a className="avatar avatar-sm p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
                             <img className="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="avatar" />
                         </a>
-                        <ul className="dropdown-menu dropdown-animation dropdown-menu-end shadow pt-3" aria-labelledby="profileDropdown">
+                        <ul className={theme.theme=='dark'?`bodyBG dropdown-menu dropdown-animation dropdown-menu-end shadow pt-3`:"dropdown-menu dropdown-animation dropdown-menu-end shadow pt-3"} aria-labelledby="profileDropdown">
                             {/* Profile info */}
                             <li className="px-3">
                                 <div className="d-flex align-items-center">

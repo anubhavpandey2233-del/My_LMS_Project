@@ -6248,9 +6248,9 @@ fieldset:disabled .btn {
   width: 100%;
   padding: 1rem 1.25rem;
   font-size: 0.9375rem;
-  color: #212529;
+  /* color: #212529; */
   text-align: left;
-  background-color: #fff;
+  /* background-color: #fff; */
   border: 0;
   border-radius: 0;
   overflow-anchor: none;
@@ -18050,7 +18050,7 @@ fieldset:disabled .btn {
 
 .accordion.accordion-bg-light .accordion-button {
   background-color: rgba(116, 117, 121, 0.1) !important;
-  color: #24292d !important;
+  /* color: #24292d !important; */
 }
 
 .accordion.accordion-bg-light .accordion-button:after {
@@ -22329,6 +22329,12 @@ html[dir=rtl] .choices__input {
   color: white;
 }
 
+.bodyAccordian {
+  background-color:gray !important;
+  color: white !important;
+  
+}
+
 .dark h1,
 .dark h2,
 .dark h3,
@@ -22341,7 +22347,8 @@ html[dir=rtl] .choices__input {
 
 .bodyBG {
   background-color: #221E35;
-  color: white;
+  color: white !important;
+  
 }
 
 .dark footer .nav-link,
@@ -22350,6 +22357,10 @@ html[dir=rtl] .choices__input {
 }
 
 .spanText {
+  color: white;
+}
+
+.buttonText {
   color: white;
 }
 
@@ -22385,9 +22396,20 @@ html[dir=rtl] .choices__input {
   padding: 10px !important;
 }
 
+#course .swiper-button-prev,
+#course .swiper-button-next {
+  color: White !important;
+  background-color: #D4D4D4 !important;
+  border-radius: 50% !important;
+  padding: 10px !important;
+}
 
 #trending .swiper-button-prev svg,
 #trending .swiper-button-next svg{
   width: 70%  !important;
   height: 70% !important;
+}
+.swiper-pagination .swiper-pagination-clickable .swiper-pagination-bullets .swiper-pagination-horizontal,
+.swiper-pagination-bullet{
+  display: none !important;
 }

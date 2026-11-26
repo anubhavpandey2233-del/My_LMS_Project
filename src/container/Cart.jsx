@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../context/reducer/ThemeContext';
 
 function Cart(props) {
+
+    const theme=useContext(ThemeContext)
+        console.log(theme);
+
     return (
         <main>
             {/* =======================
@@ -35,7 +40,7 @@ Page content START */}
                     <div className="row g-4 g-sm-5">
                         {/* Main content START */}
                         <div className="col-lg-8 mb-4 mb-sm-0">
-                            <div className="card card-body p-4 shadow">
+                            <div className={theme.theme=='dark'?`bodyBG card card-body p-4 shadow`:"card card-body p-4 shadow"}>
                                 {/* Alert */}
                                 <div className="alert alert-danger alert-dismissible d-flex justify-content-between align-items-center fade show py-3 pe-2" role="alert">
                                     <div>
@@ -122,7 +127,7 @@ Page content START */}
                         {/* Right sidebar START */}
                         <div className="col-lg-4">
                             {/* Card total START */}
-                            <div className="card card-body p-4 shadow">
+                            <div className={theme.theme=='dark'?`bodyBG card card-body p-4 shadow`:"card card-body p-4 shadow"}>
                                 {/* Title */}
                                 <h4 className="mb-3">Cart Total</h4>
                                 {/* Price and detail */}

@@ -45,7 +45,7 @@ Page content START */}
                     <div className="row g-4">
                         {/* Card item START */}
                         <div className="col-sm-6 col-lg-4 col-xl-3">
-                            <div className="card shadow">
+                             <div className={theme.theme==='dark'?`bodyBG card shadow h-100`:"card shadow h-100"}>
                                 {/* Image */}
                                 <img src="assets/images/courses/4by3/02.jpg" className="card-img-top" alt="course image" />
                                 <div className="card-body pb-0">
@@ -81,7 +81,7 @@ Page content START */}
                         {/* Card item END */}
                         {/* Card item START */}
                         <div className="col-sm-6 col-lg-4 col-xl-3">
-                            <div className="card shadow">
+                            <div className={theme.theme==='dark'?`bodyBG card shadow h-100`:"card shadow h-100"}>
                                 {/* Image */}
                                 <img src="assets/images/courses/4by3/07.jpg" className="card-img-top" alt="course image" />
                                 <div className="card-body pb-0">

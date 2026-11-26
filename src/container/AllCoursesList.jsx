@@ -146,20 +146,15 @@ Page content START */}
                                             <option value>Categories</option>
                                             {
                                                 fCat?.map((v) => (
-                                                    <option>{v.name}</option>
+                                                   <option key={v._id} value={v._id}>
+    {v.name}
+</option>
                                                 ))
                                             }
                                         </select>
                                     </div>
                                     {/* Search item */}
-                                    <div className="col-sm-6 col-md-3 pb-2 pb-md-0">
-                                        <select className="form-select form-select-sm js-choice" aria-label=".form-select-sm example">
-                                            <option value>Price level</option>
-                                            <option>All</option>
-                                            <option>Free</option>
-                                            <option>Paid</option>
-                                        </select>
-                                    </div>
+                                  
                                     {/* Search item */}
                                     <div className="col-sm-6 col-md-3 pb-2 pb-md-0">
                                         
@@ -316,7 +311,7 @@ Page content START */}
 
 
                             {/* Pagination START */}
-                            <Pagination className='mt-4 '>
+                            <Pagination className='mt-4 justify-content-center'>
 
                                 <Pagination.Prev onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} />
                                 {

@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../context/reducer/ThemeContext';
 
 function Faqs(props) {
+
+    const theme=useContext(ThemeContext)
+            console.log(theme);
     return (
         <main>
             {/* =======================
@@ -40,7 +44,7 @@ Page Banner START */}
                                 <p className="mb-0">Choose a category to quickly find the help you need</p>
                                 {/* Category item */}
                                 <div className="col-sm-6 col-md-3">
-                                    <div className="card card-body card-border-hover p-0">
+                                    <div className={theme.theme=='dark'?`bodyBG card card-body card-border-hover p-0`:"card card-body card-border-hover p-0"}>
                                         <a href="#" className="p-3">
                                             <h2><i className="fas fa-street-view transition-base" /></h2>
                                             <h6 className="mb-0">User Guide</h6>
@@ -49,7 +53,7 @@ Page Banner START */}
                                 </div>
                                 {/* Category item */}
                                 <div className="col-sm-6 col-md-3">
-                                    <div className="card card-body card-border-hover p-0">
+                                   <div className={theme.theme=='dark'?`bodyBG card card-body card-border-hover p-0`:"card card-body card-border-hover p-0"}>
                                         <a href="#" className="p-3">
                                             <h2><i className="fas fa-hands-helping transition-base" /></h2>
                                             <h6 className="mb-0">Assistance</h6>
@@ -58,7 +62,7 @@ Page Banner START */}
                                 </div>
                                 {/* Category item */}
                                 <div className="col-sm-6 col-md-3">
-                                    <div className="card card-body card-border-hover p-0">
+                                   <div className={theme.theme=='dark'?`bodyBG card card-body card-border-hover p-0`:"card card-body card-border-hover p-0"}>
                                         <a href="#" className="p-3">
                                             <h2><i className="fas fa-exclamation-circle transition-base" /></h2>
                                             <h6 className="mb-0">General guide</h6>
@@ -67,7 +71,7 @@ Page Banner START */}
                                 </div>
                                 {/* Category item */}
                                 <div className="col-sm-6 col-md-3">
-                                    <div className="card card-body card-border-hover p-0">
+                                   <div className={theme.theme=='dark'?`bodyBG card card-body card-border-hover p-0`:"card card-body card-border-hover p-0"}>
                                         <a href="#" className="p-3">
                                             <h2><i className="fas fa-flag transition-base" /></h2>
                                             <h6 className="mb-0">Getting started</h6>
@@ -94,9 +98,9 @@ Page content START */}
                             {/* FAQ START */}
                             <div className="accordion accordion-icon accordion-bg-light" id="accordionExample2">
                                 {/* Item */}
-                                <div className="accordion-item mb-3">
-                                    <h6 className="accordion-header font-base" id="heading-1">
-                                        <button className="accordion-button fw-bold rounded d-inline-block collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
+                                <div className={theme.theme=='dark'?`bodyBG accordion-item mb-3`:"accordion-item mb-3"}>
+                                    <h6 className={theme.theme=='dark'?`bodyBG accordion-header font-base`:"accordion-header font-base"} id="heading-1">
+                                        <button className={theme.theme=='dark'?`buttonText accordion-button fw-bold rounded d-inline-block collapsed`:"accordion-button fw-bold rounded d-inline-block collapsed"} type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
                                             How can we help?
                                         </button>
                                     </h6>
@@ -108,9 +112,9 @@ Page content START */}
                                     </div>
                                 </div>
                                 {/* Item */}
-                                <div className="accordion-item mb-3">
-                                    <h6 className="accordion-header font-base" id="heading-2">
-                                        <button className="accordion-button fw-bold rounded d-inline-block collapsed d-block pe-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
+                                <div className={theme.theme=='dark'?`bodyBG accordion-item mb-3`:"accordion-item mb-3"}>
+                                    <h6 className={theme.theme=='dark'?`bodyBG accordion-header font-base`:"accordion-header font-base"} id="heading-1">
+                                        <button className={theme.theme=='dark'?`buttonText accordion-button fw-bold rounded d-inline-block collapsed d-block pe-5`:"accordion-button fw-bold rounded d-inline-block collapsed d-block pe-5"} type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
                                             How to edit my Profile?
                                         </button>
                                     </h6>
@@ -122,9 +126,9 @@ Page content START */}
                                     </div>
                                 </div>
                                 {/* Item */}
-                                <div className="accordion-item mb-3">
-                                    <h6 className="accordion-header font-base" id="heading-3">
-                                        <button className="accordion-button fw-bold collapsed rounded d-block pe-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
+                                <div className={theme.theme=='dark'?`bodyBG accordion-item mb-3`:"accordion-item mb-3"}>
+                                    <h6 className={theme.theme=='dark'?`bodyBG accordion-header font-base`:"accordion-header font-base"} id="heading-1">
+                                        <button className={theme.theme=='dark'?`buttonText accordion-button fw-bold collapsed rounded d-block pe-5`:"accordion-button fw-bold collapsed rounded d-block pe-5"} type="button" data-bs-toggle="collapse" data-bs-target="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
                                             How much should I offer the sellers?
                                         </button>
                                     </h6>
@@ -136,9 +140,9 @@ Page content START */}
                                     </div>
                                 </div>
                                 {/* Item */}
-                                <div className="accordion-item mb-3">
-                                    <h6 className="accordion-header font-base" id="heading-4">
-                                        <button className="accordion-button fw-bold collapsed rounded d-block pe-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-4" aria-expanded="false" aria-controls="collapse-4">
+                               <div className={theme.theme=='dark'?`bodyBG accordion-item mb-3`:"accordion-item mb-3"}>
+                                    <h6 className={theme.theme=='dark'?`bodyBG accordion-header font-base`:"accordion-header font-base"} id="heading-1">
+                                        <button className={theme.theme=='dark'?`buttonText accordion-button fw-bold collapsed rounded d-block pe-5`:"accordion-button fw-bold collapsed rounded d-block pe-5"} type="button" data-bs-toggle="collapse" data-bs-target="#collapse-4" aria-expanded="false" aria-controls="collapse-4">
                                             Installation Guide
                                         </button>
                                     </h6>
@@ -151,9 +155,9 @@ Page content START */}
                                     </div>
                                 </div>
                                 {/* Item */}
-                                <div className="accordion-item mb-3">
-                                    <h6 className="accordion-header font-base" id="heading-5">
-                                        <button className="accordion-button fw-bold collapsed rounded d-block pe-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-5" aria-expanded="false" aria-controls="collapse-5">
+                                <div className={theme.theme=='dark'?`bodyBG accordion-item mb-3`:"accordion-item mb-3"}>
+                                     <h6 className={theme.theme=='dark'?`bodyBG accordion-header font-base`:"accordion-header font-base"} id="heading-1">
+                                        <button className={theme.theme=='dark'?`buttonText accordion-button fw-bold collapsed rounded d-block pe-5`:"accordion-button fw-bold collapsed rounded d-block pe-5"} type="button" data-bs-toggle="collapse" data-bs-target="#collapse-5" aria-expanded="false" aria-controls="collapse-5">
                                             Additional Options and Services
                                         </button>
                                     </h6>
@@ -165,9 +169,9 @@ Page content START */}
                                     </div>
                                 </div>
                                 {/* Item */}
-                                <div className="accordion-item">
-                                    <h6 className="accordion-header font-base" id="heading-6">
-                                        <button className="accordion-button fw-bold collapsed rounded d-block pe-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-6" aria-expanded="false" aria-controls="collapse-6">
+                              <div className={theme.theme=='dark'?`bodyBG accordion-item`:"accordion-item"}>
+                                   <h6 className={theme.theme=='dark'?`bodyBG accordion-header font-base`:"accordion-header font-base"} id="heading-6">
+                                        <button className={theme.theme=='dark'?`buttonText accordion-button fw-bold collapsed rounded d-block pe-5`:"accordion-button fw-bold collapsed rounded d-block pe-5"} type="button" data-bs-toggle="collapse" data-bs-target="#collapse-6" aria-expanded="false" aria-controls="collapse-6">
                                             What's are the difference between a college and a university?
                                         </button>
                                     </h6>
@@ -203,7 +207,7 @@ Page content START */}
                                     </div>
                                     {/* Category END */}
                                     {/* Related Topic START */}
-                                    <div className="card card-body shadow p-4 mb-4">
+                                    <div className={theme.theme=='dark'?`bodyBG card card-body shadow p-4 mb-4`:"card card-body shadow p-4 mb-4"}>
                                         {/* Title */}
                                         <h4 className="mb-3">Related Topic</h4>
                                         {/* Item */}
@@ -266,7 +270,7 @@ Page content START */}
                                 </div>
                                 <div className="col-12 col-sm-6 col-lg-12">
                                     {/* Tags START */}
-                                    <div className="card card-body shadow p-4">
+                                    <div  className={theme.theme=='dark'?`bodyBG card card-body shadow p-4 mb-4`:"card card-body shadow p-4 mb-4"}>
                                         <h4 className="mb-3">Popular Tags</h4>
                                         <ul className="list-inline mb-0">
                                             <li className="list-inline-item"><a className="btn btn-outline-light btn-sm" href="#">blog</a></li>

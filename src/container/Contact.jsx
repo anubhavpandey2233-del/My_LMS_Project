@@ -1,6 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { ThemeContext } from '../context/reducer/ThemeContext';
 
 function Contact(props) {
+
+    const theme=useContext(ThemeContext)
+        console.log(theme);
 
     return (
         <main>
@@ -40,7 +44,7 @@ Page Banner START */}
                         </div>
                         {/* Box item */}
                         <div className="col-lg-4 mt-lg-0">
-                            <div className="card card-body shadow py-5 text-center">
+                            <div className={theme.theme=='dark'?`bodyBG card card-body shadow py-5 text-center`:"card card-body shadow py-5 text-center"}>
                                 {/* Title */}
                                 <h5 className="mb-3">Contact Address</h5>
                                 <ul className="list-inline mb-0">
@@ -61,7 +65,7 @@ Page Banner START */}
                         </div>
                         {/* Box item */}
                         <div className="col-lg-4 mt-lg-0">
-                            <div className="card card-body shadow py-5 text-center">
+                             <div className={theme.theme=='dark'?`bodyBG card card-body shadow py-5 text-center`:"card card-body shadow py-5 text-center"}>
                                 {/* Title */}
                                 <h5 className="mb-3">Main Office Address</h5>
                                 <ul className="list-inline mb-0">

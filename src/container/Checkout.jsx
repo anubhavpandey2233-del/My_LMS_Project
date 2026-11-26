@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../context/reducer/ThemeContext';
 
 function Checkout(props) {
+
+    const theme=useContext(ThemeContext)
+    console.log(theme);
+    
+
     return (
         <main>
             {/* =======================
@@ -44,7 +50,7 @@ Page content START */}
                                 <button type="button" className="btn btn-link mb-0 text-end" data-bs-dismiss="alert" aria-label="Close"><i className="bi bi-x-lg text-dark" /></button>
                             </div>
                             {/* Personal info START */}
-                            <div className="card card-body shadow p-4">
+                            <div className={theme.theme=='dark'?`bodyBG card card-body shadow p-4`:"card card-body shadow p-4"}>
                                 {/* Title */}
                                 <h5 className="mb-0">Personal Details</h5>
                                 {/* Form START */}
@@ -128,9 +134,9 @@ Page content START */}
                                     {/* Title */}
                                     <h5 className>Payment method</h5>
                                     <div className="col-12">
-                                        <div className="accordion accordion-circle" id="accordioncircle">
+                                        <div className={theme.theme==='dark'?`bodyBG accordion accordion-circle`:"accordion accordion-circle"} id="accordioncircle">
                                             {/* Credit or debit card START */}
-                                            <div className="accordion-item mb-3">
+                                            <div className={theme.theme==='dark'?`bodyBG accordion-item mb-3`:"accordion-item mb-3"}>
                                                 <h6 className="accordion-header" id="heading-1">
                                                     <button className="accordion-button rounded collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
                                                         Credit or Debit Card
@@ -174,7 +180,7 @@ Page content START */}
                                             </div>
                                             {/* Credit or debit card END */}
                                             {/* Net banking START */}
-                                            <div className="accordion-item mb-3">
+                                            <div className={theme.theme==='dark'?`bodyBG accordion-item mb-3`:"accordion-item mb-3"}>
                                                 <h6 className="accordion-header" id="heading-2">
                                                     <button className="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
                                                         Pay with Net Banking
@@ -215,7 +221,7 @@ Page content START */}
                             <div className="row mb-0">
                                 <div className="col-md-6 col-xl-12">
                                     {/* Order summary START */}
-                                    <div className="card card-body shadow p-4 mb-4">
+                                    <div className={theme.theme=='dark'?`bodyBG card card-body shadow p-4 mb-4`:"card card-body shadow p-4 mb-4"}>
                                         {/* Title */}
                                         <h4 className="mb-4">Order Summary</h4>
                                         {/* Coupon START */}
