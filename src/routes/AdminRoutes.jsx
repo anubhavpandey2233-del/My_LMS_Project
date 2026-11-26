@@ -5,6 +5,7 @@ import Category from '../admin/container/Category/Category';
 import Section from '../admin/container/Section/Section';
 import Dashboard from '../component/Dashboard/Dashboard';
 import Courses from '../admin/container/Courses/Courses';
+import Content from '../admin/container/Content/Content';
 
 function AdminRoutes(props) {
     return (
@@ -14,6 +15,7 @@ function AdminRoutes(props) {
                 <Route path='/category' element={<Category />} />
                 <Route path='/courses' element={<Courses />} />
                 <Route path='/section' element={<Section />} />
+                <Route path='/content' element={<Content/>}/>
             </Routes>
         </Layout>
     );

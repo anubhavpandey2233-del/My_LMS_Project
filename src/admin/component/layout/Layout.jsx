@@ -22,6 +22,7 @@ import CastForEducationIcon from '@mui/icons-material/CastForEducation';
 import CategoryIcon from '@mui/icons-material/Category';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import { NavLink } from 'react-router';
+import DifferenceIcon from '@mui/icons-material/Difference';
 
 const drawerWidth = 240;
 
@@ -120,7 +121,8 @@ export default function Layout({ children }) {
 
     { text: 'Category', icons: <CategoryIcon />, to: '/admin/category' },
     { text: 'Courses', icons: <CastForEducationIcon />, to: '/admin/courses' },
-    { text: 'Section', icons: <AccountBalanceWalletIcon />, to: '/admin/section' }
+    { text: 'Section', icons: <AccountBalanceWalletIcon />, to: '/admin/section' },
+    { text: 'Content', icons: <DifferenceIcon />, to: '/admin/content' }
 
   ]
 

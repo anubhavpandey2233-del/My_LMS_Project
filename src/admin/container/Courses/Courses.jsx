@@ -18,15 +18,17 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { fetchCategory } from '../../../redux/slice/category.slice';
 import { DataGrid } from '@mui/x-data-grid';
+import { useAddCourseMutation, useDeleteCourseMutation, useEditCourseMutation, useGetAllCourseQuery } from '../../../redux/api/course.api';
 
 
 function Courses(props) {
 
     const [search, setSearch] = useState()
     const [edit, setEdit] = useState(null)
+    const [rtkUpdate, setRtkUpdate] = useState({})
 
-    const courseData = useSelector((state) => state.course)
-    console.log(courseData);
+    // const courseData = useSelector((state) => state.course)
+    // console.log(courseData);
 
     const categoryData = useSelector((state) => state.category)
     console.log(categoryData);
@@ -35,13 +37,28 @@ function Courses(props) {
     const dispatch = useDispatch()
 
 
+    // -------------------------------------------- RTK Query Start-----------------------------------
+    let { data, isError, isLoading } = useGetAllCourseQuery()
+    console.log("RTK Query", data?.data);
+
+    const [addCourseData] = useAddCourseMutation()
+    console.log("addCourseData", addCourseData);
+
+    const [deleteCourseData] = useDeleteCourseMutation()
+    console.log("deleteCourseData", deleteCourseData);
+
+    const [editCourseData] = useEditCourseMutation();
+    console.log("editCourseData", editCourseData);
+
+
+    // --------------------------------------------RTK Query End-----------------------------------
     let yupSchema = object({
         category_id: string(),
         name: string().required("Please enter course name"),
         description: string().required(),
         fees: string().required(),
-        level:string().required(),
-        language:string().required(),
+        level: string().required(),
+        language: string().required(),
 
         course_img: mixed()
             .test("course_img", "Plese select only .png,.jpg,jpeg files", function (val) {
@@ -102,26 +119,26 @@ function Courses(props) {
         }
     }
 
-    const handleEdit = (row, fd) => {
-        console.log(row);
-        console.log(fd);
+    // const handleEdit = (row, fd) => {
+    //     console.log(row);
+    //     console.log(fd);
 
-        let editData = courseData.course.find((v) => v._id === row._id)
-        console.log(editData);
+    //     let editData = courseData.course.find((v) => v._id === row._id)
+    //     console.log(editData);
 
-        fd.setValues(editData)
+    //     fd.setValues(editData)
 
-        setEdit(row)
-    }
+    //     setEdit(row)
+    // }
 
-    console.log(edit);
+   
 
 
     const columns = [
         {
             field: 'category_id', headerName: 'Category', width: 90,
             renderCell: (params) => (
-                categoryData?.category?.find((v) => v?._id === params?.row?.category_id)?.name
+                data?.data?.find((v) => v?._id === params?.row?.category_id)?.name
             )
         },
         {
@@ -147,6 +164,7 @@ function Courses(props) {
             width: 160,
             renderCell: (params) => (
                 <img src={IMAGE_URL + params?.row?.course_img} width={'50px'} height={'50px'} />
+                
             )
         },
         {
@@ -155,10 +173,10 @@ function Courses(props) {
             width: 160,
             renderCell: (params) => (
                 <>
-                    <IconButton aria-label="delete" onClick={() => dispatch(deleteCourse(params?.row))}>
+                    <IconButton aria-label="delete" onClick={() => deleteCourseData(params?.row)}>
                         <DeleteIcon />
                     </IconButton>
-                    <IconButton aria-label="delete" onClick={() => handleEdit(params?.row, fd)}>
+                    <IconButton aria-label="delete" onClick={() => handleEdit(params?.row)}>
                         <EditIcon />
                     </IconButton>
                 </>
@@ -168,35 +186,46 @@ function Courses(props) {
     ];
 
 
-     const selectLevel = [
+    const selectLevel = [
         { value: '', label: 'Select level' },
         { value: 'beginner', label: 'Beginner' },
         { value: 'intermidiate', label: 'Intermidiate' },
-         { value: 'advance', label: 'Advance' }
+        { value: 'advance', label: 'Advance' }
 
     ]
 
-     const selectLanguage = [
+    const selectLanguage = [
         { value: '', label: 'Select Language' },
         { value: 'English', label: 'English' },
         { value: 'Hindi', label: 'Hindi' },
-         { value: 'Gujarati', label: 'Gujarati' }
+        { value: 'Gujarati', label: 'Gujarati' }
 
     ]
+
+     const handleEdit = (data) => (
+
+        setRtkUpdate(data)
+        
+
+    )
+
+    console.log("rtkUpdate", rtkUpdate, Object.keys(rtkUpdate).length==0);
+
 
 
     return (
         <div>
             <Formik
-                initialValues={{
+                initialValues={Object.keys(rtkUpdate).length > 0 ? rtkUpdate : {
                     category_id: "",
                     name: "",
                     description: "",
                     fees: "",
-                    level:"",
-                    language    :"",
+                    level: "",
+                    language: "",
                     course_img: [],
                 }}
+                enableReinitialize={true}
                 validationSchema={yupSchema}
                 onSubmit={(values, { resetForm }) => {
                     // console.log("SUBMIT VALUES:", values);
@@ -206,11 +235,15 @@ function Courses(props) {
                     console.log("ppppppp", values);
 
 
-                    if (edit === null) {
-                        dispatch(addCourse(values));
+                    if (Object.keys(rtkUpdate).length==0) {
+                        // dispatch(addCourse(values));
+                        addCourseData(values)
                     } else {
-                        dispatch(updateCourse(values))
-                        setEdit(null)
+                        // dispatch(updateCourse(values))
+                        // setEdit(null)
+
+                        editCourseData(values)
+                        setRtkUpdate({})
                     }
                     resetForm();
                 }}
@@ -241,11 +274,11 @@ function Courses(props) {
                                 <TextBox name="name" type="text" label="Course" />
                                 <TextBox name="description" type="text" label="description" />
                                 <TextBox name="fees" type="text" label="Fees" />
-                                <TextBox name="level" type="text" selectLevel={selectLevel}  select/>
-                                <TextBox name="language" type="text" selectLanguage={selectLanguage}  select/>
+                                <TextBox name="level" type="text" selectLevel={selectLevel} select />
+                                <TextBox name="language" type="text" selectLanguage={selectLanguage} select />
                                 <FileUpload name="course_img" type="file" multiple={true} />
                                 <button type="submit">Submit</button>
-                            </Form>k
+                            </Form>
 
 
                             {/* <TableContainer component={Paper}>
@@ -303,7 +336,7 @@ function Courses(props) {
 
 
                             <DataGrid
-                                rows={courseData?.course}
+                                rows={data?.data}
                                 columns={columns}
                                 initialState={{
                                     pagination: {
