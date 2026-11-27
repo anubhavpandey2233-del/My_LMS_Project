@@ -6,7 +6,8 @@ export const contentApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
     endpoints: (build) => ({
         getAllContent: build.query({
-            query: () => '/content/getAllContent'
+            query: () => '/content/getAllContent',
+            // providesTags: ['course']
         }),
         addContent: build.mutation({
             query: (data) => {
@@ -28,13 +29,84 @@ export const contentApi = createApi({
                     method: 'POST',
                     body: fd
                 }
-            }
+            },
+            // invalidatesTags:['course']
+
+            async onQueryStarted(data, { dispatch, queryFulfilled }) {
+                const patchResult = dispatch(
+                 
+                    contentApi.util.updateQueryData('getAllContent', undefined, (draft) => {
+
+                        const temp_id = crypto.randomUUID();
+
+                        const updatedData = { ...data, _id: temp_id }
+
+                        draft?.data?.push(updatedData)
+
+                        console.log("data", data);
+
+
+                        // Object.assign(draft, patch)
+                    }),
+                )
+                try {
+                    const { data } = await queryFulfilled
+
+                    contentApi.util.updateQueryData('getAllContent', undefined, (draft) => {
+
+                        const index = draft?.data?.findIndex(v => v._id == temp_id)
+
+
+                        Object.assign(draft?.data[index], data?.data)
+                    })
+                } catch {
+                    patchResult.undo()
+
+                    /**
+                     * Alternatively, on failure you can invalidate the corresponding cache tags
+                     * to trigger a re-fetch:
+                     * dispatch(api.util.invalidateTags(['Post']))
+                     */
+                }
+            },
+
         }),
         deleteContent: build.mutation({
             query: ({ _id }) => ({
                 url: `/content/deleteContent/${_id}`,
                 method: 'DELETE'
-            })
+            }),
+            // invalidatesTags:['course']
+
+            async onQueryStarted({ _id }, { dispatch, queryFulfilled }) {
+
+
+
+                const patchResult = dispatch(
+
+                    contentApi.util.updateQueryData('getAllContent', undefined, (draft) => {
+
+                        const index = draft?.data?.findIndex(v => v._id == _id)
+
+                        draft?.data?.splice(index, 1)
+
+                        // Object.assign(draft, patch)
+                    }),
+                )
+                try {
+                    await queryFulfilled
+
+                } catch {
+                    patchResult.undo()
+
+                    /**
+                     * Alternatively, on failure you can invalidate the corresponding cache tags
+                     * to trigger a re-fetch:
+                     * dispatch(api.util.invalidateTags(['Post']))
+                     */
+                }
+            },
+
         }),
         editContent: build.mutation({
             query: (data) => {
@@ -58,7 +130,8 @@ export const contentApi = createApi({
                 })
 
 
-            }
+            },
+            // invalidatesTags:['course']
 
         })
     })

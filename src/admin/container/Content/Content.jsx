@@ -43,7 +43,7 @@ function Content(props) {
 
     const [addContentData] = useAddContentMutation()
     const [deleteContentData] = useDeleteContentMutation()
-    const [updateContentData]=useEditContentMutation()
+    const [updateContentData] = useEditContentMutation()
 
 
 

@@ -61,48 +61,48 @@ function Courses(props) {
         language: string().required(),
 
         content_file: mixed()
-    .test("content_file", "Plese select only .png,.jpg,jpeg files", function (val) {
+            .test("content_file", "Plese select only .png,.jpg,jpeg files", function (val) {
 
-        const fileType = ["image/jpg", "image/jpeg", "image/png"]
+                const fileType = ["image/jpg", "image/jpeg", "image/png"]
 
-        let flag = true
+                let flag = true
 
-        val?.map((v) => {
-            if (typeof v === 'string') {
-                flag = false
-            }
-        })
+                val?.map((v) => {
+                    if (typeof v === 'string') {
+                        flag = false
+                    }
+                })
 
-        if (flag) {
-            if (Array.isArray(val)) {
-                return val?.every((v) => fileType.includes(v.type))
-            } else {
-                return !val || fileType.includes(val.type)
-            }
-        } else {
-            return true
-        }
-    })
-    .test("content_file", "Plese select files under 2MB", function (val) {
+                if (flag) {
+                    if (Array.isArray(val)) {
+                        return val?.every((v) => fileType.includes(v.type))
+                    } else {
+                        return !val || fileType.includes(val.type)
+                    }
+                } else {
+                    return true
+                }
+            })
+            .test("content_file", "Plese select files under 2MB", function (val) {
 
-        let flag = true
+                let flag = true
 
-        val?.map((v) => {
-            if (typeof v === 'string') {
-                flag = false
-            }
-        })
+                val?.map((v) => {
+                    if (typeof v === 'string') {
+                        flag = false
+                    }
+                })
 
-        if (flag) {
-            if (Array.isArray(val)) {
-                return val?.every((v) => v.size < 2 * 1024 * 1024)
-            } else {
-                return !val || val.size < 2 * 1024 * 1024
-            }
-        } else {
-            return true
-        }
-    }),
+                if (flag) {
+                    if (Array.isArray(val)) {
+                        return val?.every((v) => v.size < 2 * 1024 * 1024)
+                    } else {
+                        return !val || val.size < 2 * 1024 * 1024
+                    }
+                } else {
+                    return true
+                }
+            }),
 
 
     })
@@ -164,19 +164,31 @@ function Courses(props) {
             field: 'course_img',
             headerName: 'File',
             width: 160,
-            renderCell: (params) => (
-                <>
-                    {params?.row?.course_img?.map((v, index) => (
-                        <img
+            renderCell: (params) => {
+                params?.row?.course_img?.map((v, index) => {
+
+                    if (typeof v === 'object') {
+                     return   <img
                             key={index}
-                            src={IMAGE_URL + v}
+                            src={URL.createObjectURL(v)}
                             width="50px"
                             height="50px"
                             alt="course"
                         />
-                    ))}
-                </>
-            )
+                    } else {
+                        return <img
+                            key={index}
+                            src={IMAGE_URL+v}
+                            width="50px"
+                            height="50px"
+                            alt="course"
+                        />
+                    }
+
+
+                })
+            }
+
         },
         {
             field: 'Action',

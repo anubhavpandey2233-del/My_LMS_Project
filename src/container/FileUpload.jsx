@@ -28,12 +28,12 @@ function FileUpload({ multiple, ...props }) {
 
     const { setValue } = helper
 
-  
+
     useEffect(() => {
         console.log("ddddd", field);
-        
+
     }, [])
-    
+
 
     return (
         <>
@@ -50,8 +50,23 @@ function FileUpload({ multiple, ...props }) {
                     type="file"
                     value={""}
                     onChange={(event) => {
-                        const files = Array.from(event.target.files)
-                        setValue(files)
+
+                        if (multiple == true) {
+                            const files = Array.from(event.target.files)
+                            setValue(files)
+                        } else {
+                            setValue(event.target.files[0])
+
+                        }
+
+
+                        // const files = Array.from(event.target.files)
+
+                        // setValue(event.target.files[0])
+
+
+
+                        // 
 
                     }
                     }
@@ -63,16 +78,31 @@ function FileUpload({ multiple, ...props }) {
                     meta.error && meta.touched ? meta.error : ''
                 }
             </p>
+
             {
-                field?.value ?
-                field?.value?.map((v, i) => (
-                    typeof v=="object" ?
-                    <img src={URL.createObjectURL(v)} alt="" width={"100px"} height={"100px"} />
-                    :
-                    <img src={IMAGE_URL + v} width={'50px'} height={'50px'} />
-                    
-                )):null
+                multiple == true ?
+
+                    field?.value ?
+                        field?.value?.map((v, i) => (
+                            typeof v == "object" ?
+                                <img src={URL.createObjectURL(v)} alt="" width={"100px"} height={"100px"} />
+                                :
+                                <img src={IMAGE_URL + v} width={'50px'} height={'50px'} />
+
+                        )) : null
+                    : <img src={field.value ? URL.createObjectURL(field.value) : ''} alt="" width={"100px"} height={"100px"} />
             }
+
+            {/* {
+                field?.value ?
+                    field?.value?.map((v, i) => (
+                        typeof v == "object" ?
+                            <img src={URL.createObjectURL(v)} alt="" width={"100px"} height={"100px"} />
+                            :
+                            <img src={IMAGE_URL + v} width={'50px'} height={'50px'} />
+
+                    )) : null
+            } */}
         </>
     );
 }
