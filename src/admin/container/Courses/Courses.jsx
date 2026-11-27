@@ -60,47 +60,49 @@ function Courses(props) {
         level: string().required(),
         language: string().required(),
 
-        course_img: mixed()
-            .test("course_img", "Plese select only .png,.jpg,jpeg files", function (val) {
-                const fileType = ["image/jpg", "image/jpeg", "image/png"]
+        content_file: mixed()
+    .test("content_file", "Plese select only .png,.jpg,jpeg files", function (val) {
 
-                let flag = true
-                val?.map((v) => {
-                    if (typeof v === 'string') {
-                        flag = false
-                    }
-                })
+        const fileType = ["image/jpg", "image/jpeg", "image/png"]
 
-                if (flag) {
-                    return val?.every((v) => fileType.includes(v.type))
-                } else {
-                    return true
-                }
+        let flag = true
 
+        val?.map((v) => {
+            if (typeof v === 'string') {
+                flag = false
+            }
+        })
 
+        if (flag) {
+            if (Array.isArray(val)) {
+                return val?.every((v) => fileType.includes(v.type))
+            } else {
+                return !val || fileType.includes(val.type)
+            }
+        } else {
+            return true
+        }
+    })
+    .test("content_file", "Plese select files under 2MB", function (val) {
 
-            })
-            .test("course_img", "Plese select files under 2MB", function (val) {
+        let flag = true
 
+        val?.map((v) => {
+            if (typeof v === 'string') {
+                flag = false
+            }
+        })
 
-                let flag = true
-
-                val?.map((v) => {
-                    if (typeof v === 'string') {
-                        flag = false
-                    }
-                })
-
-                if (flag) {
-                    return val?.every((v) => v.size < 2 * 1024 * 1024)
-                } else {
-                    return true
-                }
-
-
-
-
-            })
+        if (flag) {
+            if (Array.isArray(val)) {
+                return val?.every((v) => v.size < 2 * 1024 * 1024)
+            } else {
+                return !val || val.size < 2 * 1024 * 1024
+            }
+        } else {
+            return true
+        }
+    }),
 
 
     })
@@ -131,7 +133,7 @@ function Courses(props) {
     //     setEdit(row)
     // }
 
-   
+
 
 
     const columns = [
@@ -163,8 +165,17 @@ function Courses(props) {
             headerName: 'File',
             width: 160,
             renderCell: (params) => (
-                <img src={IMAGE_URL + params?.row?.course_img} width={'50px'} height={'50px'} />
-                
+                <>
+                    {params?.row?.course_img?.map((v, index) => (
+                        <img
+                            key={index}
+                            src={IMAGE_URL + v}
+                            width="50px"
+                            height="50px"
+                            alt="course"
+                        />
+                    ))}
+                </>
             )
         },
         {
@@ -202,14 +213,14 @@ function Courses(props) {
 
     ]
 
-     const handleEdit = (data) => (
+    const handleEdit = (data) => (
 
         setRtkUpdate(data)
-        
+
 
     )
 
-    console.log("rtkUpdate", rtkUpdate, Object.keys(rtkUpdate).length==0);
+    console.log("rtkUpdate", rtkUpdate, Object.keys(rtkUpdate).length == 0);
 
 
 
@@ -235,7 +246,7 @@ function Courses(props) {
                     console.log("ppppppp", values);
 
 
-                    if (Object.keys(rtkUpdate).length==0) {
+                    if (Object.keys(rtkUpdate).length == 0) {
                         // dispatch(addCourse(values));
                         addCourseData(values)
                     } else {
@@ -279,61 +290,6 @@ function Courses(props) {
                                 <FileUpload name="course_img" type="file" multiple={true} />
                                 <button type="submit">Submit</button>
                             </Form>
-
-
-                            {/* <TableContainer component={Paper}>
-                                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell>Sr.No</TableCell>
-                                            <TableCell align="left">Category</TableCell>
-                                            <TableCell align="left">Name</TableCell>
-                                            <TableCell align="left">Description</TableCell>
-                                            <TableCell align="left">Fees</TableCell>
-                                            <TableCell align="center">File</TableCell>
-                                            <TableCell align="right">Actions</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {courseData?.course?.map((row, i) => (
-                                            <TableRow
-                                                key={i}
-                                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                            >
-                                                <TableCell component="th" scope="row">
-                                                    {i + 1}
-                                                </TableCell>
-                                                <TableCell align="left">
-                                                    {
-                                                        categoryData?.category?.find((v) => v?._id === row?.category_id)?.name
-                                                    }
-                                                </TableCell>
-                                                <TableCell align="left">{row.name}</TableCell>
-                                                <TableCell align="left">{row.description}</TableCell>
-                                                <TableCell align="left">{row.fees}</TableCell>
-                                                <TableCell align="center">
-                                                    {
-                                                        row.course_img.map((v) => (
-                                                            <img src={IMAGE_URL + v} width={'50px'} height={'50px'} />
-                                                        ))
-                                                    }
-                                                </TableCell>
-                                                <TableCell align="right">
-                                                    <>
-                                                        <IconButton aria-label="delete" onClick={() => dispatch(deleteCourse(row))}>
-                                                            <DeleteIcon />
-                                                        </IconButton>
-                                                        <IconButton aria-label="delete" onClick={() => handleEdit(row, fd)}>
-                                                            <EditIcon />
-                                                        </IconButton>
-                                                    </>
-                                                </TableCell>
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
-                            </TableContainer> */}
-
 
                             <DataGrid
                                 rows={data?.data}
