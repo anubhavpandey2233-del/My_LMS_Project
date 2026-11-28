@@ -214,7 +214,7 @@ Page content START */}
 
                                                         {/* Image */}
                                                         <img
-                                                            src={IMAGE_URL + v.course_img}
+                                                            src={IMAGE_URL + v.course_img?.[0]}
                                                             className="card-img-top"
                                                             alt={v.name}
                                                         />

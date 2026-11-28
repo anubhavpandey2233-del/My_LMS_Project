@@ -41,7 +41,7 @@ function TrendingCoursesSlider(props) {
                 <div>
                     <div className={theme.theme=='dark'?`bodyBG action-trigger-hover border`:"card action-trigger-hover border"}>
                         {/* Image */}
-                        <img src={IMAGE_URL + v.course_img} className="card-img-top" alt="course image" />
+                        <img src={IMAGE_URL + v.course_img?.[0]} className="card-img-top" alt="course image" />
                         {/* Ribbon */}
                         <div className="ribbon mt-3"><span>${v.fees}</span></div>
                         {/* Card body */}

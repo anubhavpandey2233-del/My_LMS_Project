@@ -132,14 +132,26 @@ function Content(props) {
             field: 'content_file',
             headerName: 'File',
             width: 160,
-            renderCell: (params) => (
-                <img
-                    src={IMAGE_URL + params?.row?.content_file}
-                    width='50px'
-                    height='50px'
-                    alt="content"
-                />
-            )
+            renderCell: (params) => {
+
+                if (typeof params?.row?.content_file === 'object') {
+                    return <img
+                        src={URL.createObjectURL(params?.row?.content_file)}
+                        width='50px'
+                        height='50px'
+                        alt="content"
+                    />
+                } else {
+                    return <img
+                        src={IMAGE_URL + params?.row?.content_file}
+                        width='50px'
+                        height='50px'
+                        alt="content"
+                    />
+                }
+
+
+            }
         },
 
         {

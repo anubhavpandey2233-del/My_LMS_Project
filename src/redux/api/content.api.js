@@ -34,7 +34,7 @@ export const contentApi = createApi({
 
             async onQueryStarted(data, { dispatch, queryFulfilled }) {
                 const patchResult = dispatch(
-                 
+
                     contentApi.util.updateQueryData('getAllContent', undefined, (draft) => {
 
                         const temp_id = crypto.randomUUID();
@@ -51,14 +51,15 @@ export const contentApi = createApi({
                 )
                 try {
                     const { data } = await queryFulfilled
+                    dispatch(
+                        contentApi.util.updateQueryData('getAllContent', undefined, (draft) => {
 
-                    contentApi.util.updateQueryData('getAllContent', undefined, (draft) => {
-
-                        const index = draft?.data?.findIndex(v => v._id == temp_id)
+                            const index = draft?.data?.findIndex(v => v._id == temp_id)
 
 
-                        Object.assign(draft?.data[index], data?.data)
-                    })
+                            Object.assign(draft?.data[index], data?.data)
+                        })
+                    )
                 } catch {
                     patchResult.undo()
 
@@ -132,6 +133,38 @@ export const contentApi = createApi({
 
             },
             // invalidatesTags:['course']
+
+            async onQueryStarted(data, { dispatch, queryFulfilled }) {
+
+
+
+                const patchResult = dispatch(
+
+                    contentApi.util.updateQueryData('getAllContent', undefined, (draft) => {
+
+                        const index = draft?.data?.findIndex(v => v._id == data?._id)
+
+                        console.log("index", index);
+
+                        Object.assign(draft?.data[index], data)
+
+
+                        // Object.assign(draft, patch)
+                    }),
+                )
+                try {
+                    await queryFulfilled
+
+                } catch {
+                    patchResult.undo()
+
+                    /**
+                     * Alternatively, on failure you can invalidate the corresponding cache tags
+                     * to trigger a re-fetch:
+                     * dispatch(api.util.invalidateTags(['Post']))
+                     */
+                }
+            },
 
         })
     })

@@ -165,7 +165,7 @@ function Courses(props) {
             headerName: 'File',
             width: 160,
             renderCell: (params) => {
-                params?.row?.course_img?.map((v, index) => {
+                return   params?.row?.course_img?.map((v, index) => {
 
                     if (typeof v === 'object') {
                      return   <img

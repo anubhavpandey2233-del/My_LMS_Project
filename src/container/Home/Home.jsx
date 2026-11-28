@@ -446,7 +446,7 @@ Popular course START */}
                                                 <SwiperSlide>
                                                     <div className={theme.theme === 'dark' ? ` bodyBG card shadow h-100` : "card shadow h-100"}>
                                                         {/* Image */}
-                                                        <img src={IMAGE_URL + v.course_img} className={theme.theme == 'dark' ? `bodyBG card-img-top` : "card-img-top"} alt="course image" />
+                                                        <img src={IMAGE_URL + v.course_img?.[0]} className={theme.theme == 'dark' ? `bodyBG card-img-top` : "card-img-top"} alt="course image" />
                                                         {/* Card body */}
                                                         <div className="card-body pb-0">
                                                             {/* Badge and favorite */}

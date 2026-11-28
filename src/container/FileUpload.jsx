@@ -90,7 +90,18 @@ function FileUpload({ multiple, ...props }) {
                                 <img src={IMAGE_URL + v} width={'50px'} height={'50px'} />
 
                         )) : null
-                    : <img src={field.value ? URL.createObjectURL(field.value) : ''} alt="" width={"100px"} height={"100px"} />
+                    :
+
+                    field?.value ?
+                        typeof field.value === "object" ?
+                            <img
+                                src={URL.createObjectURL(field?.value)} width="100px" height="100px" />
+                            :
+                            <img
+                                src={IMAGE_URL + field?.value} width="100px" height="100px"
+                            />
+                        : null
+
             }
 
             {/* {
