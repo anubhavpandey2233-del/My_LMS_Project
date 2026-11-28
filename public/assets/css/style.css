@@ -123,7 +123,7 @@ h1,
   font-family: "Heebo", sans-serif;
   font-weight: 700;
   line-height: 1.25;
-  color: #24292d;
+  /* color: #24292d; */
 }
 
 h1,
@@ -22330,9 +22330,9 @@ html[dir=rtl] .choices__input {
 }
 
 .bodyAccordian {
-  background-color:gray !important;
+  background-color: gray !important;
   color: white !important;
-  
+
 }
 
 .dark h1,
@@ -22348,7 +22348,7 @@ html[dir=rtl] .choices__input {
 .bodyBG {
   background-color: #221E35;
   color: white !important;
-  
+
 }
 
 .dark footer .nav-link,
@@ -22358,6 +22358,11 @@ html[dir=rtl] .choices__input {
 
 .spanText {
   color: white;
+}
+
+
+.paginationText {
+  color: blac;
 }
 
 .buttonText {
@@ -22373,9 +22378,9 @@ html[dir=rtl] .choices__input {
   color: green;
 }
 
-.dark ul li a {
+/* .dark ul li a {
   color: white;
-}
+} */
 
 .iconSize {
   font-size: 20px;
@@ -22405,11 +22410,12 @@ html[dir=rtl] .choices__input {
 }
 
 #trending .swiper-button-prev svg,
-#trending .swiper-button-next svg{
-  width: 70%  !important;
+#trending .swiper-button-next svg {
+  width: 70% !important;
   height: 70% !important;
 }
+
 .swiper-pagination .swiper-pagination-clickable .swiper-pagination-bullets .swiper-pagination-horizontal,
-.swiper-pagination-bullet{
+.swiper-pagination-bullet {
   display: none !important;
 }

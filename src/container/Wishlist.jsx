@@ -55,7 +55,7 @@ Page content START */}
                                         <a href="#" className="text-danger"><i className="fas fa-heart" /></a>
                                     </div>
                                     {/* Title */}
-                                    <h5 className="card-title fw-normal"><a href="#">Graphic Design Masterclass</a></h5>
+                                    <h5 className={theme.theme=='dark'?`spanText card-title fw-normal`:"card-title fw-normal"}><a href="#">Graphic Design Masterclass</a></h5>
                                     <p className="mb-2 text-truncate-2">Rooms oh fully taken by worse do Points afraid but may end Rooms
                                         Points afraid but may end Rooms</p>
                                     {/* Rating star */}

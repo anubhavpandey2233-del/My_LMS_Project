@@ -23,6 +23,10 @@ import CategoryIcon from '@mui/icons-material/Category';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import { NavLink } from 'react-router';
 import DifferenceIcon from '@mui/icons-material/Difference';
+import { useContext } from 'react';
+import { ThemeContext } from '../../../context/reducer/ThemeContext';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 const drawerWidth = 240;
 
@@ -126,7 +130,14 @@ export default function Layout({ children }) {
 
   ]
 
+  const myTheme = useContext(ThemeContext)
+
+  console.log(myTheme);
+  
   return (
+
+
+
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
@@ -148,6 +159,13 @@ export default function Layout({ children }) {
           <Typography variant="h6" noWrap component="div">
             LMS Admin Panel
           </Typography>
+
+          <IconButton onClick={()=> myTheme?.changTheme( myTheme?.theme )}  sx={{ display:'flex',justifyContent: "flex-end" }}>
+            {
+              myTheme.theme === 'dark' ? <LightModeIcon /> : <DarkModeIcon />
+            }
+          </IconButton>
+
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

@@ -192,6 +192,10 @@ function Content(props) {
 
     ]
 
+    const filterCourse = (c_id) => {
+        console.log("c_idc_idc_id", c_id);
+    }
+
     return (
         <Formik
             initialValues={Object.keys(rtkUpdate).length > 0 ? rtkUpdate : {
@@ -230,10 +234,7 @@ function Content(props) {
                     <>
                         <Form encType="multipart/form-data">
 
-                            <TextBox
-                                name="category_id"
-                                label="Category"
-                                select
+                            <TextBox name="category_id" label="Category" select filterCourse={filterCourse}
                                 categoryData={categoryData?.category}
                             />
 
@@ -261,7 +262,7 @@ function Content(props) {
                             <TextBox
                                 name="name"
                                 type="text"
-                                label="Course"
+                                label="Content"
                             />
 
                             <TextBox

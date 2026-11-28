@@ -583,7 +583,7 @@ function Header(props) {
                                 </div>
                             </li> */}
                             {/* Nav item 5 link*/}
-                            <li className="nav-item dropdown">
+                            {/* <li className="nav-item dropdown">
                                 <a className={theme.theme == 'dark' ? `spanText nav-link` : "nav-link"} href="#" id="advanceMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i className="fas fa-ellipsis-h" />
                                 </a>
@@ -616,7 +616,7 @@ function Header(props) {
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> */}
                         </ul>
                         {/* Nav Main menu END */}
                         {/* Nav Search START */}

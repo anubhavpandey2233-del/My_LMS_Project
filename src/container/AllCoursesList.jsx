@@ -26,8 +26,8 @@ function AllCoursesList(props) {
 
     console.log(fCat);
 
-     const theme = useContext(ThemeContext)
-        console.log(theme);
+    const theme = useContext(ThemeContext)
+    console.log(theme);
 
     const { id } = useParams();
 
@@ -53,7 +53,7 @@ function AllCoursesList(props) {
 
         const categoryMatch =
             !selectedCategory ||
-            String(v.category_id) === String(selectedCategory);
+            (v.category_id) === (selectedCategory);
 
         const levelMatch =
             !selectedLevel ||
@@ -146,18 +146,18 @@ Page content START */}
                                             <option value>Categories</option>
                                             {
                                                 fCat?.map((v) => (
-                                                   <option key={v._id} value={v._id}>
-    {v.name}
-</option>
+                                                    <option key={v._id} value={v._id}>
+                                                        {v.name}
+                                                    </option>
                                                 ))
                                             }
                                         </select>
                                     </div>
                                     {/* Search item */}
-                                  
+
                                     {/* Search item */}
                                     <div className="col-sm-6 col-md-3 pb-2 pb-md-0">
-                                        
+
                                         <select className="form-select form-select-sm js-choice" aria-label=".form-select-sm example" onChange={(e) => {
                                             setSelectedLevel(e.target.value);
                                         }}>
@@ -210,7 +210,7 @@ Page content START */}
                                                     to={`/course-detail/${v._id}`}
                                                     className="text-decoration-none text-dark"
                                                 >
-                                                    <div className={theme.theme==='dark'?`bodyBG card shadow h-100`:"card shadow h-100"}>
+                                                    <div className={theme.theme === 'dark' ? `bodyBG card shadow h-100` : "card shadow h-100"}>
 
                                                         {/* Image */}
                                                         <img
@@ -225,9 +225,9 @@ Page content START */}
                                                             {/* Badge and favorite */}
                                                             <div className="d-flex justify-content-between mb-2">
 
-                                                                {/* <span className="badge bg-purple bg-opacity-10 text-purple">
-                                                                    All level
-                                                                </span> */}
+                                                                <span className="badge bg-purple bg-opacity-10 text-purple">
+                                                                    {v.level}
+                                                                </span>
 
                                                                 <span className="h6 fw-light mb-0">
                                                                     <i className="far fa-heart" />
@@ -241,7 +241,7 @@ Page content START */}
                                                             </h5>
 
                                                             {/* Rating */}
-                                                            <ul className={theme.theme==='dark'?`bodyBG list-inline mb-0`:"list-inline mb-0"}>
+                                                            <ul className={theme.theme === 'dark' ? `bodyBG list-inline mb-0` : "list-inline mb-0"}>
 
                                                                 <li className="list-inline-item me-0 small">
                                                                     <i className="fas fa-star text-warning" />
@@ -272,7 +272,7 @@ Page content START */}
                                                         </div>
 
                                                         {/* Card footer */}
-                                                        <div className={theme.theme==='dark'?`bodyBG card-footer pt-0 pb-3`:"card-footer pt-0 pb-3"}>
+                                                        <div className={theme.theme === 'dark' ? `bodyBG card-footer pt-0 pb-3` : "card-footer pt-0 pb-3"}>
 
                                                             <hr />
 
@@ -313,7 +313,7 @@ Page content START */}
                             {/* Pagination START */}
                             <Pagination className='mt-4 justify-content-center'>
 
-                                <Pagination.Prev onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} />
+                                <Pagination.Prev  onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1} className={theme.theme == 'dark' ? `paginationText` : ''} />
                                 {
                                     Array.from({ length: page }, (_, i) =>
 

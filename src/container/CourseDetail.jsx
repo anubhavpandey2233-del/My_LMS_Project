@@ -1,19 +1,27 @@
 
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { fetchCourses } from "../redux/slice/course.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { IMAGE_URL } from "../utills/url";
 import { fetchSection } from "../redux/slice/section.slice";
 import Accordion from 'react-bootstrap/Accordion';
+import { ThemeContext } from "../context/reducer/ThemeContext";
+import { useGetAllContentQuery } from "../redux/api/content.api";
 
 
 function CourseDetail() {
     const courseData = useSelector(state => state.course)
     console.log(courseData);
 
+    const theme = useContext(ThemeContext)
+    console.log("Themmmmeeeeeeeee");
+
     const sectionData = useSelector(state => state.section)
     console.log("sectionDatasectionData", sectionData.section);
+
+
+
 
     const { id } = useParams();
 
@@ -32,11 +40,28 @@ function CourseDetail() {
         (v) => v._id === id
     );
 
+    console.log("selectedCourse", selectedCourse);
+
+
+    // -------------------------------RTK QUERY START----------------------------
+
+    const { data: contentData } = useGetAllContentQuery()
+    console.log("Content Data", contentData?.data);
+
+
+    const cData = contentData?.data?.filter((v) => v.course_id === id)
+
+    const selectedContent=contentData?.data?.find(v=>v.course_id===id)
+    console.log("selectedContent",selectedContent);
+
+
+    // -------------------------------RTK QUERY END----------------------------
+
     console.log("Selected Course:", selectedCourse);
 
 
     return (
-        <main>
+        <main>levelExperienced
 
             {/* ================= HERO SECTION ================= */}
             <section className="bg-light py-5">
@@ -47,14 +72,14 @@ function CourseDetail() {
                         <div className="col-lg-7">
 
                             <span className="badge bg-purple bg-opacity-10 text-purple mb-3">
-                                {selectedCourse?.name}
+                                {selectedCourse?.level}
                             </span>
 
                             <h1 className="display-5 fw-bold mb-3">
                                 {selectedCourse?.name}
                             </h1>
 
-                            <p className="lead text-muted mb-4">
+                            <p className="lead  mb-4">
                                 {selectedCourse?.description}
                             </p>
 
@@ -112,10 +137,10 @@ function CourseDetail() {
                         {/* Course Card */}
                         <div className="col-lg-5">
 
-                            <div className="card shadow border-0">
+                            <div className={theme.theme == 'dark' ? `bodyBG card shadow border-0` : "card shadow border-0"}>
 
                                 <img
-                                    src={IMAGE_URL + selectedCourse?.course_img}
+                                    src={IMAGE_URL + selectedCourse?.course_img?.[0]}
                                     className="card-img-top"
                                     alt="Course"
                                     style={{
@@ -145,31 +170,31 @@ function CourseDetail() {
                                         Add to Wishlist
                                     </button>
 
-                                    <hr className="my-4" />
+                                    {/* <hr className="my-4" /> */}
 
-                                    <h6 className="fw-bold mb-3">
-                                        This course includes:
-                                    </h6>
+                                    {/* <h6 className="fw-bold mb-3">
+                                    This course includes:
+                                </h6>
 
-                                    <p className="mb-2">
-                                        <i className="fas fa-video text-primary me-2" />
-                                        25 Video Lectures
-                                    </p>
+                                <p className="mb-2">
+                                    <i className="fas fa-video text-primary me-2" />
+                                    25 Video Lectures
+                                </p>
 
-                                    <p className="mb-2">
-                                        <i className="fas fa-file-alt text-success me-2" />
-                                        Downloadable Resources
-                                    </p>
+                                <p className="mb-2">
+                                    <i className="fas fa-file-alt text-success me-2" />
+                                    Downloadable Resources
+                                </p>
 
-                                    <p className="mb-2">
-                                        <i className="fas fa-infinity text-warning me-2" />
-                                        Lifetime Access
-                                    </p>
+                                <p className="mb-2">
+                                    <i className="fas fa-infinity text-warning me-2" />
+                                    Lifetime Access
+                                </p>
 
-                                    <p className="mb-0">
-                                        <i className="fas fa-certificate text-danger me-2" />
-                                        Certificate of Completion
-                                    </p>
+                                <p className="mb-0">
+                                    <i className="fas fa-certificate text-danger me-2" />
+                                    Certificate of Completion
+                                </p> */}
 
                                 </div>
 
@@ -199,21 +224,21 @@ function CourseDetail() {
                                     About This Course
                                 </h2>
 
-                                <p className="text-muted">
+                                <p className="">
                                     {selectedCourse?.description}
                                 </p>
 
-                                <p className="text-muted">
-                                    By the end of this course, you will be able
-                                    to create responsive websites and build
-                                    real-world web applications.
-                                </p>
+                                {/* <p className="text-muted">
+                            By the end of this course, you will be able
+                            to create responsive websites and build
+                            real-world web applications.
+                        </p> */}
 
                             </div>
 
 
                             {/* What You Will Learn */}
-                            <div className="card border-0 shadow-sm mb-5">
+                            <div className={theme.theme == 'dark' ? `bodyBG card border-0 shadow-sm mb-5` : "card border-0 shadow-sm mb-5"}>
 
                                 <div className="card-body p-4">
 
@@ -289,14 +314,24 @@ function CourseDetail() {
                                     sData?.map((v, i) => (
 
 
-                                        <Accordion>
-                                            <Accordion.Item eventKey={i}>
-                                                <Accordion.Header>{v.name}</Accordion.Header>
-                                                <Accordion.Body>
-                                                   {v.description}
-                                                </Accordion.Body>
+                                        <Accordion className={theme.theme === 'dark' ? `bodyBG` : ''}>
+                                            <Accordion.Item eventKey={i} className={theme.theme === 'dark' ? `bodyBG` : ''}>
+
+                                                <Accordion.Header className={theme.theme === 'dark' ? `bodyBG` : ''}>{v.name}</Accordion.Header>
+
+                                                {/* {
+                                                    cData?.map((v, i) => ( */}
+                                                        <Accordion.Body className={theme.theme === 'dark' ? `bodyBG` : ''}>
+                                                            {selectedContent?.name}
+                                                        </Accordion.Body>
+                                                    {/* ))
+                                                } */}
+
+
+
+
                                             </Accordion.Item>
-                                            
+
                                         </Accordion>
 
 
@@ -310,10 +345,10 @@ function CourseDetail() {
 
 
                         {/* Sidebar */}
-                        <div className="col-lg-4">
+                        {/* <div className="col-lg-4"> */}
 
-                            {/* Instructor */}
-                            <div className="card shadow-sm border-0 mb-4">
+                        {/* Instructor */}
+                        {/* <div className="card shadow-sm border-0 mb-4">
 
                                 <div className="card-body p-4">
 
@@ -355,11 +390,11 @@ function CourseDetail() {
 
                                 </div>
 
-                            </div>
+                            </div> */}
 
 
-                            {/* Course Features */}
-                            <div className="card shadow-sm border-0">
+                        {/* Course Features */}
+                        {/* <div className="card shadow-sm border-0">
 
                                 <div className="card-body p-4">
 
@@ -409,9 +444,9 @@ function CourseDetail() {
 
                                 </div>
 
-                            </div>
+                            </div> */}
 
-                        </div>
+                        {/* </div> */}
 
                     </div>
 
@@ -419,7 +454,7 @@ function CourseDetail() {
 
             </section>
 
-        </main>
+        </main >
     );
 }
 

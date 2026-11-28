@@ -3,9 +3,12 @@ import TextField from '@mui/material/TextField';
 import { useField } from 'formik';
 import { MenuItem } from '@mui/material';
 
-function TextBox({ label, type, categoryData = [], selectLevel = [], selectLanguage = [], Type= [], ...props }) {
+function TextBox({ label, type, categoryData = [], selectLevel = [], selectLanguage = [], Type = [], ...props }) {
     const [field, meta] = useField(props);
     console.log(categoryData)
+
+    console.log("proppropss", field, props);
+
     return (
         <div>
             <TextField
@@ -14,6 +17,11 @@ function TextBox({ label, type, categoryData = [], selectLevel = [], selectLangu
                 error={meta.error && meta.touched}
                 margin="normal"
                 id="name"
+                onChange={(e) => {
+                    field.onChange(field.name)(e);
+                    props?.select && props?.filterCourse(e?.target?.value)
+
+                }}
                 label={label}
                 type={type}
                 fullWidth

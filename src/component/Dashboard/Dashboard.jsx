@@ -343,13 +343,13 @@ const installedCountries = [
 ]
 
 const topAuthors = [
-    { img: 'src/assets/Images/Minimal - Client and Admin Dashboard - MUI Store_files/avatar-1.webp', name: 'Jayvion Simon', like: '9.91k',color:'red' },
+    { img: 'src/assets/Images/Minimal - Client and Admin Dashboard - MUI Store_files/avatar-1.webp', name: 'Jayvion Simon', like: '9.91k', color: 'red' },
 
-    { img: 'src/assets/Images/Minimal - Client and Admin Dashboard - MUI Store_files/avatar-2.webp', name: 'Deja Brady', like: '9.91k',color:'green' },
+    { img: 'src/assets/Images/Minimal - Client and Admin Dashboard - MUI Store_files/avatar-2.webp', name: 'Deja Brady', like: '9.91k', color: 'green' },
 
-    { img: 'src/assets/Images/Minimal - Client and Admin Dashboard - MUI Store_files/avatar-3.webp', name: 'Lucian Obrien', like: '9.91k',color:'blue' },
+    { img: 'src/assets/Images/Minimal - Client and Admin Dashboard - MUI Store_files/avatar-3.webp', name: 'Lucian Obrien', like: '9.91k', color: 'blue' },
 
-    { img: 'src/assets/Images/Minimal - Client and Admin Dashboard - MUI Store_files/avatar-1.webp', name: 'Jayvion Simon', like: '9.91k',color:'brown' },
+    { img: 'src/assets/Images/Minimal - Client and Admin Dashboard - MUI Store_files/avatar-1.webp', name: 'Jayvion Simon', like: '9.91k', color: 'brown' },
 ]
 
 function Dashboard(props) {
@@ -832,7 +832,7 @@ function Dashboard(props) {
                                             </Box>
                                         </Box>
                                     </Box>
-                                    <Box sx={{ width: 40, pl: 1, height: 40, backgroundColor: '#d9e2df', borderRadius: 25, alignItems: 'center', display: 'flex',  }}>
+                                    <Box sx={{ width: 40, pl: 1, height: 40, backgroundColor: '#d9e2df', borderRadius: 25, alignItems: 'center', display: 'flex', }}>
                                         <EmojiEventsIcon style={{ color: v.color }} />
                                     </Box>
                                 </Box>
